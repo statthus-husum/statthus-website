@@ -1,0 +1,57 @@
+{
+  "file": "exampleSite/content/english/shop/product-1.md",
+  "name": "shop",
+  "fileType": "md",
+  "fmType": "yaml",
+  "template": [
+    {
+      "name": "title",
+      "label": "Title",
+      "type": "string",
+      "value": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "date",
+      "label": "Date",
+      "type": "Date",
+      "value": "",
+      "defaultValue": "",
+      "alwaysUseCurrentDate": false
+    },
+    {
+      "name": "images",
+      "label": "Images",
+      "type": "gallery",
+      "defaultValue": ""
+    },
+    {
+      "name": "price",
+      "label": "Price",
+      "type": "string",
+      "value": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "discount_price",
+      "label": "Discount Price",
+      "type": "string",
+      "value": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "description",
+      "label": "Description",
+      "type": "string",
+      "value": "",
+      "defaultValue": ""
+    },
+    {
+      "name": "draft",
+      "label": "Draft",
+      "type": "boolean",
+      "value": false,
+      "defaultValue": ""
+    }
+  ]
+}
