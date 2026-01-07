@@ -1,0 +1,75 @@
+# ============================================
+# SENSITIVE FILES - DO NOT ACCESS
+# ============================================
+
+# meta files
+**/meta
+
+# Environment files with secrets
+*.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
+id_rsa*
+*.crt
+
+# Credentials and tokens
+**/credentials.json
+**/secrets.json
+**/tokens.json
+.netrc
+.npmrc
+
+# Cloud provider configs with credentials
+.aws/credentials
+.azure/
+.gcloud/
+
+# ============================================
+# LARGE/BINARY FILES - NOT USEFUL FOR AI
+# ============================================
+
+# Build artifacts
+bin/
+dist/
+build/
+*.exe
+*.dll
+*.so
+*.dylib
+public/
+
+# Dependencies (too large, not project-specific)
+node_modules/
+vendor/
+
+# Test coverage reports
+coverage/
+*.cover
+*.out
+
+# IDE/Editor files
+.idea/
+.vscode/settings.json
+*.swp
+*.swo
+
+# ============================================
+# GENERATED FILES
+# ============================================
+
+# Generated code
+*_gen.go
+*.pb.go
+*_mock.go
+
+# Lock files (usually not needed for context)
+package-lock.json
+yarn.lock
+go.sum

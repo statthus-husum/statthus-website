@@ -9,8 +9,7 @@
 {{ end }}
 <script crossorigin="anonymous" defer {{ if hugo.IsProduction }}integrity="{{ $bootstrap.Data.Integrity }}"{{end}} type="application/javascript">{{$bootstrap.Content | safeJS}}</script>
 
-<!-- JS Plugins + Main script -->
-{{ $scripts := slice }}
+<!-- JS Plugins -->
 {{ range site.Params.plugins.js }}
   {{ if findRE "^http" .link }}
     <script
@@ -18,10 +17,13 @@
       type="application/javascript"
       {{ .attributes | safeHTMLAttr }}></script>
   {{ else }}
-    {{ $scripts = $scripts | append (resources.Get .link) }}
+    {{ $script := resources.Get .link }}
+    {{ if hugo.IsProduction }}
+      {{ $script = $script | fingerprint "sha512" }}
+    {{ end }}
+    <script crossorigin="anonymous" {{ if hugo.IsProduction }}integrity="{{ $script.Data.Integrity }}"{{end}} type="application/javascript">{{$script.Content | safeJS}}</script>
   {{ end }}
 {{ end }}
-
 
 <!-- Snipcart public key -->
 {{ if site.Params.snipcart.enable }}
@@ -32,14 +34,12 @@
     data-config-modal-style="side"></div>
 {{ end }}
 
-
 <!-- main script -->
-{{ $scripts = $scripts | append (resources.Get "js/script.js") }}
-{{ $scripts = $scripts | resources.Concat "js/scripts.js" }}
+{{ $mainScript := resources.Get "js/script.js" }}
 {{ if hugo.IsProduction }}
-  {{ $scripts = $scripts | fingerprint "sha512" }}
+  {{ $mainScript = $mainScript | fingerprint "sha512" }}
 {{ end }}
-<script crossorigin="anonymous" defer {{ if hugo.IsProduction }}integrity="{{ $scripts.Data.Integrity }}"{{end}} type="application/javascript">{{$scripts.Content | safeJS}}</script>
+<script crossorigin="anonymous" {{ if hugo.IsProduction }}integrity="{{ $mainScript.Data.Integrity }}"{{end}} type="application/javascript">{{$mainScript.Content | safeJS}}</script>
 
 <!-- font family -->
 {{ $pf:= site.Params.variables.font_primary }}

@@ -51,7 +51,7 @@ preloader = "" # use jpg, png, svg or gif format.
 
 [search]
 enable = true
-primary_color = "#ce8460"
+primary_color = "#a8131a"
 include_sections = ["post", "shop"] # if `include_sections` is empty, then section's will come from `mainSections`
 show_image = true
 show_description = true
@@ -187,3 +187,6 @@ link = "#"
 title = "linkedin"
 icon = "fab fa-linkedin" # fontawesome icon pack : https://fontawesome.com/icons/
 link = "#"
+
+[variables]
+color_primary="#a8131a"
