@@ -1,0 +1,68 @@
+- id: continue_reading
+  translation: Weiterlesen
+
+- id: search_placeholder
+  translation: Eingeben & Enter drücken...
+
+- id: latest_article
+  translation: Neuester Artikel
+
+- id: categories
+  translation: Kategorien
+
+- id: tags
+  translation: Schlagwörter
+
+- id: search
+  translation: Suche
+
+- id: date
+  translation: Datum
+
+- id: posted_by
+  translation: Veröffentlicht von diesem Autor
+
+- id: send
+  translation: Jetzt senden
+
+- id: name
+  translation: Ihr Name
+
+- id: email
+  translation: Ihre E-Mail-Adresse
+
+- id: message
+  translation: Ihre Nachricht
+
+- id: subscribe
+  translation: Jetzt abonnieren
+
+- id: write_email
+  translation: Formulare nicht Ihr Ding? Schreiben Sie uns eine E-Mail
+
+- id: subscribe_newsletter
+  translation: Newsletter abonnieren
+
+- id: quick_links
+  translation: Schnellzugriff
+
+- id: social
+  translation: Soziale Medien
+
+- id: back_to_home
+  translation: Zurück zur Startseite
+
+- id: about_me
+  translation: Über mich
+
+- id: page_not_found
+  translation: Ups! Diese Seite ist nicht verfügbar
+
+- id: search_input_placeholder
+  translation: LogBook durchsuchen...
+
+- id: no_results_for
+  translation: 0 Ergebnisse für
+
+- id: empty_search_results_placeholder
+  translation: Geben Sie etwas ein, um zu suchen...

@@ -3,14 +3,14 @@ baseURL = "/"
 title = "LogBook | Hugo Personal Blog Template"
 theme = "logbook-hugo"
 # Default time zone for time stamps; use any valid tz database name: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List
-timeZone = "America/New_York"
+timeZone = "Europe/Berlin"
 # post pagination
 pagination.pagerSize = 6
 
 # post excerpt
 summaryLength = 50 # see https://gohugo.io/content-management/excerpts/analytics/answer/1008080?hl=en
 # disable language
-disableLanguages = []        # desable language from here
+disableLanguages = ["en", "fr"]        # disabled English and French
 capitalizeListTitles = false # capitalize list titles
 
 ########################### Services #############################

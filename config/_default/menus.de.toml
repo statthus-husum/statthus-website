@@ -1,0 +1,86 @@
+############### German navigation ################
+
+# Simple homepage link
+[[main]]
+weight = 1
+name = "Startseite"
+url = "/"
+
+[[main]]
+name = "Über uns"
+url = "about/"
+weight = 2
+
+[[main]]
+name = "Kontakt"
+url = "contact/"
+weight = 3
+
+# Dropdown menu
+[[main]]
+weight = 4
+name = "Seiten"
+hasChildren = true
+
+[[main]]
+parent = "Seiten"
+name = "Autor"
+url = "author/john-doe/"
+weight = 1
+
+[[main]]
+parent = "Seiten"
+name = "Kategorie"
+url = "categories/photography/"
+weight = 2
+
+[[main]]
+parent = "Seiten"
+name = "Schlagwörter"
+url = "tags/photo/"
+weight = 3
+
+[[main]]
+parent = "Seiten"
+name = "Suche"
+url = "search/"
+weight = 4
+
+[[main]]
+parent = "Seiten"
+name = "404 Seite"
+url = "404/"
+weight = 5
+
+[[main]]
+parent = "Seiten"
+name = "Elemente"
+url = "elements/"
+weight = 6
+
+[[main]]
+name = "Shop"
+url = "shop/"
+weight = 5
+
+
+# footer menu
+[[footer]]
+name = "Über uns"
+url = "about/"
+weight = 1
+
+[[footer]]
+name = "Kontakt"
+url = "contact/"
+weight = 2
+
+[[footer]]
+name = "Datenschutz"
+url = "privacy-policy/"
+weight = 3
+
+[[footer]]
+name = "AGB"
+url = "terms-conditions/"
+weight = 4

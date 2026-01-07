@@ -31,13 +31,12 @@ statthus/
 │       ├── menus.fr.toml # French navigation menus
 │       ├── module.toml   # Hugo modules & version constraints
 │       └── params.toml   # Site parameters & customization
-├── content/              # Multilingual content
-│   ├── english/          # English content
-│   │   ├── post/         # Blog posts
-│   │   ├── shop/         # E-commerce products
-│   │   ├── homepage/     # Homepage layout variants
-│   │   └── author/       # Author profiles
-│   └── french/           # French content (mirrored structure)
+├── content/              # Content
+│   └── german/           # German content
+│       ├── post/         # Blog posts
+│       ├── shop/         # E-commerce products
+│       ├── homepage/     # Homepage layout variants
+│       └── author/       # Author profiles
 ├── data/                 # Data files (JSON/YAML/TOML)
 ├── i18n/                 # Translation strings
 ├── layouts/              # Template overrides (mostly empty)
@@ -84,12 +83,13 @@ The project uses Hugo Modules for modular functionality. All modules are importe
 - **CodePen** - Code embed
 - **Table of Contents** - Auto-generated TOC
 
-## Multilingual Support
+## Language Configuration
 
 | Language | Code | Content Directory |
 |----------|------|-------------------|
-| English | en-us | `content/english/` |
-| French | fr-fr | `content/french/` |
+| German | de-de | `content/german/` |
+
+> Note: English and French were removed. To add additional languages, create entries in [`languages.toml`](../config/_default/languages.toml).
 
 ## Features
 
