@@ -1,0 +1,56 @@
+{{ define "main" }}
+  <section class="section-sm border-bottom">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="title-bordered mb-5 d-flex align-items-center">
+            <h1 class="h4 fw-normal">{{ .Title }}</h1>
+            <ul class="list-inline social-icons ms-auto me-3 d-none d-sm-block">
+              {{ range .Params.social }}
+                <li class="list-inline-item">
+                  <a href="{{ .link | safeURL }}"
+                    ><i class="{{ .icon }}"></i
+                  ></a>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-lg-3 col-md-4 mb-4 mb-md-0 text-center text-md-start">
+          {{ if .Params.Image }}
+            {{ partial "image.html" (dict "Src" .Params.Image "Alt" "author image" "Class" `rounded-lg`) }}
+          {{ else if .Params.Email }}
+            {{ $emailHash := md5 .Params.Email }}
+            {{ $gravatorUrl := print "https://www.gravatar.com/avatar/" $emailHash "?s=700&pg&d=identicon" }}
+            {{ partial "image.html" (dict "Src" $gravatorUrl "Alt" "author image") }}
+          {{ end }}
+        </div>
+        <div class="col-lg-9 col-md-8 content text-md-start">
+          <div class="people-tag">
+            <div class="people-text-header">{{ i18n "wer_wir_sind" }}</div>
+            <div class="people-text-body">{{ .Params.einstieg | markdownify | safeHTML }}</div>
+          </div>
+          <div class="people-tag">
+            <div class="people-text-header">{{ i18n "motivation" }}</div>
+            <div class="people-text-body">{{ .Params.motivation | markdownify | safeHTML }}</div>
+          </div>
+          <div class="people-tag">
+            <div class="people-text-header">{{ i18n "menschliches" }}</div>
+            <div class="people-text-body">{{ .Params.menschliches | markdownify | safeHTML }}</div>
+          </div>
+          <div class="people-tag">
+            <div class="people-text-header">{{ i18n "funfact" }}</div>
+            <div class="people-text-body">{{ .Params.funfact | markdownify | safeHTML }}</div>
+          </div>
+          <div class="people-tag">
+            <div class="people-text-header">{{ i18n "passion" }}</div>
+            <div class="people-text-body">{{ .Params.passion | markdownify | safeHTML }}</div>
+          </div>
+          {{ .Content }}
+        </div>
+      </div>
+    </div>
+  </section>
+
+{{ end }}

@@ -2,67 +2,64 @@
 
 # Simple homepage link
 [[main]]
-weight = 1
+weight = 10
 name = "Startseite"
 url = "/"
 
 [[main]]
+name = "Aktuelles"
+url = "member/"
+weight = 15
+
+[[main]]
 name = "Über uns"
 url = "about/"
-weight = 2
+weight = 20
+
+[[main]]
+parent = "Über uns"
+name = "Das Projekt"
+url = "about/project"
+weight = 10
+
+[[main]]
+parent = "Über uns"
+name = "Die Menschen"
+url = "people/"
+weight = 20
+
+[[main]]
+parent = "Über uns"
+name = "Wie wir leben"
+url = "about/dailylife"
+weight = 30
+
+[[main]]
+parent = "Über uns"
+name = "In der Presse"
+url = "about/dailylife"
+weight = 40
+
+[[main]]
+parent = "Über uns"
+name = "Galerie"
+url = "about/photos"
+weight = 50
+
+[[main]]
+name = "Mitwohnen"
+url = "member/"
+weight = 30
+
+[[main]]
+name = "Unterstützen"
+url = "helping/"
+weight = 32
 
 [[main]]
 name = "Kontakt"
 url = "contact/"
-weight = 3
-
-# Dropdown menu
-[[main]]
-weight = 4
-name = "Seiten"
-hasChildren = true
-
-[[main]]
-parent = "Seiten"
-name = "Autor"
-url = "author/john-doe/"
-weight = 1
-
-[[main]]
-parent = "Seiten"
-name = "Kategorie"
-url = "categories/photography/"
-weight = 2
-
-[[main]]
-parent = "Seiten"
-name = "Schlagwörter"
-url = "tags/photo/"
-weight = 3
-
-[[main]]
-parent = "Seiten"
-name = "Suche"
-url = "search/"
-weight = 4
-
-[[main]]
-parent = "Seiten"
-name = "404 Seite"
-url = "404/"
-weight = 5
-
-[[main]]
-parent = "Seiten"
-name = "Elemente"
-url = "elements/"
-weight = 6
-
-[[main]]
-name = "Shop"
-url = "shop/"
-weight = 5
-
+weight = 35
 
 # footer menu
 [[footer]]

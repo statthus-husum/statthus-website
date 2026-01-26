@@ -66,3 +66,22 @@
 
 - id: empty_search_results_placeholder
   translation: Geben Sie etwas ein, um zu suchen...
+
+- id: wer_wir_sind
+  translation: Hallo :)
+
+- id: motivation
+  translation: Gemeinschaft und Motivation
+
+- id: menschliches
+  translation: Persönliches und Menschliches
+
+- id: funfact
+  translation: Fun Fact
+
+- id: passion
+  translation: Leidenschaft
+
+
+
+

@@ -1,0 +1,81 @@
+{{ define "main" }}
+  <!-- people list header -->
+  <section class="section-sm pb-0">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="title-bordered">
+            <h1 class="h4 fw-normal">
+              Showing items from
+              <span class="text-primary">{{ .Title }}</span>
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- people list content -->
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        {{ $pages := .RegularPages }}
+        {{ if $pages }}
+          {{ range $pages }}
+            <div class="col-lg-4 col-md-6 mb-4">
+              <article class="card h-100 border-0 shadow-sm">
+                <!-- people image -->
+                <div class="card-img-top overflow-hidden">
+                  {{ if .Params.Image }}
+                    <a href="{{ .RelPermalink }}">
+                      {{ partial "image.html" (dict "Src" .Params.Image "Alt" .Title "Class" "w-10") }}
+                    </a>
+                  {{ else if .Params.Email }}
+                    {{ $emailHash := md5 .Params.Email }}
+                    {{ $gravatorUrl := print "https://www.gravatar.com/avatar/" $emailHash "?s=700&pg&d=identicon" }}
+                    <a href="{{ .RelPermalink }}">
+                      {{ partial "image.html" (dict "Src" $gravatorUrl "Alt" .Title "Class" "w-100") }}
+                    </a>
+                  {{ end }}
+                </div>
+
+                <!-- people card body -->
+                <div class="card-body">
+                  <h3 class="h5 mb-3">
+                    <a class="text-dark" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                  </h3>
+                  
+                  {{ with .Params.einstieg }}
+                    <p class="mb-3">{{ . | markdownify | truncate 100 | safeHTML }}</p>
+                  {{ end }}
+
+                  <!-- social links -->
+                  {{ with .Params.social }}
+                    <ul class="list-inline social-icons mb-3">
+                      {{ range . }}
+                        <li class="list-inline-item">
+                          <a href="{{ .link | safeURL }}" target="_blank" rel="noopener noreferrer">
+                            <span class="visually-hidden">{{ .icon }}</span>
+                            <i class="{{ .icon }}"></i>
+                          </a>
+                        </li>
+                      {{ end }}
+                    </ul>
+                  {{ end }}
+
+                  <a href="{{ .RelPermalink }}" class="btn btn-outline-primary btn-sm">
+                    {{ i18n "continue_reading" | default "Read More" }}
+                  </a>
+                </div>
+              </article>
+            </div>
+          {{ end }}
+        {{ else }}
+          <div class="col-12">
+            <p class="text-center">No people found.</p>
+          </div>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}
