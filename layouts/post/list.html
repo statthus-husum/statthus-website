@@ -1,0 +1,29 @@
+{{ define "main" }}
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="title-bordered mb-4 d-flex align-items-center">
+          <h1 class="h4">{{ .Title }}</h1>
+        </div>
+
+        {{ $posts := .RegularPages }}
+        {{ if $posts }}
+        <div class="post-teaser-list">
+          {{ range $posts }}
+          <a href="{{ .RelPermalink }}" class="post-teaser-item">
+            <span class="post-teaser-date">{{ .Date.Format "02.01." }}</span>
+            <span class="post-teaser-title">{{ .Title }}</span>
+            <span class="post-teaser-desc">{{ .Summary | plainify | truncate 80 }}</span>
+          </a>
+          {{ end }}
+        </div>
+        {{ else }}
+        <p>Noch keine Beiträge vorhanden.</p>
+        {{ end }}
+
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

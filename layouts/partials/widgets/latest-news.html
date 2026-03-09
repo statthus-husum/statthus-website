@@ -1,0 +1,21 @@
+<!-- latest news -->
+{{ $news := slice }}
+{{ range site.RegularPages }}
+  {{ if in .Params.categories "news" }}
+    {{ $news = $news | append . }}
+  {{ end }}
+{{ end }}
+{{ if $news }}
+<div class="widget">
+  <h5 class="widget-title"><span>Neues vom staTThus</span></h5>
+  <div class="post-teaser-list post-teaser-list-sm">
+    {{ range first 5 $news }}
+    <a href="{{ .RelPermalink }}" class="post-teaser-item">
+      <span class="post-teaser-date">{{ .Date.Format "02.01." }}</span>
+      <span class="post-teaser-title">{{ .Title }}</span>
+    </a>
+    {{ end }}
+  </div>
+  <a href="/post/" class="btn btn-outline-primary btn-sm mt-2">Alle Beiträge</a>
+</div>
+{{ end }}

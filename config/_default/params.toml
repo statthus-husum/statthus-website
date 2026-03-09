@@ -156,37 +156,16 @@ button = "I Accept"
 ######################## sidebar widgets #########################
 [widgets]
 sidebar = [
-  "search",
-  "about-me",
-  "promotion",
-  "subscription",
-  "categories",
-  "recent-post",
-  "tags",
-  "social",
+  "upcoming-events",
+  "latest-news",
 ]
 # available widget : search,about-me,categories,tags,recent-post,social,promotion,subscription
 
 ############################# social site ########################
 [[social]]
-title = "facebook"
-icon = "fab fa-facebook" # fontawesome icon pack : https://fontawesome.com/icons/
-link = "#"
-
-[[social]]
-title = "twitter"
-icon = "fab fa-twitter" # fontawesome icon pack : https://fontawesome.com/icons/
-link = "#"
-
-[[social]]
 title = "instagram"
 icon = "fab fa-instagram" # fontawesome icon pack : https://fontawesome.com/icons/
-link = "#"
-
-[[social]]
-title = "linkedin"
-icon = "fab fa-linkedin" # fontawesome icon pack : https://fontawesome.com/icons/
-link = "#"
+link = "https://instagram.com/statthus"
 
 ######################### site variables ##############################
 # customize your color and font from here.

@@ -1,0 +1,168 @@
+{{ define "main" }}
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="title-bordered mb-4 d-flex align-items-center">
+          <h1 class="h4">{{ .Title }}</h1>
+        </div>
+
+        <!-- Calendar navigation -->
+        <div class="calendar-nav">
+          <button id="cal-prev" class="calendar-nav-btn">&larr;</button>
+          <span id="cal-month-label" class="calendar-nav-label"></span>
+          <button id="cal-next" class="calendar-nav-btn">&rarr;</button>
+          <button id="cal-today" class="calendar-nav-today">Heute</button>
+        </div>
+
+        <!-- Event submission form (Formspree) -->
+        <div class="calendar-submit mb-4">
+          <p>Kennt ihr eine Veranstaltung, die hier stehen sollte? Schickt uns einen Hinweis!</p>
+          <button id="cal-submit-btn" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('cal-form').classList.toggle('d-none')">Veranstaltung melden</button>
+          <form id="cal-form" class="cal-submit-form d-none mt-3" action="https://formspree.io/f/FORMSPREE_ID" method="POST">
+            <div class="mb-2">
+              <input type="text" name="event_name" class="form-control" placeholder="Name der Veranstaltung" required>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-6">
+                <input type="date" name="event_date" class="form-control" required>
+              </div>
+              <div class="col-md-6">
+                <input type="text" name="event_location" class="form-control" placeholder="Ort">
+              </div>
+            </div>
+            <div class="mb-2">
+              <textarea name="event_description" class="form-control" rows="3" placeholder="Kurze Beschreibung" required></textarea>
+            </div>
+            <div class="mb-2">
+              <input type="email" name="contact_email" class="form-control" placeholder="Eure E-Mail (optional)">
+            </div>
+            <button type="submit" class="btn btn-primary btn-sm">Absenden</button>
+          </form>
+        </div>
+
+        <!-- Calendar grid -->
+        <div class="calendar-grid">
+          <div class="calendar-header">Mo</div>
+          <div class="calendar-header">Di</div>
+          <div class="calendar-header">Mi</div>
+          <div class="calendar-header">Do</div>
+          <div class="calendar-header">Fr</div>
+          <div class="calendar-header">Sa</div>
+          <div class="calendar-header">So</div>
+          <div id="cal-cells"></div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+{{ $events := slice }}
+{{ range .Site.RegularPages }}
+  {{ if in .Params.categories "event" }}
+    {{ $events = $events | append . }}
+  {{ end }}
+{{ end }}
+<script>
+const calEvents = [
+{{- range $i, $e := $events -}}
+  {{- if $i }},{{ end -}}
+  {"title":"{{ .Title }}","url":"{{ .RelPermalink }}","date":"{{ with .Params.event_date }}{{ dateFormat "2006-01-02" . }}{{ else }}{{ .Date.Format "2006-01-02" }}{{ end }}","location":"{{ default "" .Params.event_location }}"}
+{{- end -}}
+];
+
+(function() {
+  const cells = document.getElementById("cal-cells");
+  const label = document.getElementById("cal-month-label");
+  const monthNames = ["Januar","Februar","März","April","Mai","Juni","Juli","August","September","Oktober","November","Dezember"];
+
+  let current = new Date();
+  current.setDate(1);
+
+  function parseDate(s) {
+    if (!s) return null;
+    return new Date(s + "T00:00:00");
+  }
+
+  function sameDay(a, b) {
+    return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+  }
+
+  function render() {
+    const year = current.getFullYear();
+    const month = current.getMonth();
+    label.textContent = monthNames[month] + " " + year;
+
+    // First day of month (0=Sun), shift to Mon-start
+    let firstDay = new Date(year, month, 1).getDay();
+    firstDay = (firstDay === 0) ? 6 : firstDay - 1;
+
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const today = new Date();
+
+    let html = "";
+
+    // Empty cells before first day
+    for (let i = 0; i < firstDay; i++) {
+      html += '<div class="calendar-cell calendar-cell-empty"></div>';
+    }
+
+    // Day cells
+    for (let d = 1; d <= daysInMonth; d++) {
+      const cellDate = new Date(year, month, d);
+      const isToday = sameDay(cellDate, today);
+      const dayEvents = calEvents.filter(function(ev) {
+        const evDate = parseDate(ev.date);
+        return evDate && sameDay(evDate, cellDate);
+      });
+
+      let cls = "calendar-cell";
+      if (isToday) cls += " calendar-cell-today";
+      if (dayEvents.length) cls += " calendar-cell-has-event";
+
+      html += '<div class="' + cls + '">';
+      html += '<span class="calendar-day-number">' + d + '</span>';
+
+      dayEvents.forEach(function(ev) {
+        html += '<a href="' + ev.url + '" class="calendar-event">';
+        html += '<span class="calendar-event-title">' + ev.title + '</span>';
+        if (ev.location) {
+          html += '<span class="calendar-event-location">' + ev.location + '</span>';
+        }
+        html += '</a>';
+      });
+
+      html += '</div>';
+    }
+
+    // Fill remaining cells to complete the grid
+    const totalCells = firstDay + daysInMonth;
+    const remainder = totalCells % 7;
+    if (remainder > 0) {
+      for (let i = 0; i < 7 - remainder; i++) {
+        html += '<div class="calendar-cell calendar-cell-empty"></div>';
+      }
+    }
+
+    cells.innerHTML = html;
+  }
+
+  document.getElementById("cal-prev").addEventListener("click", function() {
+    current.setMonth(current.getMonth() - 1);
+    render();
+  });
+  document.getElementById("cal-next").addEventListener("click", function() {
+    current.setMonth(current.getMonth() + 1);
+    render();
+  });
+  document.getElementById("cal-today").addEventListener("click", function() {
+    current = new Date();
+    current.setDate(1);
+    render();
+  });
+
+  render();
+})();
+</script>
+{{ end }}

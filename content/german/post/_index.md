@@ -1,6 +1,5 @@
 ---
-title: "Blogs"
-# description
-description: "This is meta description"
+title: "Aktuelles"
+description: "Neuigkeiten und Veranstaltungen rund ums staTThus"
 draft: false
 ---

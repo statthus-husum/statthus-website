@@ -1,0 +1,59 @@
+{{ define "main" }}
+<section class="section-sm">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="title-bordered mb-4 d-flex align-items-center">
+          <h1 class="h4">{{ .Title }}</h1>
+        </div>
+
+        <!-- Featured article as small card -->
+        {{ with .GetPage .Params.featured }}
+        <div class="row mb-5">
+          <div class="col-lg-4 col-md-6">
+            <article class="card h-100 border-0 shadow-sm">
+              {{ with .Params.image }}
+              <div class="card-img-top overflow-hidden">
+                <a href="{{ $.RelPermalink }}{{ $.Params.featured }}/">
+                  {{ partial "image.html" (dict "Src" . "Alt" "staTThus als Denkmal" "Class" "w-100") }}
+                </a>
+              </div>
+              {{ end }}
+              <div class="card-body">
+                <h3 class="h5 mb-2">
+                  <a class="text-dark" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                </h3>
+                <p class="mb-3">{{ .Description | truncate 120 }}</p>
+                <a href="{{ .RelPermalink }}" class="btn btn-outline-primary btn-sm">Weiterlesen</a>
+              </div>
+            </article>
+          </div>
+        </div>
+        {{ end }}
+
+        <!-- Filtered posts tagged "quartier" -->
+        {{ $posts := slice }}
+        {{ range .Site.RegularPages }}
+          {{ if in .Params.tags "quartier" }}
+            {{ $posts = $posts | append . }}
+          {{ end }}
+        {{ end }}
+
+        {{ if $posts }}
+        <h2 class="h5 mb-3">Neues aus dem Quartier</h2>
+        <div class="post-teaser-list">
+          {{ range $posts }}
+          <a href="{{ .RelPermalink }}" class="post-teaser-item">
+            <span class="post-teaser-date">{{ .Date.Format "02.01." }}</span>
+            <span class="post-teaser-title">{{ .Title }}</span>
+            <span class="post-teaser-desc">{{ .Summary | plainify | truncate 80 }}</span>
+          </a>
+          {{ end }}
+        </div>
+        {{ end }}
+
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

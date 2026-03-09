@@ -1,0 +1,61 @@
+{{ define "main" }}
+  {{ if site.Params.featured_post }}
+    {{ partial "featured-post.html" . }}
+  {{ end }}
+
+  {{ $sidebar := site.Params.sidebar }}
+  {{ $widget := site.Params.widgets.sidebar }}
+
+  <!-- Top posts + sidebar -->
+  <section class="section">
+    <div class="container">
+      <div class="row">
+        <!-- main content -->
+        <div class="col-lg-8 mb-5 mb-lg-0">
+          {{ $topPosts := slice }}
+          {{ range site.RegularPages }}
+            {{ if in .Params.tags "top-post" }}
+              {{ $topPosts = $topPosts | append . }}
+            {{ end }}
+          {{ end }}
+
+          {{ if $topPosts }}
+          <div class="row">
+            {{ range first 3 $topPosts }}
+            <div class="col-md-6 col-lg-4 mb-4">
+              <article class="card h-100 border-0 shadow-sm">
+                {{ $permalink := .RelPermalink }}
+                {{ with .Params.images }}
+                  <div class="card-img-top overflow-hidden">
+                    <a href="{{ $permalink }}">
+                      {{ range first 1 . }}
+                        {{ partial "image.html" (dict "Src" . "Alt" "post-thumb" "Class" "w-100") }}
+                      {{ end }}
+                    </a>
+                  </div>
+                {{ end }}
+                <div class="card-body">
+                  <h3 class="h6 mb-2">
+                    <a class="text-dark" href="{{ .RelPermalink }}">{{ .Title }}</a>
+                  </h3>
+                  <p class="small text-muted mb-0">{{ .Summary | plainify | truncate 100 }}</p>
+                </div>
+              </article>
+            </div>
+            {{ end }}
+          </div>
+          {{ end }}
+        </div>
+
+        <!-- right sidebar -->
+        {{ if eq $sidebar "right" }}
+        <aside class="col-lg-4">
+          <div class="ps-0 ps-lg-4">
+            {{ partial "widgets/widget-wrapper" ( dict "Widgets" $widget "Scope" . ) }}
+          </div>
+        </aside>
+        {{ end }}
+      </div>
+    </div>
+  </section>
+{{ end }}

@@ -1,0 +1,21 @@
+<!-- upcoming events -->
+{{ $events := slice }}
+{{ range site.RegularPages }}
+  {{ if in .Params.categories "event" }}
+    {{ $events = $events | append . }}
+  {{ end }}
+{{ end }}
+{{ if $events }}
+<div class="widget">
+  <h5 class="widget-title"><span>Nächste Veranstaltungen</span></h5>
+  <div class="post-teaser-list post-teaser-list-sm">
+    {{ range first 3 $events }}
+    <a href="{{ .RelPermalink }}" class="post-teaser-item">
+      <span class="post-teaser-date">{{ with .Params.event_date }}{{ dateFormat "02.01." . }}{{ else }}{{ .Date.Format "02.01." }}{{ end }}</span>
+      <span class="post-teaser-title">{{ .Title }}</span>
+    </a>
+    {{ end }}
+  </div>
+  <a href="/kalender/" class="btn btn-outline-primary btn-sm mt-2">Alle Termine</a>
+</div>
+{{ end }}

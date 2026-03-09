@@ -1,25 +1,34 @@
 ############### German navigation ################
 
 # Simple homepage link
-[[main]]
-weight = 10
-name = "Startseite"
-url = "/"
 
 [[main]]
 name = "Aktuelles"
-url = "member/"
-weight = 15
+url = "#"
+weight = 40
+
+[[main]]
+parent = "Aktuelles"
+name = "Veranstaltungskalender"
+url = "kalender/"
+weight = 10
+
+[[main]]
+parent = "Aktuelles"
+name = "Neues vom staTThus"
+url = "post/"
+weight = 20
+
 
 [[main]]
 name = "Über uns"
 url = "about/"
-weight = 20
+weight = 10
 
 [[main]]
 parent = "Über uns"
 name = "Das Projekt"
-url = "about/project"
+url = "projekt/"
 weight = 10
 
 [[main]]
@@ -31,53 +40,47 @@ weight = 20
 [[main]]
 parent = "Über uns"
 name = "Wie wir leben"
-url = "about/dailylife"
+url = "dailylife/"
 weight = 30
 
 [[main]]
-parent = "Über uns"
-name = "In der Presse"
-url = "about/dailylife"
-weight = 40
+name = "Wir im Quartier"
+url = "nachbarn/"
+weight = 30
 
-[[main]]
-parent = "Über uns"
-name = "Galerie"
-url = "about/photos"
-weight = 50
 
 [[main]]
 name = "Mitwohnen"
 url = "member/"
-weight = 30
+weight = 20
 
 [[main]]
 name = "Unterstützen"
-url = "helping/"
-weight = 32
+url = "help/"
+weight = 50
 
 [[main]]
-name = "Kontakt"
-url = "contact/"
-weight = 35
+name = "Galerie"
+url = "gallery/"
+weight = 60
 
 # footer menu
 [[footer]]
-name = "Über uns"
-url = "about/"
-weight = 1
-
-[[footer]]
-name = "Kontakt"
-url = "contact/"
+name = "Newsletter"
+url = "newsletter/"
 weight = 2
 
 [[footer]]
-name = "Datenschutz"
-url = "privacy-policy/"
-weight = 3
+name = "Kontakt"
+url = "kontakt/"
+weight = 1
 
 [[footer]]
-name = "AGB"
-url = "terms-conditions/"
+name = "Datenschutz"
+url = "datenschutz/"
 weight = 4
+
+[[footer]]
+name = "Impressum"
+url = "impressum/"
+weight = 3
