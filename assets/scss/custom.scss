@@ -1,21 +1,192 @@
-.people-tag {
+// ============================================
+// staTThus Website - Custom Design
+// Color scheme: teal green (#056478) + cream (#faf6f0)
+// ============================================
+
+// --- Variables ---
+// Original red palette
+$primary: #a8131a;
+$primary-dark: #8a0f15;
+$primary-light: #c4262e;
+$cream: #faf6f0;
+$cream-dark: #f0ebe3;
+$cream-darker: #e5ddd3;
+$text-dark: #2c2c2c;
+$text-muted: #6b6b6b;
+
+// --- Font overrides ---
+// Typekit font for menus and headers
+header .navbar-nav .nav-link,
+header .navbar-nav .dropdown-item {
+  font-family: "itc-bradley-hand-std", sans-serif;
 }
 
-.people-text-header {
-    margin-top: 0.5rem;
-    font-weight: bold;    
-    color: #00aaee;
+h1, h2, h3, h4, h5, h6 {
+  font-family: "itc-bradley-hand-std", sans-serif;
 }
 
-.people-text-body {
+// --- Global background ---
+body {
+  background-color: $cream !important;
 }
 
-// Featured card with image
-.featured-card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
+// --- Red Navbar with rounded corners ---
+.statthus-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  z-index: 1030;
+  padding: 0.75rem 0 0;
+}
+
+.statthus-navbar-wrapper {
+  background-color: $primary;
+  border-radius: 12px;
+  padding: 0 1rem;
+  position: relative;
+
+  .navbar {
+    padding: 0.4rem 0;
+  }
+
+  .navbar-brand img {
+    filter: brightness(0) invert(1);
+  }
+
+  .nav-link {
+    color: #fff !important;
+    font-size: 0.95rem;
+    padding: 0.5rem 0.85rem !important;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+
+    &:hover,
+    &:focus {
+      background-color: rgba(255, 255, 255, 0.15);
+    }
+  }
+
+  .dropdown-menu {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    margin-top: 0.25rem;
+    background: #fff;
+
+    .dropdown-item {
+      color: $text-dark;
+      padding: 0.5rem 1.25rem;
+      border-radius: 4px;
+      margin: 0.15rem 0.5rem;
+
+      &:hover {
+        background-color: rgba($primary, 0.08);
+        color: $primary;
+      }
+    }
+  }
+
+  .search-btn {
+    color: #fff;
+    background: none;
+    border: none;
+    &:hover {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .header-search-panel {
+    background: $primary-dark;
+    border-radius: 0 0 12px 12px;
+
+    .search-query {
+      background: transparent;
+      color: #fff;
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+}
+
+// Override the original sticky header styles
+header.position-sticky {
+  background: transparent !important;
+  border: none !important;
+}
+
+// --- Section styling ---
+.section, .section-sm {
+  background-color: transparent;
+}
+
+// --- Cards (used on homepage and people list) ---
+.card {
+  background-color: #fff;
+  border-radius: 12px !important;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  border: none !important;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-img-top {
+    border-radius: 12px 12px 0 0;
+    overflow: hidden;
+
+    img {
+      transition: transform 0.3s;
+    }
+
+    &:hover img {
+      transform: scale(1.03);
+    }
+  }
+
+  .card-body {
+    padding: 1.25rem;
+  }
+}
+
+// --- Buttons ---
+.btn-primary {
+  background-color: $primary !important;
+  border-color: $primary !important;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: $primary-dark !important;
+    border-color: $primary-dark !important;
+  }
+}
+
+.btn-outline-primary {
+  color: $primary !important;
+  border-color: $primary !important;
+  border-radius: 8px;
+
+  &:hover {
+    background-color: $primary !important;
+    color: #fff !important;
+  }
+}
+
+// --- Featured hero section ---
+.video-hero {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.featured-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  background: #fff;
 }
 
 .featured-card-image {
@@ -36,7 +207,29 @@
   p { font-size: 0.95rem; line-height: 1.6; }
 }
 
-// Compact post teaser list
+// --- People section ---
+.people-tag {
+  background: #fff;
+  border-radius: 10px;
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+}
+
+.people-text-header {
+  margin-top: 0;
+  margin-bottom: 0.35rem;
+  font-weight: bold;
+  color: $primary;
+  font-size: 1.05rem;
+}
+
+.people-text-body {
+  color: $text-muted;
+  line-height: 1.6;
+}
+
+// --- Post teaser list ---
 .post-teaser-list {
   display: flex;
   flex-direction: column;
@@ -47,19 +240,19 @@
   align-items: baseline;
   gap: 0.75rem;
   padding: 0.6rem 0;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid $cream-darker;
   text-decoration: none;
   color: inherit;
   &:hover {
-    background: #fafafa;
-    .post-teaser-title { color: #00aaee; }
+    background: $cream-dark;
+    .post-teaser-title { color: $primary; }
   }
   &:last-child { border-bottom: none; }
 }
 
 .post-teaser-date {
   font-size: 0.8rem;
-  color: #999;
+  color: $text-muted;
   white-space: nowrap;
   min-width: 3rem;
 }
@@ -69,17 +262,22 @@
   font-size: 0.95rem;
   white-space: nowrap;
   transition: color 0.15s;
+
+  // Allow wrapping in sidebar / small containers
+  .homepage-red-bar &,
+  aside & {
+    white-space: normal;
+  }
 }
 
 .post-teaser-desc {
   font-size: 0.85rem;
-  color: #666;
+  color: $text-muted;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-// Smaller variant for sidebar widgets
 .post-teaser-list-sm {
   .post-teaser-item { padding: 0.4rem 0; }
   .post-teaser-date { font-size: 0.75rem; min-width: 2.5rem; }
@@ -97,7 +295,149 @@
   }
 }
 
-// Calendar
+// --- Homepage red sidebar bar ---
+.homepage-red-bar {
+  background-color: $primary;
+  border-radius: 12px;
+  padding: 1.5rem;
+
+  .card, .widget, [class*="widget"] {
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
+    border-radius: 12px !important;
+    box-shadow: none;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1.25rem;
+
+    h6, h5, h4, .widget-title {
+      color: #fff !important;
+    }
+
+    a {
+      color: rgba(255, 255, 255, 0.85) !important;
+      &:hover {
+        color: #fff !important;
+      }
+    }
+
+    p, span, .text-muted, small {
+      color: rgba(255, 255, 255, 0.75) !important;
+    }
+  }
+
+  // Widget title: override the white span background from theme
+  .widget-title {
+    span {
+      background: transparent !important;
+      color: #fff !important;
+    }
+    &::before {
+      background: rgba(255, 255, 255, 0.25) !important;
+    }
+  }
+
+  .post-teaser-item {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      .post-teaser-title { color: #fff; }
+    }
+  }
+  .post-teaser-date { color: rgba(255, 255, 255, 0.6); }
+  .post-teaser-title { color: rgba(255, 255, 255, 0.9); }
+  .post-teaser-desc { color: rgba(255, 255, 255, 0.65); }
+}
+
+// --- Footer (dark grey, contained width) ---
+$footer-grey: #5c524a;       // warm brown-grey
+$footer-grey-light: #6e645c;
+
+.statthus-footer {
+  background: transparent !important;
+  border: none !important;
+  padding-top: 2rem;
+  padding-bottom: 1rem;
+
+  .footer-inner {
+    background-color: $footer-grey;
+    border-radius: 12px;
+    padding: 2rem 2rem 1rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  a {
+    color: rgba(255, 255, 255, 0.75) !important;
+    &:hover {
+      color: #fff !important;
+    }
+  }
+
+  h6, p, .content {
+    color: rgba(255, 255, 255, 0.85) !important;
+  }
+
+  .footer-list li a {
+    color: rgba(255, 255, 255, 0.65) !important;
+    &:hover {
+      color: #fff !important;
+    }
+  }
+
+  .subscription {
+    .form-control {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+    }
+    .btn {
+      background: #fff !important;
+      color: $footer-grey !important;
+      border: none !important;
+      &:hover {
+        background: $cream !important;
+      }
+    }
+  }
+
+  #scrollTop {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: none;
+    &:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  // Invert logo to white inside dark footer
+  img {
+    filter: brightness(0) invert(1);
+  }
+}
+
+// Override theme footer defaults
+footer.section-sm {
+  background: transparent !important;
+  border: none !important;
+}
+
+// --- Sidebar widgets ---
+aside {
+  .card, .widget {
+    background: #fff;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
+}
+
+// --- Title bordered ---
+.title-bordered {
+  border-bottom-color: $cream-darker !important;
+}
+
+// --- Calendar ---
 .calendar-nav {
   display: flex;
   align-items: center;
@@ -106,13 +446,13 @@
 }
 
 .calendar-nav-btn {
-  background: none;
-  border: 1px solid #ddd;
-  border-radius: 4px;
+  background: #fff;
+  border: 1px solid $cream-darker;
+  border-radius: 8px;
   padding: 0.25rem 0.75rem;
   font-size: 1.1rem;
   cursor: pointer;
-  &:hover { background: #f0f0f0; }
+  &:hover { background: $cream-dark; }
 }
 
 .calendar-nav-label {
@@ -124,32 +464,33 @@
 
 .calendar-nav-today {
   background: none;
-  border: 1px solid #00aaee;
-  color: #00aaee;
-  border-radius: 4px;
+  border: 1px solid $primary;
+  color: $primary;
+  border-radius: 8px;
   padding: 0.25rem 0.75rem;
   font-size: 0.85rem;
   cursor: pointer;
   margin-left: auto;
-  &:hover { background: #00aaee; color: #fff; }
+  &:hover { background: $primary; color: #fff; }
 }
 
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  border: 1px solid #e0e0e0;
-  border-radius: 6px;
+  border: 1px solid $cream-darker;
+  border-radius: 12px;
   overflow: hidden;
+  background: #fff;
 }
 
 .calendar-header {
-  background: #f5f5f5;
+  background: $cream-dark;
   font-weight: 600;
   text-align: center;
   padding: 0.5rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid $cream-darker;
   font-size: 0.85rem;
-  color: #666;
+  color: $text-muted;
 }
 
 #cal-cells {
@@ -158,20 +499,21 @@
 
 .calendar-cell {
   min-height: 90px;
-  border: 1px solid #eee;
+  border: 1px solid $cream-darker;
   padding: 0.35rem;
   vertical-align: top;
   font-size: 0.85rem;
+  background: #fff;
 }
 
 .calendar-cell-empty {
-  background: #fafafa;
+  background: $cream;
   min-height: 90px;
-  border: 1px solid #eee;
+  border: 1px solid $cream-darker;
 }
 
 .calendar-cell-today {
-  background: #f0faff;
+  background: rgba($primary, 0.04);
 }
 
 .calendar-cell-has-event {
@@ -182,25 +524,25 @@
   display: block;
   font-weight: 600;
   font-size: 0.8rem;
-  color: #999;
+  color: $text-muted;
   margin-bottom: 0.25rem;
 }
 
 .calendar-cell-today .calendar-day-number {
-  color: #00aaee;
+  color: $primary;
 }
 
 .calendar-event {
   display: block;
-  background: #00aaee;
+  background: $primary;
   color: #fff;
-  border-radius: 3px;
+  border-radius: 6px;
   padding: 0.2rem 0.4rem;
   margin-top: 0.2rem;
   text-decoration: none;
   font-size: 0.75rem;
   line-height: 1.3;
-  &:hover { background: #0088cc; color: #fff; }
+  &:hover { background: $primary-dark; color: #fff; }
 }
 
 .calendar-event-title {
@@ -214,7 +556,6 @@
   opacity: 0.85;
 }
 
-// Responsive: stack on small screens
 @media (max-width: 576px) {
   .calendar-cell, .calendar-cell-empty {
     min-height: 60px;
@@ -229,15 +570,67 @@
   }
 }
 
-// Calendar submit form
 .calendar-submit {
-  background: #f8f9fa;
+  background: #fff;
   padding: 1rem 1.25rem;
-  border-radius: 6px;
+  border-radius: 10px;
   font-size: 0.9rem;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
   p { margin-bottom: 0.5rem; }
 }
 
 .cal-submit-form {
   max-width: 600px;
+}
+
+// --- Responsive navbar adjustments ---
+@media (max-width: 991px) {
+  .statthus-navbar-wrapper {
+    border-radius: 10px;
+
+    .navbar-collapse {
+      background: $primary;
+      border-radius: 0 0 10px 10px;
+      padding: 0.5rem 0;
+    }
+
+    .nav-link {
+      padding: 0.6rem 1rem !important;
+      text-align: left;
+    }
+
+    .dropdown-menu {
+      background: rgba(0, 0, 0, 0.15);
+      box-shadow: none;
+
+      .dropdown-item {
+        color: rgba(255, 255, 255, 0.85);
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+// --- Misc ---
+// Rounded images throughout
+.rounded-lg {
+  border-radius: 12px !important;
+}
+
+// Text primary color override
+.text-primary {
+  color: $primary !important;
+}
+
+// Border color overrides for cream theme
+.border-bottom.border-default {
+  border-color: $cream-darker !important;
+}
+
+// Section bottom borders
+.section-sm.border-bottom {
+  border-color: $cream-darker !important;
 }

@@ -171,7 +171,7 @@ link = "https://instagram.com/statthus"
 # customize your color and font from here.
 [variables]
 color_primary = "#a8131a"
-body_color = "#fff"
+body_color = "#faf6f0"
 text_color = "#696c6d"
 text_dark = "#1c1d1f"
 text_light = "#888c8e"
