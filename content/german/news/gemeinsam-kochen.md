@@ -4,8 +4,6 @@ date: 2026-02-20
 images:
   - images/post/post-4.jpg
 description: "Jeden Dienstag kochen wir gemeinsam — ein Ritual, das zusammenschweißt."
-categories:
-  - news
 tags:
   - alltag
   - gemeinschaft

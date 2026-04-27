@@ -1,18 +1,13 @@
-<!-- latest news -->
-{{ $news := slice }}
-{{ range site.RegularPages }}
-  {{ if in .Params.categories "news" }}
-    {{ $news = $news | append . }}
-  {{ end }}
-{{ end }}
-{{ if $news }}
+<!-- latest news: rollierender Feed über alle Posts + neue People-Einträge -->
+{{ $feed := where site.RegularPages "Section" "in" (slice "event" "news" "people") }}
+{{ if $feed }}
 <div class="widget">
   <h5 class="widget-title"><span>Neues vom staTThus</span></h5>
   <div class="post-teaser-list post-teaser-list-sm">
-    {{ range first 5 $news }}
+    {{ range first 5 $feed.ByDate.Reverse }}
     <a href="{{ .RelPermalink }}" class="post-teaser-item">
       <span class="post-teaser-date">{{ .Date.Format "02.01." }}</span>
-      <span class="post-teaser-title">{{ .Title }}</span>
+      <span class="post-teaser-title">{{ if eq .Section "people" }}Neue Nachbar:innen: {{ end }}{{ .Title }}</span>
     </a>
     {{ end }}
   </div>

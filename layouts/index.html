@@ -14,7 +14,7 @@
         <div class="col-lg-8 mb-5 mb-lg-0">
           {{ $topPosts := slice }}
           {{ range site.RegularPages }}
-            {{ if in .Params.tags "top-post" }}
+            {{ if in .Params.flags "top-post" }}
               {{ $topPosts = $topPosts | append . }}
             {{ end }}
           {{ end }}

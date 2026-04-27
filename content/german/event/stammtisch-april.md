@@ -4,8 +4,6 @@ date: 2026-03-03
 images:
   - images/post/post-6.jpg
 description: "Offener Stammtisch für alle, die das staTThus kennenlernen möchten."
-categories:
-  - event
 tags:
   - stammtisch
   - kennenlernen

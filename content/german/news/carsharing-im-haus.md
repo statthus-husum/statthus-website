@@ -4,8 +4,6 @@ date: 2026-01-15
 images:
   - images/post/post-5.jpg
 description: "Unser hauseigenes Carsharing läuft — ein Auto für alle."
-categories:
-  - news
 tags:
   - alltag
   - nachhaltigkeit

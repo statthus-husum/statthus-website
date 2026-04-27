@@ -7,13 +7,13 @@
           <h1 class="h4">{{ .Title }}</h1>
         </div>
 
-        {{ $posts := .RegularPages }}
-        {{ if $posts }}
+        {{ $feed := where site.RegularPages "Section" "in" (slice "event" "news" "people") }}
+        {{ if $feed }}
         <div class="post-teaser-list">
-          {{ range $posts }}
+          {{ range $feed.ByDate.Reverse }}
           <a href="{{ .RelPermalink }}" class="post-teaser-item">
             <span class="post-teaser-date">{{ .Date.Format "02.01." }}</span>
-            <span class="post-teaser-title">{{ .Title }}</span>
+            <span class="post-teaser-title">{{ if eq .Section "people" }}Neue Nachbar:innen: {{ end }}{{ .Title }}</span>
             <span class="post-teaser-desc">{{ .Summary | plainify | truncate 80 }}</span>
           </a>
           {{ end }}

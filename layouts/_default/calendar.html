@@ -58,12 +58,7 @@
   </div>
 </section>
 
-{{ $events := slice }}
-{{ range .Site.RegularPages }}
-  {{ if in .Params.categories "event" }}
-    {{ $events = $events | append . }}
-  {{ end }}
-{{ end }}
+{{ $events := where .Site.RegularPages "Section" "event" }}
 <script>
 const calEvents = [
 {{- range $i, $e := $events -}}

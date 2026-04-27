@@ -4,8 +4,6 @@ date: 2026-03-01
 images:
   - images/post/post-1.jpg
 description: "Unser erstes großes Sommerfest — alle Nachbarn sind herzlich eingeladen!"
-categories:
-  - event
 tags:
   - sommerfest
   - quartier

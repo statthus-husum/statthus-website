@@ -4,8 +4,6 @@ date: 2026-02-01
 images:
   - images/post/post-3.jpg
 description: "Im neuen Quartiersrat engagieren wir uns für eine lebendige Nachbarschaft."
-categories:
-  - news
 tags:
   - quartier
   - nachbarschaft

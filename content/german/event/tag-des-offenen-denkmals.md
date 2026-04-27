@@ -4,8 +4,6 @@ date: 2026-02-10
 images:
   - images/post/post-2.jpg
 description: "Am Tag des offenen Denkmals öffnen wir unsere Türen für alle Interessierten."
-categories:
-  - event
 tags:
   - quartier
   - denkmal

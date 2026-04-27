@@ -4,13 +4,12 @@ date: 2026-03-04
 images:
   - images/post/post-3.jpg
 description: "Der Rohbau steht — ein Blick auf den aktuellen Baufortschritt."
-categories:
-  - news
+flags:
+  - top-post
 tags:
   - bau
   - fortschritt
   - rohbau
-  - top-post
 draft: false
 ---
 

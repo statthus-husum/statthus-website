@@ -4,14 +4,13 @@ date: 2026-01-20
 images:
   - images/post/post-1.jpg
 description: "Tolle Nachricht: Die Stadt fördert unsere Gemeinschaftsräume mit 50.000 Euro."
-categories:
-  - news
+flags:
+  - top-post
 tags:
   - foerderung
   - gemeinschaft
   - politik
   - quartier
-  - top-post
 draft: false
 ---
 

@@ -1,10 +1,5 @@
 <!-- upcoming events -->
-{{ $events := slice }}
-{{ range site.RegularPages }}
-  {{ if in .Params.categories "event" }}
-    {{ $events = $events | append . }}
-  {{ end }}
-{{ end }}
+{{ $events := where site.RegularPages "Section" "event" }}
 {{ if $events }}
 <div class="widget">
   <h5 class="widget-title"><span>Nächste Veranstaltungen</span></h5>

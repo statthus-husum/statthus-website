@@ -4,8 +4,6 @@ date: 2026-03-02
 images:
   - images/post/post-2.jpg
 description: "Im Mai-Workshop geht es um die Gestaltung unserer Gemeinschaftsräume."
-categories:
-  - event
 tags:
   - workshop
   - neubau

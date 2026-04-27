@@ -24,6 +24,16 @@ ID = 'G-MEASUREMENT_ID' # see https://gohugo.io/templates/internal/#configure-go
 shortname = '' # disabled
 
 
+############################# Taxonomies ##########################
+# Sektion (event | news) ist die Inhaltsart — daher keine eigene Taxonomie nötig.
+# themen: wie-wir-leben | wir-im-quartier | ...  (Filterseiten)
+# flags : top-post | ...                          (Feature-Flags)
+# tags  : freie Schlagworte
+[taxonomies]
+thema = "themen"
+flag = "flags"
+tag = "tags"
+
 ############################# Modules ############################
 [module]
 [[module.mounts]]

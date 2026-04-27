@@ -4,8 +4,6 @@ date: 2026-03-01
 images:
   - images/post/post-4.jpg
 description: "Wir freuen uns, Anne als neue Bewohnerin im staTThus begrüßen zu dürfen."
-categories:
-  - news
 tags:
   - menschen
   - gemeinschaft

@@ -4,15 +4,14 @@ date: 2026-02-15
 images:
   - images/post/post-5.jpg
 description: "Unser Gemeinschaftsgarten nimmt Gestalt an — erste Ideen und Pläne."
-categories:
-  - news
+flags:
+  - top-post
 tags:
   - garten
   - gemeinschaft
   - nachhaltigkeit
   - alltag
   - quartier
-  - top-post
 draft: false
 ---
 

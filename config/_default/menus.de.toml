@@ -40,12 +40,12 @@ weight = 20
 [[main]]
 parent = "Über uns"
 name = "Wie wir leben"
-url = "dailylife/"
+url = "themen/wie-wir-leben/"
 weight = 30
 
 [[main]]
 name = "Wir im Quartier"
-url = "nachbarn/"
+url = "themen/wir-im-quartier/"
 weight = 30
 
 
