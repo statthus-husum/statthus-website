@@ -1,18 +1,17 @@
 ---
-title: "Kennenlern-Stammtisch im April"
-date: 2026-03-03
+title: Kennenlern-Stammtisch im Mai
+date: 2026-03-03T00:00:00.000Z
+description: 'Offener Stammtisch für alle, die das staTThus kennenlernen möchten.'
 images:
   - images/post/post-6.jpg
-description: "Offener Stammtisch für alle, die das staTThus kennenlernen möchten."
+event_date: 2026-05-08T00:00:00.000Z
+event_end: 2026-05-08T00:00:00.000Z
+event_location: 'Café Klatsch, Marktstraße 12'
 tags:
   - stammtisch
   - kennenlernen
   - gemeinschaft
 draft: false
-
-event_date: 2026-04-12T18:00:00+02:00
-event_end: 2026-04-12T21:00:00+02:00
-event_location: "Café Klatsch, Marktstraße 12"
 ---
 
 ## Kommt vorbei!
@@ -25,16 +24,16 @@ In lockerer Atmosphäre erzählen wir von unserem Projekt, wie alles angefangen 
 
 ### Wann und wo?
 
-- **Datum:** Samstag, 12. April 2026
-- **Uhrzeit:** 18:00 – 21:00 Uhr
-- **Ort:** Café Klatsch, Marktstraße 12
+* **Datum:** Samstag, 12. April 2026
+* **Uhrzeit:** 18:00 – 21:00 Uhr
+* **Ort:** Café Klatsch, Marktstraße 12
 
 Eine Anmeldung ist nicht nötig — kommt einfach vorbei! Wir sind die Gruppe mit dem staTThus-Schild auf dem Tisch.
 
 ### Für wen ist der Stammtisch?
 
-- Menschen, die sich für gemeinschaftliches Wohnen interessieren
-- Nachbarn, die das Projekt kennenlernen möchten
-- Alle, die einfach neugierig sind
+* Menschen, die sich für gemeinschaftliches Wohnen interessieren
+* Nachbarn, die das Projekt kennenlernen möchten
+* Alle, die einfach neugierig sind
 
 Wir freuen uns auf neue Gesichter!
