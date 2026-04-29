@@ -1,5 +1,5 @@
 ---
 title: franz
-image: images/franz.png
+image: images/uploads/franz.png
 ---
 
