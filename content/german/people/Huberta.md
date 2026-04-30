@@ -1,5 +1,7 @@
 ---
 title: Huberta
-image: images/uploads/selfscrum_expressive_painterly_childbook_illustration_a_messy_2eb66695-5565-4b6d-bd76-4d450b232741_3.png
+image: >-
+  images/uploads/people/selfscrum_expressive_painterly_childbook_illustration_a_messy_2eb66695-5565-4b6d-bd76-4d450b232741_3.png
 einstieg: ''
 ---
+
