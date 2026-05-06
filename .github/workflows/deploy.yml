@@ -74,7 +74,8 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Install Hugo modules
-        run: hugo mod get -u
+        # No -u: stick to the versions pinned in go.mod / go.sum
+        run: hugo mod get
 
       - name: Build with Hugo
         env:
