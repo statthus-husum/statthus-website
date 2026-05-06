@@ -39,7 +39,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: "0.145.0"
+      HUGO_VERSION: "0.152.2"
       GO_VERSION: "1.20"
       NODE_VERSION: "20"
     steps:
