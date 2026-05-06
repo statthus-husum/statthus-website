@@ -4,26 +4,107 @@
     <div class="row">
       <div class="col-12">
         <div class="title-bordered mb-4 d-flex align-items-center">
-          <h1 class="h4">{{ .Title }}</h1>
+          <h1 class="h2">{{ .Title }}</h1>
         </div>
-
-        {{ $feed := where site.RegularPages "Section" "in" (slice "event" "news" "people") }}
-        {{ if $feed }}
-        <div class="post-teaser-list">
-          {{ range $feed.ByDate.Reverse }}
-          <a href="{{ .RelPermalink }}" class="post-teaser-item">
-            <span class="post-teaser-date">{{ .Date.Format "02.01." }}</span>
-            <span class="post-teaser-title">{{ if eq .Section "people" }}Neue Nachbar:innen: {{ end }}{{ .Title }}</span>
-            <span class="post-teaser-desc">{{ .Summary | plainify | truncate 80 }}</span>
-          </a>
-          {{ end }}
-        </div>
-        {{ else }}
-        <p>Noch keine Beiträge vorhanden.</p>
-        {{ end }}
-
       </div>
     </div>
+
+    {{ $feed := where site.RegularPages "Section" "in" (slice "event" "news" "people") }}
+    {{ if $feed }}
+      <div class="row">
+        <div class="col-12 mb-3">
+          <div class="post-view-toggle btn-group" role="group" aria-label="Ansicht umschalten">
+            <button type="button" class="btn btn-sm btn-outline-primary active" data-view-target="cards">
+              <i class="fas fa-th-large me-1"></i> Kacheln
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-primary" data-view-target="list">
+              <i class="fas fa-list me-1"></i> Liste
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="post-overview" data-view="cards">
+        <!-- Card view -->
+        <div class="post-view-cards row projekt-card-row">
+          {{ range $feed.ByDate.Reverse }}
+            {{ $section := .Section }}
+            {{ $label := dict "news" "News" "event" "Termin" "people" "Menschen" }}
+            {{ $img := "" }}
+            {{ if eq $section "people" }}
+              {{ $img = .Params.Image }}
+            {{ else }}
+              {{ with .Params.images }}{{ $img = index . 0 }}{{ end }}
+            {{ end }}
+            <div class="col-md-6 col-lg-4 mb-4">
+              <a class="projekt-card post-card h-100" href="{{ .RelPermalink }}">
+                {{ with $img }}
+                  <div class="projekt-card-image">
+                    {{ partial "image.html" (dict "Src" . "Alt" $.Title "Class" "img-fluid") }}
+                  </div>
+                {{ end }}
+                <div class="projekt-card-body">
+                  <div class="post-card-meta">
+                    <span class="post-card-section post-card-section-{{ $section }}">{{ index $label $section }}</span>
+                    <span class="post-card-date">{{ time.Format ":date_long" .Date }}</span>
+                  </div>
+                  <h3 class="projekt-card-title">
+                    {{ if eq $section "people" }}Neue Nachbar:innen: {{ end }}{{ .Title }}
+                  </h3>
+                  {{ with .Params.description }}
+                    <p class="projekt-card-desc">{{ . }}</p>
+                  {{ else }}
+                    {{ with .Summary }}
+                      <p class="projekt-card-desc">{{ . | plainify | truncate 120 }}</p>
+                    {{ end }}
+                  {{ end }}
+                </div>
+              </a>
+            </div>
+          {{ end }}
+        </div>
+
+        <!-- List view -->
+        <div class="post-view-list">
+          <div class="post-teaser-list">
+            {{ range $feed.ByDate.Reverse }}
+              <a href="{{ .RelPermalink }}" class="post-teaser-item">
+                <span class="post-teaser-date">{{ time.Format ":date_long" .Date }}</span>
+                <span class="post-teaser-title">{{ if eq .Section "people" }}Neue Nachbar:innen: {{ end }}{{ .Title }}</span>
+                <span class="post-teaser-desc">{{ .Summary | plainify | truncate 80 }}</span>
+              </a>
+            {{ end }}
+          </div>
+        </div>
+      </div>
+    {{ else }}
+      <div class="row">
+        <div class="col-12">
+          <p>Noch keine Beiträge vorhanden.</p>
+        </div>
+      </div>
+    {{ end }}
   </div>
 </section>
+
+<script>
+(function() {
+  const overview = document.querySelector('.post-overview');
+  const buttons = document.querySelectorAll('[data-view-target]');
+  if (!overview || !buttons.length) return;
+
+  function setView(view) {
+    overview.dataset.view = view;
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.viewTarget === view));
+    try { localStorage.setItem('post-view', view); } catch (e) {}
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => setView(b.dataset.viewTarget)));
+
+  try {
+    const saved = localStorage.getItem('post-view');
+    if (saved === 'cards' || saved === 'list') setView(saved);
+  } catch (e) {}
+})();
+</script>
 {{ end }}

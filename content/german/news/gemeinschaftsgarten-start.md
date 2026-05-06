@@ -12,6 +12,8 @@ tags:
   - nachhaltigkeit
   - alltag
   - quartier
+themen:
+  - wir-im-quartier
 draft: false
 ---
 

@@ -8,6 +8,8 @@ tags:
   - menschen
   - gemeinschaft
   - willkommen
+themen:
+  - wie-wir-leben
 draft: false
 
 ref_section: "people"
