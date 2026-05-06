@@ -1,0 +1,72 @@
+{{ define "main" }}
+{{ $sidebar := site.Params.sidebar }}
+{{ $hasbar := or (eq $sidebar `left`) (eq $sidebar `right`) }}
+{{ $widget := slice "event-data" }}
+
+<section class="section">
+  <div class="container">
+    <!-- Full-width title -->
+    <div class="row">
+      <div class="col-12 mb-4">
+        <div class="title-bordered mb-3 d-flex align-items-center">
+          <h1 class="h2">{{ .Title }}</h1>
+        </div>
+        <ul class="list-inline post-meta mb-3">
+          <li class="list-inline-item">{{ time.Format ":date_long" .PublishDate }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <article class="row mb-4">
+      {{ if eq $sidebar `left` }}
+        <aside class="col-lg-4 order-2 order-lg-1 mt-5 mt-lg-0">
+          <div class="pr-0 pr-lg-4">
+            {{ partial "widgets/widget-wrapper" (dict "Widgets" $widget "Scope" .) }}
+          </div>
+        </aside>
+      {{ end }}
+
+      {{ if $hasbar }}<div
+        class="col-lg-8 {{ if eq $sidebar `left` }}order-1 order-lg-2{{ end }}">{{ end }}
+        {{ with .Params.images }}
+          <div class="{{ if not $hasbar }}col-12{{ end }} mb-3">
+            {{ if gt (len .) 1 }}
+              <div class="swiper post-slider">
+                <div class="swiper-wrapper">
+                  {{ range . }}
+                    <div class="swiper-slide">
+                      {{ partial "image.html" (dict "Src" . "Alt" "post-thumb" "Class" `w-100`) }}
+                    </div>
+                  {{ end }}
+                </div>
+                <div class="swiper-navigation">
+                  <button class="swiper-button-prev" aria-label="navigation button"></button>
+                  <button class="swiper-button-next" aria-label="navigation button"></button>
+                </div>
+              </div>
+            {{ else }}
+              <div class="post-slider">
+                {{ range . }}
+                  {{ partial "image.html" (dict "Src" . "Alt" "post-thumb" "Class" `w-100`) }}
+                {{ end }}
+              </div>
+            {{ end }}
+          </div>
+        {{ end }}
+
+        <div class="{{ if not $hasbar }}col-lg-10 mx-auto{{ end }}">
+          <div class="content">{{ .Content }}</div>
+        </div>
+      {{ if $hasbar }}</div>{{ end }}
+
+      {{ if eq $sidebar `right` }}
+        <aside class="col-lg-4 mt-5 mt-lg-0">
+          <div class="ps-0 ps-lg-4">
+            {{ partial "widgets/widget-wrapper" (dict "Widgets" $widget "Scope" .) }}
+          </div>
+        </aside>
+      {{ end }}
+    </article>
+  </div>
+</section>
+{{ end }}

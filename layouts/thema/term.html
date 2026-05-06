@@ -1,0 +1,46 @@
+{{ define "main" }}
+  <section class="section-sm">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="title-bordered mb-5 d-flex align-items-center">
+            <h1 class="h2">{{ .Title }}</h1>
+          </div>
+          {{ with .Content }}
+            <div class="content mb-4">{{ . }}</div>
+          {{ end }}
+        </div>
+      </div>
+
+      {{ with .Pages }}
+        <div class="col-12">
+          <div class="row projekt-card-row">
+            {{ range .ByDate.Reverse }}
+              <div class="col-md-4 mb-3">
+                <a class="projekt-card" href="{{ .RelPermalink }}">
+                  {{ with .Params.images }}
+                    {{ with index . 0 }}
+                      <div class="projekt-card-image">
+                        {{ partial "image.html" (dict "Src" . "Alt" "" "Class" "img-fluid") }}
+                      </div>
+                    {{ end }}
+                  {{ end }}
+                  <div class="projekt-card-body">
+                    <h3 class="projekt-card-title">{{ .Title }}</h3>
+                    {{ with .Params.description }}
+                      <p class="projekt-card-desc">{{ . }}</p>
+                    {{ else }}
+                      {{ with .Summary }}
+                        <p class="projekt-card-desc">{{ . | plainify | truncate 120 }}</p>
+                      {{ end }}
+                    {{ end }}
+                  </div>
+                </a>
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      {{ end }}
+    </div>
+  </section>
+{{ end }}

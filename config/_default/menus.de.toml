@@ -9,14 +9,14 @@ weight = 40
 
 [[main]]
 parent = "Aktuelles"
-name = "Veranstaltungskalender"
-url = "kalender/"
+name = "Neues vom staTThus"
+url = "post/"
 weight = 10
 
 [[main]]
 parent = "Aktuelles"
-name = "Neues vom staTThus"
-url = "post/"
+name = "Veranstaltungskalender"
+url = "kalender/"
 weight = 20
 
 
