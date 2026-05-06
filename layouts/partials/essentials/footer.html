@@ -48,6 +48,15 @@
       <div class="scroll-top">
         <button id="scrollTop" aria-label="scroll to top"><i class="fas fa-angle-up"></i></button>
       </div>
+      <div class="text-center">
+        <p class="content">
+          {{ site.Params.copyright | markdownify }}
+          {{ if site.Params.theme_copyright }}
+          | Theme by
+          <a target="_blank" rel="noopener noreferrer" href="https://gethugothemes.com/">GetHugoThemes</a>
+          {{ end }}
+        </p>
+      </div>
     </div>
   </div>
 </footer>

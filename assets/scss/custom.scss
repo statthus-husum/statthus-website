@@ -25,10 +25,6 @@ h1, h2, h3, h4, h5, h6 {
   font-family: "itc-bradley-hand-std", sans-serif;
 }
 
-.btn, button {
-  font-family: "itc-bradley-hand-std", sans-serif;
-}
-
 // --- Global background ---
 body {
   background-color: $cream !important;
@@ -226,373 +222,11 @@ header.position-sticky {
   font-weight: bold;
   color: $primary;
   font-size: 1.05rem;
-  font-family: "itc-bradley-hand-std", sans-serif;
 }
 
 .people-text-body {
   color: $text-muted;
   line-height: 1.6;
-}
-
-// --- Projekt sections ---
-.projekt-section {
-  background: #fff;
-  border-radius: 12px;
-  padding: 1.5rem;
-  margin-bottom: 1.25rem;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
-  margin-left: 0;
-  margin-right: 0;
-}
-
-.projekt-section-header {
-  color: $primary;
-  margin-bottom: 0.75rem;
-  font-size: 1.05rem;
-  font-weight: bold;
-}
-
-.projekt-section-body {
-  color: $text-dark;
-  line-height: 1.65;
-
-  p:last-child {
-    margin-bottom: 0;
-  }
-}
-
-.projekt-section-image img {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
-.projekt-card-row {
-  margin-left: -0.5rem;
-  margin-right: -0.5rem;
-}
-
-.projekt-card {
-  display: block;
-  background: $cream;
-  border-radius: 10px;
-  padding: 1.25rem;
-  height: 100%;
-  text-decoration: none;
-  color: $text-dark;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-  transition: transform 0.15s, box-shadow 0.15s;
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    color: $text-dark;
-    .projekt-card-title { color: $primary-dark; }
-  }
-}
-
-.projekt-card-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 0.75rem;
-  display: block;
-}
-
-.projekt-card-title {
-  color: $primary;
-  font-size: 1.1rem;
-  margin-bottom: 0.4rem;
-  transition: color 0.15s;
-}
-
-.projekt-card-desc {
-  color: $text-muted;
-  font-size: 0.9rem;
-  line-height: 1.5;
-  margin-bottom: 0;
-}
-
-// Back link (subpage → parent section) — styled as a small outline button
-.back-link {
-  margin-bottom: 0.75rem;
-  text-decoration: none;
-}
-
-// Post overview view toggle (cards <-> list on /post/)
-.post-overview {
-  &[data-view="cards"] .post-view-list { display: none; }
-  &[data-view="list"] .post-view-cards { display: none; }
-}
-
-.post-view-toggle {
-  .btn.active {
-    background-color: $primary !important;
-    color: #fff !important;
-  }
-}
-
-// Post overview cards (list on /post/)
-.post-card {
-  display: flex;
-  flex-direction: column;
-}
-
-.post-card-meta {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  margin-bottom: 0.5rem;
-  font-size: 0.8rem;
-}
-
-.post-card-section {
-  display: inline-block;
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
-  background: $primary;
-  color: #fff;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: 0.7rem;
-
-  &.post-card-section-event { background: #5c6e3a; }
-  &.post-card-section-people { background: #3a5a78; }
-}
-
-.post-card-date {
-  color: $text-muted;
-}
-
-// --- Photo marquee (auto-scrolling gallery) ---
-.photo-marquee {
-  overflow: hidden;
-  padding: 3rem 0;
-  background: linear-gradient(180deg, $cream-darker 0%, $cream 50%, $cream-darker 100%);
-  position: relative;
-
-  // Soft fade on left/right edges
-  &::before, &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 6rem;
-    pointer-events: none;
-    z-index: 2;
-  }
-  &::before {
-    left: 0;
-    background: linear-gradient(90deg, $cream 0%, transparent 100%);
-  }
-  &::after {
-    right: 0;
-    background: linear-gradient(270deg, $cream 0%, transparent 100%);
-  }
-
-  &:hover .photo-marquee-track {
-    animation-play-state: paused;
-  }
-}
-
-.photo-marquee-track {
-  display: flex;
-  align-items: center;
-  gap: 2.5rem;
-  width: max-content;
-  animation: photo-marquee 90s linear infinite;
-}
-
-@keyframes photo-marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-.photo-frame {
-  flex-shrink: 0;
-  width: 380px;
-  margin: 0;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-
-  &:hover {
-    z-index: 5;
-  }
-
-  .photo-frame-img,
-  img {
-    width: 100%;
-    height: 270px;
-    object-fit: cover;
-    display: block;
-  }
-}
-
-// Slight random-looking tilts
-.tilt-a { transform: rotate(-2.5deg); }
-.tilt-b { transform: rotate(1.5deg); }
-.tilt-c { transform: rotate(-1deg); }
-.tilt-d { transform: rotate(2deg); }
-
-// Polaroid: white frame with caption space at bottom, written-style font
-.photo-frame-polaroid {
-  background: #fff;
-  padding: 0.6rem 0.6rem 0;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.18);
-
-  .photo-caption {
-    font-family: "itc-bradley-hand-std", cursive;
-    color: $text-dark;
-    text-align: center;
-    padding: 0.6rem 0.5rem 0.9rem;
-    font-size: 1rem;
-    line-height: 1.2;
-  }
-}
-
-// Classic: dark frame with thin gold inner border
-.photo-frame-classic {
-  background: #2a1a0a;
-  padding: 0.7rem;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-  position: relative;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0.4rem;
-    right: 0.4rem;
-    bottom: 0.4rem;
-    left: 0.4rem;
-    border: 1px solid #c9a86a;
-    pointer-events: none;
-    z-index: 1;
-  }
-
-  .photo-caption {
-    color: #c9a86a;
-    text-align: center;
-    font-size: 0.85rem;
-    padding-top: 0.5rem;
-    letter-spacing: 0.04em;
-  }
-}
-
-// Simple: thin white border with soft shadow
-.photo-frame-simple {
-  background: #fff;
-  padding: 0.4rem;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
-
-  .photo-caption {
-    color: $text-muted;
-    text-align: center;
-    font-size: 0.8rem;
-    padding-top: 0.5rem;
-  }
-}
-
-// Mobile: disable auto-scroll, enable native swipe-scrolling with snap
-@media (max-width: 768px) {
-  .photo-marquee {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-    padding: 2rem 0;
-
-    &::before, &::after { display: none; }
-  }
-
-  .photo-marquee-track {
-    animation: none;
-    scroll-snap-type: x mandatory;
-    gap: 1.25rem;
-    padding: 0 1rem;
-  }
-
-  .photo-frame {
-    scroll-snap-align: center;
-    width: 78vw;
-
-    &[aria-hidden="true"] { display: none; }
-
-    .photo-frame-img,
-    img {
-      height: 220px;
-    }
-  }
-}
-
-// --- Photo lightbox ---
-.photo-lightbox {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.88);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  padding: 2rem;
-
-  &.is-open {
-    display: flex;
-  }
-}
-
-.photo-lightbox-content {
-  max-width: 95vw;
-  max-height: 95vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-
-.photo-lightbox-img {
-  max-width: 100%;
-  max-height: 85vh;
-  object-fit: contain;
-  border-radius: 4px;
-  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-}
-
-.photo-lightbox-caption {
-  color: #fff;
-  font-family: "itc-bradley-hand-std", sans-serif;
-  font-size: 1.4rem;
-  text-align: center;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
-}
-
-.photo-lightbox-close {
-  position: absolute;
-  top: 1rem;
-  right: 1.5rem;
-  background: transparent;
-  border: 0;
-  color: #fff;
-  font-size: 2.5rem;
-  line-height: 1;
-  cursor: pointer;
-  opacity: 0.8;
-  &:hover { opacity: 1; }
-}
-
-// Event-data widget (event single sidebar)
-.event-data-widget {
-  .event-data {
-    dt {
-      color: $primary;
-      font-weight: bold;
-      margin-top: 0.5rem;
-      &:first-child { margin-top: 0; }
-    }
-    dd {
-      margin: 0 0 0.25rem 0;
-      color: $text-dark;
-    }
-  }
 }
 
 // --- Post teaser list ---
@@ -620,7 +254,7 @@ header.position-sticky {
   font-size: 0.8rem;
   color: $text-muted;
   white-space: nowrap;
-  min-width: 8rem;
+  min-width: 3rem;
 }
 
 .post-teaser-title {
@@ -661,35 +295,57 @@ header.position-sticky {
   }
 }
 
-// --- Sidebar (homepage red bar + news/single sidebars) ---
-aside > div {
+// --- Homepage red sidebar bar ---
+.homepage-red-bar {
   background-color: $primary;
   border-radius: 12px;
-  padding: 1.5rem !important;
-}
+  padding: 1.5rem;
 
-aside {
   .card, .widget, [class*="widget"] {
-    background: #fff;
-    color: $text-dark;
+    background: rgba(255, 255, 255, 0.12);
+    color: #fff;
     border-radius: 12px !important;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+    box-shadow: none;
     padding: 1rem 1.25rem;
     margin-bottom: 1.25rem;
+
+    h6, h5, h4, .widget-title {
+      color: #fff !important;
+    }
+
+    a {
+      color: rgba(255, 255, 255, 0.85) !important;
+      &:hover {
+        color: #fff !important;
+      }
+    }
+
+    p, span, .text-muted, small {
+      color: rgba(255, 255, 255, 0.75) !important;
+    }
   }
 
-  // Widget title: red text, no horizontal rule
+  // Widget title: override the white span background from theme
   .widget-title {
-    color: $primary;
     span {
       background: transparent !important;
-      color: $primary !important;
-      padding-right: 0;
+      color: #fff !important;
     }
     &::before {
-      display: none !important;
+      background: rgba(255, 255, 255, 0.25) !important;
     }
   }
+
+  .post-teaser-item {
+    border-bottom-color: rgba(255, 255, 255, 0.15);
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      .post-teaser-title { color: #fff; }
+    }
+  }
+  .post-teaser-date { color: rgba(255, 255, 255, 0.6); }
+  .post-teaser-title { color: rgba(255, 255, 255, 0.9); }
+  .post-teaser-desc { color: rgba(255, 255, 255, 0.65); }
 }
 
 // --- Footer (dark grey, contained width) ---
@@ -765,6 +421,15 @@ $footer-grey-light: #6e645c;
 footer.section-sm {
   background: transparent !important;
   border: none !important;
+}
+
+// --- Sidebar widgets ---
+aside {
+  .card, .widget {
+    background: #fff;
+    border-radius: 12px !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  }
 }
 
 // --- Title bordered ---

@@ -39,7 +39,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: "0.152.2"
+      HUGO_VERSION: "0.145.0"
       GO_VERSION: "1.20"
       NODE_VERSION: "20"
     steps:
@@ -74,8 +74,7 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Install Hugo modules
-        # No -u: stick to the versions pinned in go.mod / go.sum
-        run: hugo mod get
+        run: hugo mod get -u
 
       - name: Build with Hugo
         env:

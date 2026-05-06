@@ -8,8 +8,6 @@ tags:
   - alltag
   - gemeinschaft
   - kochen
-themen:
-  - wie-wir-leben
 draft: false
 ---
 

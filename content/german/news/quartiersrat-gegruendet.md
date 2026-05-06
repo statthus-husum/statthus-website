@@ -8,8 +8,6 @@ tags:
   - quartier
   - nachbarschaft
   - engagement
-themen:
-  - wir-im-quartier
 draft: false
 ---
 
