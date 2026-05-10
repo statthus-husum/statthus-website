@@ -1,16 +1,12 @@
 ---
+title: Unsere Vision
 weight: 10
 image_position: right
+draft: false
 build:
   render: never
   list: local
-title: Unsere Vision
-draft: false
 cards:
-  - title: neu
-    link: null
-  - title: neuer
-    link: null
   - title: am neuesten
     link: content/german/projekt/am-neuesten/neuer-eintrag.md
 ---
