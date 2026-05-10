@@ -27,21 +27,11 @@
         </div>
         {{ if site.Params.subscription.enable }}
         <div class="col-md-3 mb-4">
-          <h6 class="mb-4 fw-semibold">{{i18n "subscribe_newsletter"}}</h6>
-          {{ with site.Params.subscription }}
-          <form class="subscription" action="{{ .mailchimp_form_action }}" method="post" name="mc-embedded-subscribe-form"
-            target="_blank">
-            <div class="position-relative">
-              <i class="fas fa-envelope email-icon"></i>
-              <input type="email" class="form-control" placeholder="{{ i18n `email`}}">
-            </div>
-            <button class="btn btn-primary btn-block w-100 rounded" type="submit" name="subscribe">{{ i18n
-              "subscribe"}}</button>
-            <div style="position: absolute; left: -5000px;" aria-hidden="true">
-              <input type="text" name="{{ .mailchimp_form_name }}" tabindex="-1">
-            </div>
-          </form>
-          {{ end }}
+          <h6 class="mb-4 fw-semibold">{{ i18n "subscribe_newsletter" }}</h6>
+          <p class="footer-newsletter-blurb mb-3">{{ i18n "newsletter_footer_blurb" }}</p>
+          <a class="btn btn-primary w-100 rounded" href="{{ "newsletter/" | relLangURL }}">
+            <i class="fas fa-envelope me-2"></i>{{ i18n "subscribe" }}
+          </a>
         </div>
         {{ end }}
       </div>

@@ -727,22 +727,12 @@ $footer-grey-light: #6e645c;
     }
   }
 
-  .subscription {
-    .form-control {
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      color: #fff;
-      &::placeholder {
-        color: rgba(255, 255, 255, 0.4);
-      }
-    }
-    .btn {
-      background: #fff !important;
-      color: $footer-grey !important;
-      border: none !important;
-      &:hover {
-        background: $cream !important;
-      }
+  // Newsletter CTA button — ensure crisp white text on brand-red
+  // background despite the dark-footer anchor color override above.
+  .btn-primary {
+    color: #fff !important;
+    &:hover, &:focus {
+      color: #fff !important;
     }
   }
 
@@ -968,4 +958,27 @@ footer.section-sm {
 // Section bottom borders
 .section-sm.border-bottom {
   border-color: $cream-darker !important;
+}
+
+// --- Newsletter embed (Brevo iframe) ---
+// The iframe content is served cross-origin by Brevo and cannot be styled
+// from here — these rules only frame the iframe consistently with the site.
+.newsletter-embed {
+  margin: 2.5rem auto;
+  max-width: 600px;
+
+  .newsletter-embed-frame {
+    max-width: 540px;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    background-color: #fff;
+  }
+
+  iframe {
+    display: block;
+    width: 100%;
+    border: 0;
+  }
 }

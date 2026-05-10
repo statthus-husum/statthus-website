@@ -43,6 +43,9 @@
 - id: subscribe_newsletter
   translation: Newsletter abonnieren
 
+- id: newsletter_footer_blurb
+  translation: Alle paar Wochen Updates zum Bauprojekt, Workshops und Veranstaltungen.
+
 - id: quick_links
   translation: Schnellzugriff
 
