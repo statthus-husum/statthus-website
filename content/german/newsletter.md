@@ -11,7 +11,7 @@ Bleib auf dem Laufenden: Wir verschicken alle paar Wochen einen Newsletter mit U
     <iframe
       src="https://7154cfec.sibforms.com/serve/MUIFAANAu0PEvo8Kg5nGiFr9OghQsoAhi3stHl7RqJYaJ_BG9gYggb4bRG3C0uV76AxY5sy7QEgDsvloSxAMq4X9uDznGF2RqUB9ahYEL6gjNygAL89_hkGwdQkcXFvO-WVwlBGljpiD7RwaJify-Qepu0eyeJsWaPWfhC7WYYjEPennrixJbk5HPoGFp79h-AeT5NE5tQQMV3GI"
       width="540"
-      height="305"
+      height="600"
       title="Newsletter-Anmeldung staTThus"
       loading="lazy"></iframe>
   </div>
