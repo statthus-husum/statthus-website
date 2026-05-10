@@ -1,7 +1,6 @@
 ---
 title: Neuer Eintrag
 description: ''
-draft: true
+draft: false
 ---
 
-hallo
