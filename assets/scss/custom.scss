@@ -960,30 +960,79 @@ footer.section-sm {
   border-color: $cream-darker !important;
 }
 
-// --- Newsletter embed (Brevo iframe) ---
-// The iframe content is served cross-origin by Brevo and cannot be styled
-// from here — these rules only frame the iframe consistently with the site.
+// --- Newsletter embed (Brevo inline form) ---
+// Brevo's HTML uses inline styles heavily, so most overrides need !important.
 .newsletter-embed {
   margin: 2.5rem auto;
   max-width: 600px;
 
-  .newsletter-embed-frame {
-    max-width: 540px;
-    margin: 0 auto;
-    overflow: hidden;
-    border-radius: 12px;
-    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-    background-color: #fff;
+  // Outer wrapper: drop Brevo's grey background, keep centering.
+  .sib-form {
+    background: transparent !important;
+    padding: 0 !important;
   }
 
-  iframe {
-    display: block;
-    width: 100%;
-    height: 600px;
-    border: 0;
+  // Form card: align with site's rounded-lg + cream border.
+  #sib-container {
+    border-radius: 12px !important;
+    border: 1px solid $cream-darker !important;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    padding: 1.5rem;
+    margin: 0 auto;
+  }
 
-    @media (max-width: 575.98px) {
-      height: 760px;
+  // Inherit site typography everywhere Brevo hard-codes Helvetica.
+  .sib-form-block,
+  .sib-text-form-block,
+  .sib-text-form-block p,
+  .entry__label,
+  .entry__specification,
+  .entry__error,
+  .input,
+  .sib-form-block__button,
+  .sib-form-message-panel,
+  .sib-form-message-panel__text {
+    font-family: inherit !important;
+  }
+
+  .entry__label {
+    color: $footer-grey !important;
+    font-weight: 600 !important;
+  }
+
+  // Input: soften the default, focus state picks up brand red.
+  .input {
+    font-size: 1rem !important;
+    border-radius: 8px !important;
+    padding: 0.55rem 0.85rem !important;
+    border: 1px solid $cream-darker !important;
+    color: $footer-grey;
+
+    &:focus {
+      outline: none;
+      border-color: $primary !important;
+      box-shadow: 0 0 0 0.2rem rgba($primary, 0.15) !important;
     }
+  }
+
+  // Submit button: brand red, full-width, centered label.
+  .sib-form-block__button {
+    background-color: $primary !important;
+    color: #fff !important;
+    border-radius: 8px !important;
+    padding: 0.7rem 1.25rem !important;
+    width: 100%;
+    text-align: center !important;
+    transition: background-color 0.15s ease !important;
+
+    &:hover,
+    &:focus {
+      background-color: $primary-dark !important;
+    }
+  }
+
+  // Center success/error panels under the form card.
+  .sib-form-message-panel {
+    margin: 0 auto;
   }
 }
