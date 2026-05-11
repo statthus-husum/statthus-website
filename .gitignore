@@ -1,2 +1,6 @@
 public
 **/_gen/
+
+# Hugo writes this with an absolute path to the local module cache —
+# machine-specific, not portable across dev environments.
+assets/jsconfig.json
