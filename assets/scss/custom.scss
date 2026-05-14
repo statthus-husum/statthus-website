@@ -653,9 +653,8 @@ header.position-sticky {
 }
 
 // --- Sidebar (news/single sidebars) ---
-// Outer panel shares the warm beige with the footer for visual consistency.
 aside > div {
-  background-color: $footer-bg;
+  background-color: $primary;
   border-radius: 12px;
   padding: 1.5rem !important;
 }
