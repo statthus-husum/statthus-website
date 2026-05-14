@@ -6,7 +6,6 @@ draft: false
 build:
   render: never
   list: local
-cards:
 ---
 
 staTThus ist ein Wohnprojekt für Menschen, die in lebendiger Nachbarschaft alt werden wollen — gemeinsam, generationenübergreifend und füreinander da. Dieser Abschnitt beschreibt die Grundidee und die Werte, die uns durch die Planung tragen.
