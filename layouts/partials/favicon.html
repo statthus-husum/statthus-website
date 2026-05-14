@@ -1,0 +1,35 @@
+{{/*
+  Favicon partial (project override of the theme's images-module one).
+  Supports SVG favicons natively; PNG sources still get the theme's
+  multi-size treatment.
+*/}}
+{{ $favicon := site.Params.favicon }}
+{{ if $favicon }}
+
+  {{/* SVG: single link, native scaling */}}
+  {{ if hasSuffix $favicon ".svg" }}
+    {{ with resources.Get $favicon }}
+      <link rel="icon" type="image/svg+xml" href="{{ .RelPermalink }}">
+      <link rel="mask-icon" href="{{ .RelPermalink }}" color="#a8131a">
+    {{ end }}
+
+  {{/* External URL */}}
+  {{ else if hasPrefix $favicon "http" }}
+    <link rel="shortcut icon" href="{{ $favicon | absURL }}" type="image/x-icon">
+    <link rel="icon" href="{{ $favicon | absURL }}" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ $favicon | absURL }}">
+
+  {{/* Asset PNG/JPG/etc: theme's multi-size treatment */}}
+  {{ else if fileExists (add `assets/` (string $favicon)) }}
+    {{ $img := resources.Get $favicon }}
+    {{ $f48 := $img.Resize "48x png" }}
+    {{ $f96 := $img.Resize "96x png" }}
+    {{ $f144 := $img.Resize "144x png" }}
+    <link rel="shortcut icon" href="{{ $f96.RelPermalink }}" type="image/x-icon">
+    <link rel="icon" href="{{ $f96.RelPermalink }}" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="48x48" href="{{ $f48.RelPermalink }}">
+    <link rel="icon" type="image/png" sizes="96x96" href="{{ $f96.RelPermalink }}">
+    <link rel="apple-touch-icon" sizes="144x144" href="{{ $f144.RelPermalink }}">
+  {{ end }}
+
+{{ end }}

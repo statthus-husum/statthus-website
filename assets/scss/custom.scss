@@ -22,6 +22,14 @@ $footer-grey: #5c524a;        // warm brown-grey (used in forms on white bg)
 $footer-grey-light: #6e645c;
 
 // --- Global background ---
+// Belt-and-braces overflow clamp: the theme already sets body
+// { overflow-x: hidden } but iOS Safari can still scroll horizontally
+// if html itself isn't clipped, so we mirror it here.
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body {
   background-color: $cream !important;
 }
@@ -690,6 +698,9 @@ header.position-sticky {
   .post-teaser-item {
     flex-wrap: wrap;
   }
+  .post-teaser-title {
+    white-space: normal;
+  }
   .post-teaser-desc {
     width: 100%;
     padding-left: 3.75rem;
@@ -951,16 +962,31 @@ footer.section-sm {
       text-align: left;
     }
 
-    // Theme's _navigation.scss forces .dropdown-menu background to $white
-    // via a 5-class-deep selector; we use !important to beat it and keep
-    // the mobile dropdown panel consistent with the red navbar.
+    // On mobile, force the dropdown to flow inline in the collapsed
+    // navbar instead of being absolutely positioned under its parent
+    // <li> (theme defaults it to position: absolute with top/left
+    // offsets, which floats it over neighbouring items and can push
+    // beyond the viewport). Background + text colors override the
+    // theme's 5-deep selector via !important.
     .dropdown-menu {
+      position: static !important;
+      float: none !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      top: auto !important;
+      left: auto !important;
+      transform: none !important;
+      margin: 0.25rem 0 0.5rem !important;
+      padding: 0.25rem 0 !important;
       background: rgba(0, 0, 0, 0.15) !important;
       box-shadow: none !important;
       border: none !important;
+      border-radius: 6px !important;
 
       .dropdown-item {
         color: rgba(255, 255, 255, 0.9) !important;
+        padding-left: 1.75rem !important;
+        text-align: left !important;
 
         &:hover,
         &:focus {

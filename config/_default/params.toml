@@ -1,6 +1,6 @@
 #################### default parameters ################################
-# favicon
-favicon = "images/favicon.png"
+# favicon — SVG with "TT" mark in brand red on cream
+favicon = "images/favicon.svg"
 
 # logo
 logo = "images/statthus-logo.png"
