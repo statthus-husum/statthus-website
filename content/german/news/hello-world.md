@@ -12,3 +12,5 @@ tags:
 ---
 
 hello hello
+
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/neubau.webp)
