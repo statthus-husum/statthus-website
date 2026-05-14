@@ -924,15 +924,21 @@ footer.section-sm {
       text-align: left;
     }
 
+    // Theme's _navigation.scss forces .dropdown-menu background to $white
+    // via a 5-class-deep selector; we use !important to beat it and keep
+    // the mobile dropdown panel consistent with the red navbar.
     .dropdown-menu {
-      background: rgba(0, 0, 0, 0.15);
-      box-shadow: none;
+      background: rgba(0, 0, 0, 0.15) !important;
+      box-shadow: none !important;
+      border: none !important;
 
       .dropdown-item {
-        color: rgba(255, 255, 255, 0.85);
-        &:hover {
-          background: rgba(255, 255, 255, 0.1);
-          color: #fff;
+        color: rgba(255, 255, 255, 0.9) !important;
+
+        &:hover,
+        &:focus {
+          background: rgba(255, 255, 255, 0.12) !important;
+          color: #fff !important;
         }
       }
     }
