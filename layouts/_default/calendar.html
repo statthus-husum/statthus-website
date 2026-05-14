@@ -1,4 +1,9 @@
 {{ define "main" }}
+<!-- flatpickr (date picker with German locale, formats as DD.MM.YYYY) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr@4/dist/flatpickr.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/flatpickr@4"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/flatpickr@4/dist/l10n/de.js"></script>
+
 <section class="section-sm">
   <div class="container">
     <div class="row">
@@ -7,15 +12,17 @@
           <h1 class="h2">{{ .Title }}</h1>
         </div>
 
-        <!-- Calendar navigation -->
-        <div class="calendar-nav">
-          <button id="cal-prev" class="calendar-nav-btn">&larr;</button>
-          <span id="cal-month-label" class="calendar-nav-label"></span>
-          <button id="cal-next" class="calendar-nav-btn">&rarr;</button>
-          <button id="cal-today" class="calendar-nav-today">Heute</button>
+        <!-- View toggle: calendar grid vs chronological list -->
+        <div class="calendar-view-toggle btn-group mb-4" role="group" aria-label="Ansicht umschalten">
+          <button type="button" class="btn btn-sm btn-outline-primary active" data-view-target="calendar">
+            <i class="fas fa-calendar me-1"></i> Kalender
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-primary" data-view-target="list">
+            <i class="fas fa-list me-1"></i> Liste
+          </button>
         </div>
 
-        <!-- Event submission form (Formspree) -->
+        <!-- Event submission form (Formspree) - visible in both views -->
         <div class="calendar-submit mb-4">
           <p>Kennt ihr eine Veranstaltung, die hier stehen sollte? Schickt uns einen Hinweis!</p>
           <button id="cal-submit-btn" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('cal-form').classList.toggle('d-none')">Veranstaltung melden</button>
@@ -25,10 +32,37 @@
             </div>
             <div class="row mb-2">
               <div class="col-md-6">
-                <input type="date" name="event_date" class="form-control" required>
+                <input type="text"
+                       name="event_date"
+                       class="form-control"
+                       inputmode="numeric"
+                       pattern="\d{1,2}\.\d{1,2}\.\d{4}"
+                       placeholder="TT.MM.JJJJ"
+                       title="Bitte im Format TT.MM.JJJJ eingeben"
+                       required>
               </div>
               <div class="col-md-6">
                 <input type="text" name="event_location" class="form-control" placeholder="Ort">
+              </div>
+            </div>
+            <div class="row mb-2">
+              <div class="col-md-6">
+                <input type="text"
+                       name="event_time_from"
+                       class="form-control"
+                       inputmode="numeric"
+                       pattern="\d{1,2}:\d{2}"
+                       placeholder="Uhrzeit von HH:MM"
+                       title="Bitte im Format HH:MM eingeben">
+              </div>
+              <div class="col-md-6">
+                <input type="text"
+                       name="event_time_to"
+                       class="form-control"
+                       inputmode="numeric"
+                       pattern="\d{1,2}:\d{2}"
+                       placeholder="bis HH:MM"
+                       title="Bitte im Format HH:MM eingeben">
               </div>
             </div>
             <div class="mb-2">
@@ -41,16 +75,55 @@
           </form>
         </div>
 
-        <!-- Calendar grid -->
-        <div class="calendar-grid">
-          <div class="calendar-header">Mo</div>
-          <div class="calendar-header">Di</div>
-          <div class="calendar-header">Mi</div>
-          <div class="calendar-header">Do</div>
-          <div class="calendar-header">Fr</div>
-          <div class="calendar-header">Sa</div>
-          <div class="calendar-header">So</div>
-          <div id="cal-cells"></div>
+        <!-- Toggled views -->
+        <div class="calendar-overview" data-view="calendar">
+
+          <!-- Calendar view -->
+          <div class="calendar-view-calendar">
+            <!-- Calendar navigation -->
+            <div class="calendar-nav">
+              <button id="cal-prev" class="calendar-nav-btn">&larr;</button>
+              <span id="cal-month-label" class="calendar-nav-label"></span>
+              <button id="cal-next" class="calendar-nav-btn">&rarr;</button>
+              <button id="cal-today" class="calendar-nav-today">Heute</button>
+            </div>
+
+            <!-- Calendar grid -->
+            <div class="calendar-grid">
+              <div class="calendar-header">Mo</div>
+              <div class="calendar-header">Di</div>
+              <div class="calendar-header">Mi</div>
+              <div class="calendar-header">Do</div>
+              <div class="calendar-header">Fr</div>
+              <div class="calendar-header">Sa</div>
+              <div class="calendar-header">So</div>
+              <div id="cal-cells"></div>
+            </div>
+          </div>
+
+          <!-- List view -->
+          <div class="calendar-view-list">
+            {{ $events := where .Site.RegularPages "Section" "event" }}
+            {{ $sorted := ($events.ByParam "event_date").Reverse }}
+            {{ $paginator := .Paginate $sorted 15 }}
+            {{ if $paginator.Pages }}
+              <div class="post-teaser-list">
+                {{ range $paginator.Pages }}
+                  <a href="{{ .RelPermalink }}" class="post-teaser-item">
+                    <span class="post-teaser-date">
+                      {{ with .Params.event_date }}{{ dateFormat "02.01.2006" . }}{{ else }}{{ .Date.Format "02.01.2006" }}{{ end }}
+                    </span>
+                    <span class="post-teaser-title">{{ .Title }}</span>
+                    {{ with .Params.event_location }}<span class="post-teaser-desc">{{ . }}</span>{{ end }}
+                  </a>
+                {{ end }}
+              </div>
+              {{ partial "pagination.html" $paginator }}
+            {{ else }}
+              <p>Noch keine Termine vorhanden.</p>
+            {{ end }}
+          </div>
+
         </div>
 
       </div>
@@ -158,6 +231,48 @@ const calEvents = [
   });
 
   render();
+})();
+
+// Date picker on the "Veranstaltung melden" form: German format DD.MM.YYYY
+// via flatpickr (CDN loaded above). Waits for DOMContentLoaded because
+// flatpickr is loaded with `defer`.
+document.addEventListener('DOMContentLoaded', function() {
+  if (typeof flatpickr === 'undefined') return;
+  flatpickr("input[name='event_date']", {
+    dateFormat: "d.m.Y",
+    locale: "de",
+    allowInput: true,
+    minDate: "today"
+  });
+  flatpickr("input[name='event_time_from'], input[name='event_time_to']", {
+    enableTime: true,
+    noCalendar: true,
+    dateFormat: "H:i",
+    time_24hr: true,
+    locale: "de",
+    allowInput: true,
+    minuteIncrement: 15
+  });
+});
+
+// View toggle: calendar <-> list
+(function() {
+  const overview = document.querySelector('.calendar-overview');
+  const buttons = document.querySelectorAll('.calendar-view-toggle [data-view-target]');
+  if (!overview || !buttons.length) return;
+
+  function setView(view) {
+    overview.dataset.view = view;
+    buttons.forEach(b => b.classList.toggle('active', b.dataset.viewTarget === view));
+    try { localStorage.setItem('calendar-view', view); } catch (e) {}
+  }
+
+  buttons.forEach(b => b.addEventListener('click', () => setView(b.dataset.viewTarget)));
+
+  try {
+    const saved = localStorage.getItem('calendar-view');
+    if (saved === 'calendar' || saved === 'list') setView(saved);
+  } catch (e) {}
 })();
 </script>
 {{ end }}

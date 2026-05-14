@@ -116,6 +116,23 @@ header.position-sticky {
   background-color: transparent;
 }
 
+// Homepage post cards: force uniform image height via fixed aspect ratio.
+// Scoped to .home-post-card so people-list portraits keep their natural
+// aspect ratio.
+.home-post-card .card-img-top {
+  aspect-ratio: 16 / 9;
+
+  a, picture, img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  img {
+    object-fit: cover;
+  }
+}
+
 // --- Cards (used on homepage and people list) ---
 .card {
   background-color: $cream;
@@ -225,6 +242,20 @@ header.position-sticky {
   line-height: 1.6;
 }
 
+// Subtle but visible inline links inside structured people fields.
+// Theme strips text-decoration globally, so we use a translucent
+// bottom border that intensifies on hover.
+.people-tag a {
+  color: $primary;
+  border-bottom: 1px solid rgba($primary, 0.35);
+  transition: border-color 0.15s ease;
+
+  &:hover,
+  &:focus {
+    border-bottom-color: $primary;
+  }
+}
+
 // --- Projekt sections ---
 .projekt-section {
   background: #fff;
@@ -317,6 +348,19 @@ header.position-sticky {
 }
 
 .post-view-toggle {
+  .btn.active {
+    background-color: $primary !important;
+    color: #fff !important;
+  }
+}
+
+// Calendar view toggle (calendar grid <-> chronological list on /kalender/)
+.calendar-overview {
+  &[data-view="calendar"] .calendar-view-list { display: none; }
+  &[data-view="list"] .calendar-view-calendar { display: none; }
+}
+
+.calendar-view-toggle {
   .btn.active {
     background-color: $primary !important;
     color: #fff !important;

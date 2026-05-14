@@ -24,10 +24,11 @@
         </div>
       </div>
 
+      {{ $paginator := .Paginate ($feed.ByDate.Reverse) 9 }}
       <div class="post-overview" data-view="cards">
         <!-- Card view -->
         <div class="post-view-cards row projekt-card-row">
-          {{ range $feed.ByDate.Reverse }}
+          {{ range $paginator.Pages }}
             {{ $section := .Section }}
             {{ $label := dict "news" "News" "event" "Termin" "people" "Menschen" }}
             <div class="col-md-6 col-lg-4 mb-4">
@@ -65,7 +66,7 @@
         <!-- List view -->
         <div class="post-view-list">
           <div class="post-teaser-list">
-            {{ range $feed.ByDate.Reverse }}
+            {{ range $paginator.Pages }}
               <a href="{{ .RelPermalink }}" class="post-teaser-item">
                 <span class="post-teaser-date">{{ time.Format ":date_long" .Date }}</span>
                 <span class="post-teaser-title">{{ if eq .Section "people" }}Neue Nachbar:innen: {{ end }}{{ .Title }}</span>
@@ -75,6 +76,7 @@
           </div>
         </div>
       </div>
+      {{ partial "pagination.html" $paginator }}
     {{ else }}
       <div class="row">
         <div class="col-12">

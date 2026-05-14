@@ -1,0 +1,40 @@
+{{/*
+  Bootstrap-style pagination from a Hugo paginator.
+  Call: {{ partial "pagination.html" $paginator }}
+*/}}
+{{ $paginator := . }}
+{{ if gt $paginator.TotalPages 1 }}
+  <nav aria-label="Seitennavigation" class="mt-4">
+    <ul class="pagination justify-content-center mb-0">
+      {{ if $paginator.HasPrev }}
+        <li class="page-item">
+          <a href="{{ $paginator.Prev.URL }}" class="page-link" aria-label="Vorherige Seite">&laquo;</a>
+        </li>
+      {{ else }}
+        <li class="page-item disabled">
+          <span class="page-link" aria-hidden="true">&laquo;</span>
+        </li>
+      {{ end }}
+
+      {{ range $paginator.Pagers }}
+        <li class="page-item {{ if eq . $paginator }}active{{ end }}">
+          {{ if eq . $paginator }}
+            <span class="page-link">{{ .PageNumber }}</span>
+          {{ else }}
+            <a href="{{ .URL }}" class="page-link">{{ .PageNumber }}</a>
+          {{ end }}
+        </li>
+      {{ end }}
+
+      {{ if $paginator.HasNext }}
+        <li class="page-item">
+          <a href="{{ $paginator.Next.URL }}" class="page-link" aria-label="Nächste Seite">&raquo;</a>
+        </li>
+      {{ else }}
+        <li class="page-item disabled">
+          <span class="page-link" aria-hidden="true">&raquo;</span>
+        </li>
+      {{ end }}
+    </ul>
+  </nav>
+{{ end }}

@@ -43,7 +43,7 @@
                   </h3>
                   
                   {{ with .Params.einstieg }}
-                    <p class="mb-3">{{ . | markdownify | truncate 100 | safeHTML }}</p>
+                    <p class="mb-3">{{ . | markdownify | plainify | truncate 100 }}</p>
                   {{ end }}
 
                   <!-- social links -->
