@@ -30,19 +30,17 @@
           {{ range $feed.ByDate.Reverse }}
             {{ $section := .Section }}
             {{ $label := dict "news" "News" "event" "Termin" "people" "Menschen" }}
-            {{ $img := "" }}
-            {{ if eq $section "people" }}
-              {{ $img = .Params.Image }}
-            {{ else }}
-              {{ with .Params.images }}{{ $img = index . 0 }}{{ end }}
-            {{ end }}
             <div class="col-md-6 col-lg-4 mb-4">
               <a class="projekt-card post-card h-100" href="{{ .RelPermalink }}">
-                {{ with $img }}
-                  <div class="projekt-card-image">
-                    {{ partial "image.html" (dict "Src" . "Alt" $.Title "Class" "img-fluid") }}
-                  </div>
-                {{ end }}
+                <div class="projekt-card-image">
+                  {{ if eq $section "people" }}
+                    {{ with .Params.Image }}
+                      {{ partial "image.html" (dict "Src" . "Alt" $.Title "Class" "img-fluid") }}
+                    {{ end }}
+                  {{ else }}
+                    {{ partial "post-thumbnail.html" (dict "Page" . "Alt" .Title "Class" "img-fluid") }}
+                  {{ end }}
+                </div>
                 <div class="projekt-card-body">
                   <div class="post-card-meta">
                     <span class="post-card-section post-card-section-{{ $section }}">{{ index $label $section }}</span>

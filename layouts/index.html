@@ -25,15 +25,11 @@
             <div class="col-md-6 col-lg-4 mb-4">
               <article class="card h-100 border-0 shadow-sm">
                 {{ $permalink := .RelPermalink }}
-                {{ with .Params.images }}
-                  <div class="card-img-top overflow-hidden">
-                    <a href="{{ $permalink }}">
-                      {{ range first 1 . }}
-                        {{ partial "image.html" (dict "Src" . "Alt" "post-thumb" "Class" "w-100") }}
-                      {{ end }}
-                    </a>
-                  </div>
-                {{ end }}
+                <div class="card-img-top overflow-hidden">
+                  <a href="{{ $permalink }}">
+                    {{ partial "post-thumbnail.html" (dict "Page" . "Alt" .Title "Class" "w-100") }}
+                  </a>
+                </div>
                 <div class="card-body">
                   <h3 class="h6 mb-2">
                     <a class="text-dark" href="{{ .RelPermalink }}">{{ .Title }}</a>

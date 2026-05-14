@@ -1,0 +1,31 @@
+{{/*
+  Renders a thumbnail <img> for a post with a fallback chain:
+    1. First non-empty entry in .Params.images (frontmatter)
+    2. First <img src=...> found in rendered .Content
+    3. Site logo (assets/images/statthus-logo.png)
+
+  Call:
+    {{ partial "post-thumbnail.html" (dict "Page" . "Alt" "..." "Class" "...") }}
+*/}}
+{{ $page := .Page }}
+{{ $alt := .Alt | default "post-thumb" }}
+{{ $class := .Class | default "w-100" }}
+
+{{ $src := "" }}
+{{ with $page.Params.images }}
+  {{ $first := index . 0 }}
+  {{ if $first }}
+    {{ $src = $first }}
+  {{ end }}
+{{ end }}
+
+{{ if $src }}
+  {{ partial "image.html" (dict "Src" $src "Alt" $alt "Class" $class "Context" $page) }}
+{{ else }}
+  {{ $matches := findRESubmatch `<img[^>]+src="([^"]+)"` $page.Content 1 }}
+  {{ if $matches }}
+    <img src="{{ index (index $matches 0) 1 }}" alt="{{ $alt }}" class="{{ $class }} img" loading="lazy" decoding="async" />
+  {{ else }}
+    {{ partial "image.html" (dict "Src" "images/statthus-logo.png" "Alt" $alt "Class" $class "Context" $page) }}
+  {{ end }}
+{{ end }}

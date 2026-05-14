@@ -1,16 +1,47 @@
 {{ define "main" }}
-  <section class="section-sm pb-0">
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <div class="title-bordered mb-5 d-flex align-items-center">
-            <h1 class="h2">{{ .Title }}</h1>
-          </div>
+<section class="section-sm pb-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="title-bordered mb-5 d-flex align-items-center">
+          <h1 class="h2">{{ .Title }}</h1>
         </div>
       </div>
     </div>
-  </section>
 
-  {{ .Scratch.Set "where" .Data.Pages }}
-  {{ partial "default.html" . }}
+    {{ with .Pages.ByDate.Reverse }}
+      <div class="row projekt-card-row">
+        {{ range . }}
+          <div class="col-md-6 col-lg-4 mb-4">
+            <a class="projekt-card post-card h-100" href="{{ .RelPermalink }}">
+              <div class="projekt-card-image">
+                {{ partial "post-thumbnail.html" (dict "Page" . "Alt" .Title "Class" "img-fluid") }}
+              </div>
+              <div class="projekt-card-body">
+                <div class="post-card-meta">
+                  <span class="post-card-section post-card-section-news">News</span>
+                  <span class="post-card-date">{{ time.Format ":date_long" .Date }}</span>
+                </div>
+                <h3 class="projekt-card-title">{{ .Title }}</h3>
+                {{ with .Params.description }}
+                  <p class="projekt-card-desc">{{ . }}</p>
+                {{ else }}
+                  {{ with .Summary }}
+                    <p class="projekt-card-desc">{{ . | plainify | truncate 120 }}</p>
+                  {{ end }}
+                {{ end }}
+              </div>
+            </a>
+          </div>
+        {{ end }}
+      </div>
+    {{ else }}
+      <div class="row">
+        <div class="col-12">
+          <p>Noch keine News vorhanden.</p>
+        </div>
+      </div>
+    {{ end }}
+  </div>
+</section>
 {{ end }}

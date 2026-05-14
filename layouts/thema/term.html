@@ -18,13 +18,9 @@
             {{ range .ByDate.Reverse }}
               <div class="col-md-4 mb-3">
                 <a class="projekt-card" href="{{ .RelPermalink }}">
-                  {{ with .Params.images }}
-                    {{ with index . 0 }}
-                      <div class="projekt-card-image">
-                        {{ partial "image.html" (dict "Src" . "Alt" "" "Class" "img-fluid") }}
-                      </div>
-                    {{ end }}
-                  {{ end }}
+                  <div class="projekt-card-image">
+                    {{ partial "post-thumbnail.html" (dict "Page" . "Alt" .Title "Class" "img-fluid") }}
+                  </div>
                   <div class="projekt-card-body">
                     <h3 class="projekt-card-title">{{ .Title }}</h3>
                     {{ with .Params.description }}
