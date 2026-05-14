@@ -6,37 +6,20 @@
   "orientation" : "portrait",
   "start_url": "{{ site.BaseURL | absURL }}?utm_source=web_app_manifest",
   "background_color": "{{ site.Params.variables.body_color | default `#fff`}}",
-  "theme_color": "{{ site.Params.variables.color_primary | default `#000`}}"
-
-  {{- $icon := site.Params.favicon -}}
-  {{- if and $icon (fileExists (add `assets/` $icon)) -}}
-    {{- $img := resources.Get $icon -}}
-    {{- if eq $img.MediaType.SubType "svg" -}}
-      ,
+  "theme_color": "{{ site.Params.variables.color_primary | default `#000`}}",
   "icons": [
+    {{- $first := true -}}
+    {{- range $size := slice 48 96 144 192 512 -}}
+      {{- with resources.Get (printf "images/favicon-%d.png" $size) -}}
+        {{- if not $first }},{{ end -}}
+        {{- $first = false }}
     {
-      "src": "{{ $img.RelPermalink }}",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "{{ .RelPermalink }}",
+      "sizes": "{{ $size }}x{{ $size }}",
+      "type": "image/png"
+      {{- if eq $size 192 -}}, "purpose": "any maskable"{{- end -}}
     }
+      {{- end -}}
+    {{- end }}
   ]
-    {{- else -}}
-      {{- $icon_48 := $img.Resize "48x48 png" -}}
-      {{- $icon_72 := $img.Resize "72x72 png" -}}
-      {{- $icon_96 := $img.Resize "96x96 png" -}}
-      {{- $icon_144 := $img.Resize "144x144 png" -}}
-      {{- $icon_192 := $img.Resize "192x192 png" -}}
-      {{- $icon_512 := $img.Resize "512x512 png" -}}
-      ,
-  "icons": [
-    { "src": "{{ $icon_48.RelPermalink }}",  "sizes": "48x48",   "type": "image/png" },
-    { "src": "{{ $icon_72.RelPermalink }}",  "sizes": "72x72",   "type": "image/png" },
-    { "src": "{{ $icon_96.RelPermalink }}",  "sizes": "96x96",   "type": "image/png" },
-    { "src": "{{ $icon_144.RelPermalink }}", "sizes": "144x144", "type": "image/png" },
-    { "src": "{{ $icon_192.RelPermalink }}", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
-    { "src": "{{ $icon_512.RelPermalink }}", "sizes": "512x512", "type": "image/png" }
-  ]
-    {{- end -}}
-  {{- end -}}
 }
