@@ -15,6 +15,27 @@ summaryLength = 50 # see https://gohugo.io/content-management/excerpts/analytics
 # disableLanguages = ["en", "fr"]
 capitalizeListTitles = false # capitalize list titles
 
+############################# Cascade #############################
+# Defaults pushed to every page under /projekt/ so CMS-created entries
+# (TinaCMS strips unknown frontmatter on save, so the same cascade in
+# /projekt/_index.md doesn't survive a CMS edit) inherit the correct
+# layout/build settings. Defined at the site level — config files aren't
+# touched by the CMS.
+
+[[cascade]]
+  layout = "sections"
+  [cascade._target]
+    path = "/projekt/**"
+    kind = "section"
+
+[[cascade]]
+  [cascade.build]
+    render = "never"
+    list = "local"
+  [cascade._target]
+    path = "/projekt/**"
+    kind = "page"
+
 ########################### Services #############################
 [services]
 [services.googleAnalytics]
