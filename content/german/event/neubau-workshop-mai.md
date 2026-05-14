@@ -1,21 +1,24 @@
 ---
-title: "Neubau-Workshop: Gemeinschaftsräume planen"
-date: 2026-03-02
+title: 'Neubau-Workshop: Gemeinschaftsräume planen'
+date: 2026-03-02T00:00:00.000Z
+description: Im Mai-Workshop geht es um die Gestaltung unserer Gemeinschaftsräume.
 images:
   - images/post/post-2.jpg
-description: "Im Mai-Workshop geht es um die Gestaltung unserer Gemeinschaftsräume."
+event_date: 2026-05-10T08:00:00.000Z
+event_end: 2026-05-10T14:00:00.000Z
+event_location: 'Gemeinschaftsraum, 2. OG'
+flags:
+  - top-post
 tags:
   - workshop
   - neubau
   - planung
 draft: false
-
-event_date: 2026-05-10T10:00:00+02:00
-event_end: 2026-05-10T16:00:00+02:00
-event_location: "Gemeinschaftsraum, 2. OG"
 ---
 
 ## Gemeinschaftsräume gemeinsam gestalten
+
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/test/office.png)
 
 Unser nächster Neubau-Workshop widmet sich der Frage: Wie wollen wir unsere Gemeinschaftsräume nutzen? Welche Funktionen brauchen wir — und was können wir weglassen?
 
@@ -28,13 +31,13 @@ Unser nächster Neubau-Workshop widmet sich der Frage: Wie wollen wir unsere Gem
 
 ### Ablauf
 
-| Zeit | Programm |
-|------|----------|
-| 10:00 | Ankommen und Frühstück |
-| 10:30 | Rückblick auf bisherige Ergebnisse |
-| 11:00 | Arbeitsgruppen zu den vier Themen |
+| Zeit  | Programm                            |
+| ----- | ----------------------------------- |
+| 10:00 | Ankommen und Frühstück              |
+| 10:30 | Rückblick auf bisherige Ergebnisse  |
+| 11:00 | Arbeitsgruppen zu den vier Themen   |
 | 13:00 | Mittagspause mit gemeinsamem Kochen |
-| 14:00 | Vorstellung der Gruppenergebnisse |
-| 15:30 | Abstimmung und nächste Schritte |
+| 14:00 | Vorstellung der Gruppenergebnisse   |
+| 15:30 | Abstimmung und nächste Schritte     |
 
 Bitte meldet euch bis zum 5. Mai an, damit wir das Essen planen können.
