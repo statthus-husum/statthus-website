@@ -7,8 +7,9 @@ build:
   render: never
   list: local
 cards:
-  - title: weiter
-    link: content/german/projekt/weiter/_index.md
+  - title: nochmal
+    image: images/uploads/neubau.webp
+    link: content/german/projekt/nochmal/_index.md
 ---
 
 staTThus ist ein Wohnprojekt für Menschen, die in lebendiger Nachbarschaft alt werden wollen — gemeinsam, generationenübergreifend und füreinander da. Dieser Abschnitt beschreibt die Grundidee und die Werte, die uns durch die Planung tragen.
