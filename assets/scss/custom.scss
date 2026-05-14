@@ -14,20 +14,12 @@ $cream-darker: #e5ddd3;
 $text-dark: #2c2c2c;
 $text-muted: #6b6b6b;
 
-// --- Font overrides ---
-// Typekit font for menus and headers
-header .navbar-nav .nav-link,
-header .navbar-nav .dropdown-item {
-  font-family: "itc-bradley-hand-std", sans-serif;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: "itc-bradley-hand-std", sans-serif;
-}
-
-.btn, button {
-  font-family: "itc-bradley-hand-std", sans-serif;
-}
+// Footer / sidebar warm-beige palette (declared up here so other rules
+// can reference $footer-bg before the .statthus-footer block).
+$footer-bg: #BEA696;          // warm beige
+$footer-text: #4a3f37;        // dark warm brown for readability on beige
+$footer-grey: #5c524a;        // warm brown-grey (used in forms on white bg)
+$footer-grey-light: #6e645c;
 
 // --- Global background ---
 body {
@@ -226,7 +218,6 @@ header.position-sticky {
   font-weight: bold;
   color: $primary;
   font-size: 1.05rem;
-  font-family: "itc-bradley-hand-std", sans-serif;
 }
 
 .people-text-body {
@@ -661,9 +652,10 @@ header.position-sticky {
   }
 }
 
-// --- Sidebar (homepage red bar + news/single sidebars) ---
+// --- Sidebar (news/single sidebars) ---
+// Outer panel shares the warm beige with the footer for visual consistency.
 aside > div {
-  background-color: $primary;
+  background-color: $footer-bg;
   border-radius: 12px;
   padding: 1.5rem !important;
 }
@@ -692,10 +684,7 @@ aside {
   }
 }
 
-// --- Footer (dark grey, contained width) ---
-$footer-grey: #5c524a;       // warm brown-grey
-$footer-grey-light: #6e645c;
-
+// --- Footer (warm beige, contained width) ---
 .statthus-footer {
   background: transparent !important;
   border: none !important;
@@ -703,32 +692,32 @@ $footer-grey-light: #6e645c;
   padding-bottom: 1rem;
 
   .footer-inner {
-    background-color: $footer-grey;
+    background-color: $footer-bg;
     border-radius: 12px;
     padding: 2rem 2rem 1rem;
-    color: rgba(255, 255, 255, 0.9);
+    color: $footer-text;
   }
 
   a {
-    color: rgba(255, 255, 255, 0.75) !important;
+    color: rgba($footer-text, 0.85) !important;
     &:hover {
-      color: #fff !important;
+      color: $footer-text !important;
     }
   }
 
   h6, p, .content {
-    color: rgba(255, 255, 255, 0.85) !important;
+    color: $footer-text !important;
   }
 
   .footer-list li a {
-    color: rgba(255, 255, 255, 0.65) !important;
+    color: rgba($footer-text, 0.75) !important;
     &:hover {
-      color: #fff !important;
+      color: $footer-text !important;
     }
   }
 
-  // Newsletter CTA button — ensure crisp white text on brand-red
-  // background despite the dark-footer anchor color override above.
+  // Newsletter CTA button — keep crisp white text on brand-red despite
+  // the footer anchor color override above.
   .btn-primary {
     color: #fff !important;
     &:hover, &:focus {
@@ -737,17 +726,12 @@ $footer-grey-light: #6e645c;
   }
 
   #scrollTop {
-    background: rgba(255, 255, 255, 0.15);
-    color: #fff;
+    background: rgba($footer-text, 0.15);
+    color: $footer-text;
     border: none;
     &:hover {
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba($footer-text, 0.25);
     }
-  }
-
-  // Invert logo to white inside dark footer
-  img {
-    filter: brightness(0) invert(1);
   }
 }
 
