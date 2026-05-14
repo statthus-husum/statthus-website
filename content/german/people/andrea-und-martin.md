@@ -24,8 +24,8 @@ funfact: >
   Andrea: Ich lese gerne und bin auch selbst
   [Buchautorin](https://www.amazon.de/Sinnbilder-Lebenspfade-Weisheit-kleinen-Geschichten/dp/B0F24DXQTP).
   Martin: Ich erstelle gerne
-  [Fotokalender](https://www.calvendo.de/galerie/?gallery%5Bquery%5D=selfscrum)
-  und habe damit letztes Jahr einen Preis gewonnen - ganz ohne Kamera!
+  [Fotokalender](https://www.calvendo.de/galerie/?gallery[query]=selfscrum) und
+  habe damit letztes Jahr einen Preis gewonnen - ganz ohne Kamera!
 passion: >
   Andrea: Zartbitter-Schokomousse macht mich fast immer für einen Moment
   glücklich!  Martin: Gutes Kochen und Essen
