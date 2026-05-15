@@ -1,6 +1,6 @@
 ---
 title: Architektur und Bauplanung
-image: images/uploads/neubau.webp
+image: ''
 weight: 20
 image_position: left
 draft: false
