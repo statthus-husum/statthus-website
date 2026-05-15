@@ -1,6 +1,16 @@
 {{ define "main" }}
   <section class="section-sm">
     <div class="container">
+      {{ with .Params.image }}
+        <div class="row">
+          <div class="col-12 mb-4">
+            <div class="projekt-section-hero">
+              {{ partial "image.html" (dict "Src" . "Alt" $.Title "Class" "img-fluid rounded-lg w-100") }}
+            </div>
+          </div>
+        </div>
+      {{ end }}
+
       <div class="row">
         <div class="col-12">
           <div class="title-bordered mb-5 d-flex align-items-center">
@@ -40,10 +50,12 @@
                   {{ $card := . }}
                   {{ $linkRaw := $card.link }}
                   {{ $href := "" }}
+                  {{ $cardImg := $card.image }}
                   {{ if hasPrefix $linkRaw "content/" }}
                     {{ $logical := $linkRaw | replaceRE `^content/[^/]+/` "/" | replaceRE `/_index\.md$` "/" | replaceRE `\.md$` "" }}
                     {{ with site.GetPage $logical }}
                       {{ $href = .RelPermalink }}
+                      {{ if not $cardImg }}{{ $cardImg = .Params.image }}{{ end }}
                     {{ else }}
                       {{ warnf "projekt-card: konnte Seite %q (logisch: %q) nicht aufloesen — Card wird ausgeblendet" $linkRaw $logical }}
                     {{ end }}
@@ -53,7 +65,7 @@
                   {{ with $href }}
                     <div class="col-md-4 mb-3">
                       <a class="projekt-card" href="{{ . }}">
-                        {{ with $card.image }}
+                        {{ with $cardImg }}
                           <div class="projekt-card-image">
                             {{ partial "image.html" (dict "Src" . "Alt" "" "Class" "img-fluid") }}
                           </div>
