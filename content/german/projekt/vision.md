@@ -1,7 +1,7 @@
 ---
-title: "Unsere Vision"
+title: "Vision"
 weight: 10
-image_position: "right"
+image_position: "left"
 draft: false
 build:
   render: "never"
