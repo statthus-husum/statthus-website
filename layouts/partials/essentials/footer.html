@@ -16,8 +16,7 @@
               referrerpolicy="no-referrer"
               scrolling="no"></iframe>
           </div>
-          {{ "<!-- Höhe vom Countdown selbst setzen lassen (postMessage),
-               statt geratenes aspect-ratio. Origin wird streng geprüft. -->" | safeHTML }}
+          {{ "<!-- iframe-Höhe vom Countdown per postMessage setzen (Origin streng geprüft) -->" | safeHTML }}
           <script>
             (function () {
               var f = document.getElementById("statthus-countdown");
