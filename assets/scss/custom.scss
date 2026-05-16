@@ -763,12 +763,15 @@ aside {
 
   // Countdown-Embed (ersetzt den früheren Lorem-ipsum-Platzhalter in der
   // linken Footer-Spalte). Skaliert fluide mit der Spaltenbreite; die
-  // Höhe folgt per aspect-ratio. Zwei Stellschrauben fürs Feintuning:
+  // Höhe folgt per aspect-ratio. In der schmalen Spalte bricht die Uhr
+  // auf zwei Zeilen um (Tage+Stunden / Minuten+Sekunden), der Inhalt ist
+  // dann ~quadratisch — daher 1/1 statt 11/5 (sonst halbe Höhe, Inhalt
+  // wird vertikal abgeschnitten). Zwei Stellschrauben fürs Feintuning:
   // dieses aspect-ratio UND die clamp()-Wurzelschrift der Countdown-
   // Seite (statthus-cms: app/app/countdown/page.tsx).
   .footer-countdown {
     width: 100%;
-    aspect-ratio: 11 / 5;
+    aspect-ratio: 1 / 1;
     margin-top: 0.5rem;
     overflow: hidden;
 
