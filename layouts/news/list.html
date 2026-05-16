@@ -12,7 +12,7 @@
     {{ with .Pages.ByDate.Reverse }}
       <div class="row projekt-card-row">
         {{ range . }}
-          <div class="col-md-6 col-lg-4 mb-4">
+          <div class="col-12 col-md-6 col-lg-4 mb-4">
             <a class="projekt-card post-card h-100" href="{{ .RelPermalink }}">
               <div class="projekt-card-image">
                 {{ partial "post-thumbnail.html" (dict "Page" . "Alt" .Title "Class" "img-fluid") }}

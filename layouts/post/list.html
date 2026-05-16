@@ -31,7 +31,7 @@
           {{ range $paginator.Pages }}
             {{ $section := .Section }}
             {{ $label := dict "news" "News" "event" "Termin" "people" "Menschen" }}
-            <div class="col-md-6 col-lg-4 mb-4">
+            <div class="col-12 col-md-6 col-lg-4 mb-4">
               <a class="projekt-card post-card h-100" href="{{ .RelPermalink }}">
                 <div class="projekt-card-image">
                   {{ if eq $section "people" }}
