@@ -761,6 +761,25 @@ aside {
     color: $footer-text;
   }
 
+  // Countdown-Embed (ersetzt den früheren Lorem-ipsum-Platzhalter in der
+  // linken Footer-Spalte). Skaliert fluide mit der Spaltenbreite; die
+  // Höhe folgt per aspect-ratio. Zwei Stellschrauben fürs Feintuning:
+  // dieses aspect-ratio UND die clamp()-Wurzelschrift der Countdown-
+  // Seite (statthus-cms: app/app/countdown/page.tsx).
+  .footer-countdown {
+    width: 100%;
+    aspect-ratio: 11 / 5;
+    margin-top: 0.5rem;
+    overflow: hidden;
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+  }
+
   a {
     color: rgba($footer-text, 0.85) !important;
     &:hover {

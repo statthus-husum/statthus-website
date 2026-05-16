@@ -7,7 +7,14 @@
           <a class="mb-4 d-block" href="{{ site.BaseURL | relLangURL }}">
             {{ partial "logo.html" }}
           </a>
-          <p>{{ site.Params.footer_content }}</p>
+          <div class="footer-countdown">
+            <iframe
+              src="https://schreibe.statthus-husum.de/countdown"
+              title="Countdown bis zum Spatenstich"
+              loading="lazy"
+              referrerpolicy="no-referrer"
+              scrolling="no"></iframe>
+          </div>
         </div>
         <div class="col-lg-2 col-md-3 col-6 mb-4">
           <h6 class="mb-4 fw-semibold">{{i18n "quick_links"}}</h6>
