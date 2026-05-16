@@ -9,12 +9,28 @@
           </a>
           <div class="footer-countdown">
             <iframe
+              id="statthus-countdown"
               src="https://schreibe.statthus-husum.de/countdown"
               title="Countdown bis zum Spatenstich"
               loading="lazy"
               referrerpolicy="no-referrer"
               scrolling="no"></iframe>
           </div>
+          {{ "<!-- Höhe vom Countdown selbst setzen lassen (postMessage),
+               statt geratenes aspect-ratio. Origin wird streng geprüft. -->" | safeHTML }}
+          <script>
+            (function () {
+              var f = document.getElementById("statthus-countdown");
+              if (!f) return;
+              window.addEventListener("message", function (e) {
+                if (e.origin !== "https://schreibe.statthus-husum.de") return;
+                var d = e.data || {};
+                if (d.type === "statthus-countdown-size" && d.height > 0) {
+                  f.style.height = d.height + "px";
+                }
+              });
+            })();
+          </script>
         </div>
         <div class="col-lg-2 col-md-3 col-6 mb-4">
           <h6 class="mb-4 fw-semibold">{{i18n "quick_links"}}</h6>
