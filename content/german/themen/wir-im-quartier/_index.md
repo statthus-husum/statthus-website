@@ -2,7 +2,7 @@
 title: Wir im Quartier
 description: Das staTThus in der Nachbarschaft
 featured: statthus-als-denkmal
-draft: false
+draft: true
 ---
 
 Unser Wohnprojekt befindet sich inmitten einer Wohngegend am Stadtrand von Husum. In unmittelbarer Nachbarschaft gibt es mehrere Mehrfamilien- und Einfamilienhäuser. Familien, Singles, Paare sind in diesem Wohnquartier zu Hause. 
