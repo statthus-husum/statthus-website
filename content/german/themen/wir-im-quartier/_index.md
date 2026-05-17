@@ -1,11 +1,11 @@
 ---
-title: "Wir im Quartier"
-description: "Das staTThus in der Nachbarschaft"
-featured: "statthus-als-denkmal"
+title: Wir im Quartier
+description: Das staTThus in der Nachbarschaft
+featured: statthus-als-denkmal
 draft: false
 ---
 
-Unser Wohnprojekt befindet sich inmitten einer Wohngegend. In unmittelbarer Nachbarschaft befinden sich mehrere Mehrfamilien- und Einfamilienhäuser. Familien, Singles, Paare sind in diesem Wohnquartier zu Hause.
+Unser Wohnprojekt befindet sich inmitten einer Wohngegend am Stadtrand von Husum. In unmittelbarer Nachbarschaft gibt es mehrere Mehrfamilien- und Einfamilienhäuser. Familien, Singles, Paare sind in diesem Wohnquartier zu Hause. 
 
 Es bestehen alle möglichen nachbarschaftlichen Kontakte, allerdings gibt es (außer einem Spielplatz) keinen wirklichen Treffpunkt, sei es eine Freizeiteinrichtung oder ein Café.
 
