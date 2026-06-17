@@ -1,16 +1,16 @@
 ---
-title: "Dienstags ist Kochtag"
-date: 2026-02-20
+title: Dienstags ist Kochtag
+date: 2026-02-20T00:00:00.000Z
+description: 'Jeden Dienstag kochen wir gemeinsam — ein Ritual, das zusammenschweißt.'
 images:
   - images/post/post-4.jpg
-description: "Jeden Dienstag kochen wir gemeinsam — ein Ritual, das zusammenschweißt."
+themen:
+  - wie-wir-leben
 tags:
   - alltag
   - gemeinschaft
   - kochen
-themen:
-  - wie-wir-leben
-draft: false
+draft: true
 ---
 
 ## Gemeinsam kochen, gemeinsam essen
@@ -23,10 +23,10 @@ Wer am Dienstag kochen möchte, trägt sich bis Montag in die Liste am schwarzen
 
 ### Highlights der letzten Wochen
 
-- Martins legendäres Pad Thai
-- Andreas Wildkräuter-Quiche mit selbst gesammeltem Bärlauch
-- Annes schwedische Köttbullar (vegetarisch!)
-- Internationaler Abend mit Gerichten aus fünf Ländern
+* Martins legendäres Pad Thai
+* Andreas Wildkräuter-Quiche mit selbst gesammeltem Bärlauch
+* Annes schwedische Köttbullar (vegetarisch!)
+* Internationaler Abend mit Gerichten aus fünf Ländern
 
 ### Mitmachen
 

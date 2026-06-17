@@ -4,6 +4,7 @@ date: 2026-04-28T00:00:00.000Z
 description: Neue Kurzbeschreibung
 images:
   - images/statthus-logo-orange.png
+draft: true
 ---
 
 Neuer Inhalt mit Bild

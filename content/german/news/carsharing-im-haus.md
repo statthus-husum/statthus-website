@@ -1,14 +1,14 @@
 ---
-title: "Carsharing im staTThus gestartet"
-date: 2026-01-15
+title: Carsharing im staTThus gestartet
+date: 2026-01-15T00:00:00.000Z
+description: Unser hauseigenes Carsharing läuft — ein Auto für alle.
 images:
   - images/post/post-5.jpg
-description: "Unser hauseigenes Carsharing läuft — ein Auto für alle."
 tags:
   - alltag
   - nachhaltigkeit
   - mobilitaet
-draft: false
+draft: true
 ---
 
 ## Ein Auto für alle
@@ -17,10 +17,10 @@ Seit Januar haben wir ein hauseigenes Carsharing! Statt dass jede Partei ein eig
 
 ### Das Konzept
 
-- **Buchung** über eine gemeinsame App (wir nutzen eine einfache Kalender-Lösung)
-- **Kosten** nach gefahrenen Kilometern plus ein kleiner monatlicher Grundbeitrag
-- **Stellplatz** im Innenhof — immer zugänglich
-- **Pflege** übernimmt rotierend jemand aus der Gemeinschaft
+* **Buchung** über eine gemeinsame App (wir nutzen eine einfache Kalender-Lösung)
+* **Kosten** nach gefahrenen Kilometern plus ein kleiner monatlicher Grundbeitrag
+* **Stellplatz** im Innenhof — immer zugänglich
+* **Pflege** übernimmt rotierend jemand aus der Gemeinschaft
 
 ### Erste Erfahrungen
 

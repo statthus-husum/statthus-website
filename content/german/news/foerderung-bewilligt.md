@@ -1,9 +1,9 @@
 ---
-title: "Förderung für Gemeinschaftsräume bewilligt"
-date: 2026-01-20
+title: Förderung für Gemeinschaftsräume bewilligt
+date: 2026-01-20T00:00:00.000Z
+description: 'Tolle Nachricht: Die Stadt fördert unsere Gemeinschaftsräume mit 50.000 Euro.'
 images:
   - images/post/post-1.jpg
-description: "Tolle Nachricht: Die Stadt fördert unsere Gemeinschaftsräume mit 50.000 Euro."
 flags:
   - top-post
 tags:
@@ -11,7 +11,7 @@ tags:
   - gemeinschaft
   - politik
   - quartier
-draft: false
+draft: true
 ---
 
 ## 50.000 Euro für unsere Gemeinschaftsräume!
@@ -20,10 +20,10 @@ Wir haben großartige Neuigkeiten: Die Stadt hat unseren Förderantrag für die 
 
 ### Was wird gefördert?
 
-- Professionelle Küchenausstattung für den Gemeinschaftsraum
-- Werkzeug und Einrichtung für die offene Werkstatt
-- Barrierefreier Zugang zum Veranstaltungsraum
-- Technische Ausstattung (Beamer, Leinwand, Soundsystem)
+* Professionelle Küchenausstattung für den Gemeinschaftsraum
+* Werkzeug und Einrichtung für die offene Werkstatt
+* Barrierefreier Zugang zum Veranstaltungsraum
+* Technische Ausstattung (Beamer, Leinwand, Soundsystem)
 
 ### Offenes Haus
 

@@ -13,4 +13,6 @@ Hier kommt Statthus ins Spiel: die vielseitigen Gemeinschaftsflächen laden gera
 
 Schon zahlreiche Gruppen und Veranstaltungen haben stattgefunden oder sind in Planung. Allem voran die beliebten Kleidertauschparties.
 
-So sieht es aus in unserer Nachbarschaft:![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Laurits_Kunstwerk2.png)
+So sieht es aus in unserer Nachbarschaft:
+
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Laurits_Kunstwerk2.png)

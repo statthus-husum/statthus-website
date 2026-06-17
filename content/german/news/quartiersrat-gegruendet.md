@@ -1,16 +1,16 @@
 ---
-title: "Quartiersrat gegründet — staTThus ist dabei"
-date: 2026-02-01
+title: Quartiersrat gegründet — staTThus ist dabei
+date: 2026-02-01T00:00:00.000Z
+description: Im neuen Quartiersrat engagieren wir uns für eine lebendige Nachbarschaft.
 images:
   - images/post/post-3.jpg
-description: "Im neuen Quartiersrat engagieren wir uns für eine lebendige Nachbarschaft."
+themen:
+  - wir-im-quartier
 tags:
   - quartier
   - nachbarschaft
   - engagement
-themen:
-  - wir-im-quartier
-draft: false
+draft: true
 ---
 
 ## Gemeinsam für das Quartier
@@ -19,10 +19,10 @@ Anfang Februar wurde der neue Quartiersrat gegründet — und das staTThus ist v
 
 ### Unsere Themen
 
-- **Nachbarschaftshilfe:** Organisation von gegenseitiger Unterstützung im Alltag
-- **Grünflächen:** Pflege und Gestaltung öffentlicher Grünflächen im Quartier
-- **Verkehrsberuhigung:** Initiativen für mehr Sicherheit und Lebensqualität
-- **Kulturelle Angebote:** Koordination von Festen und Veranstaltungen
+* **Nachbarschaftshilfe:** Organisation von gegenseitiger Unterstützung im Alltag
+* **Grünflächen:** Pflege und Gestaltung öffentlicher Grünflächen im Quartier
+* **Verkehrsberuhigung:** Initiativen für mehr Sicherheit und Lebensqualität
+* **Kulturelle Angebote:** Koordination von Festen und Veranstaltungen
 
 ### Nächste Sitzung
 
