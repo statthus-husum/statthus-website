@@ -1,18 +1,17 @@
 ---
-title: "Sommerfest im staTThus"
-date: 2026-03-01
+title: Sommerfest im staTThus
+date: 2026-03-01T00:00:00.000Z
+description: Unser erstes großes Sommerfest — alle Nachbarn sind herzlich eingeladen!
 images:
   - images/post/post-1.jpg
-description: "Unser erstes großes Sommerfest — alle Nachbarn sind herzlich eingeladen!"
+event_date: 2026-06-21T13:00:00.000Z
+event_end: 2026-06-21T19:00:00.000Z
+event_location: staTThus Innenhof
 tags:
   - sommerfest
   - quartier
   - nachbarschaft
-draft: false
-
-event_date: 2026-06-21T15:00:00+02:00
-event_end: 2026-06-21T21:00:00+02:00
-event_location: "staTThus Innenhof"
+draft: true
 ---
 
 ## Sommerfest am 21. Juni
@@ -21,11 +20,11 @@ Wir feiern den längsten Tag des Jahres mit einem bunten Fest im Innenhof! Alle 
 
 ### Was erwartet euch?
 
-- **Ab 15 Uhr:** Kaffee, Kuchen und kalte Getränke
-- **16 Uhr:** Führung durch das staTThus für Interessierte
-- **17 Uhr:** Gemeinsames Grillen — bringt gerne etwas für das Büffet mit
-- **19 Uhr:** Livemusik von der Hausband „Die Dachgeschosse"
-- **Ab 20 Uhr:** Gemütliches Beisammensein bei Lichterketten und Feuerschale
+* **Ab 15 Uhr:** Kaffee, Kuchen und kalte Getränke
+* **16 Uhr:** Führung durch das staTThus für Interessierte
+* **17 Uhr:** Gemeinsames Grillen — bringt gerne etwas für das Büffet mit
+* **19 Uhr:** Livemusik von der Hausband „Die Dachgeschosse"
+* **Ab 20 Uhr:** Gemütliches Beisammensein bei Lichterketten und Feuerschale
 
 ### Mitbringen
 

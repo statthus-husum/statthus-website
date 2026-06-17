@@ -13,7 +13,7 @@ tags:
   - workshop
   - neubau
   - planung
-draft: false
+draft: true
 ---
 
 ## Gemeinschaftsräume gemeinsam gestalten
