@@ -8,6 +8,7 @@ build:
   list: local
 cards:
   - title: Wohnen
+    image: images/uploads/Laurits_Kunstwerk2.png
     link: content/german/member/wohnen/_index.md.md
 ---
 
