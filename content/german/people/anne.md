@@ -1,7 +1,7 @@
 ---
 title: Anne
 image: images/uploads/people/anne.png
-einstieg: hallo
+einstieg: hallo nochmal
 motivation: ''
 menschliches: ''
 funfact: ''
