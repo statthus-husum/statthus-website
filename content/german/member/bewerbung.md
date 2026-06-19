@@ -4,7 +4,6 @@ weight: 20
 image_position: left
 draft: false
 build:
-  render: never
   list: local
 cards:
   - title: Wohnen
