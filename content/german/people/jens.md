@@ -1,7 +1,7 @@
 ---
 title: Jens
 image: images/uploads/people/jens.png
-einstieg: hallo
+einstieg: hi
 motivation: ''
 menschliches: ''
 funfact: ''
