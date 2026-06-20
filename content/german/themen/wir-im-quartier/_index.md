@@ -16,3 +16,6 @@ Schon zahlreiche Gruppen und Veranstaltungen haben stattgefunden oder sind in Pl
 So sieht es aus in unserer Nachbarschaft:
 
 ![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Laurits_Kunstwerk2.png)
+
+Die schon erwähnten Kleidertauschparties haben sich mittlerweile in ganz Husum herumgesprochen. Die Idee ist natürlich nicht neu und auch nicht von uns - aber in Husum trifft sie einen Nerv: ohne Kommerz und Konsum sich an neuen Klamotten zu erfreuen, ganz einfach durch Tauschen - das ist einfach eine tolle Sache. Und dass der eigene Kleiderschrank mal wieder durchgeräumt wird, ist ja auch ganz schön. Zweimal im Jahr organisiert das Kreativteam im Statthus diese Aktion mit viel Aufwand und viel Spaß.
+Übrigens treffen sich beim Tauschen alle Altersstufen, das ist lebendig und bereichend.
