@@ -104,14 +104,24 @@
         statusEl.textContent = '';
         if (btn) { btn.disabled = true; btn.textContent = 'Senden …'; }
 
-        if (siteKey && window.grecaptcha) {
-          grecaptcha.ready(function () {
-            grecaptcha.execute(siteKey, { action: 'submit' })
-              .then(post)
-              .catch(function () { post(null); }); // bei reCAPTCHA-Fehler trotzdem senden
-          });
+        // reCAPTCHA-Token holen, aber den Versand NIE blockieren: Wenn grecaptcha
+        // nicht antwortet (z. B. Domain nicht registriert), würde execute() sonst
+        // ewig hängen und der Button bliebe auf „Senden …". Daher Timeout-Netz und
+        // ein Guard, damit post() genau einmal läuft.
+        var sent = false;
+        var go = function (token) { if (!sent) { sent = true; post(token); } };
+
+        if (siteKey && window.grecaptcha && window.grecaptcha.execute) {
+          var timer = setTimeout(function () { go(null); }, 6000);
+          try {
+            grecaptcha.ready(function () {
+              grecaptcha.execute(siteKey, { action: 'submit' })
+                .then(function (token) { clearTimeout(timer); go(token); })
+                .catch(function () { clearTimeout(timer); go(null); });
+            });
+          } catch (err) { clearTimeout(timer); go(null); }
         } else {
-          post(null);
+          go(null);
         }
       });
     })();
