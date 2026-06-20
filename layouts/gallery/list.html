@@ -50,7 +50,10 @@
 
     {{ $frames := slice "polaroid" "classic" "simple" }}
     {{ $tilts := slice "tilt-a" "tilt-b" "tilt-c" "tilt-d" }}
-    <div class="photo-marquee">
+    {{/* Ab 3 Bildern läuft die Galerie (mit Wisch-Schwung scrollbar); darunter
+         statisch zentriert, damit ein einzelnes Bild nicht doppelt erscheint. */}}
+    {{ $scroll := ge (len $photos) 3 }}
+    <div class="photo-marquee{{ if not $scroll }} photo-marquee--static{{ end }}">
       <div class="photo-marquee-track">
         {{ range $i, $p := $photos }}
           {{ $frame := index $frames (mod $i (len $frames)) }}
@@ -62,16 +65,18 @@
             {{ end }}
           </figure>
         {{ end }}
-        {{/* duplicate for seamless infinite scroll */}}
-        {{ range $i, $p := $photos }}
-          {{ $frame := index $frames (mod $i (len $frames)) }}
-          {{ $tilt := index $tilts (mod $i (len $tilts)) }}
-          <figure class="photo-frame photo-frame-{{ $frame }} {{ $tilt }}" aria-hidden="true">
-            {{ partial "image.html" (dict "Src" $p.src "Alt" "" "Class" "photo-frame-img") }}
-            {{ with $p.caption }}
-              <figcaption class="photo-caption">{{ . }}</figcaption>
-            {{ end }}
-          </figure>
+        {{ if $scroll }}
+          {{/* Kopie für den nahtlosen Endlos-Lauf */}}
+          {{ range $i, $p := $photos }}
+            {{ $frame := index $frames (mod $i (len $frames)) }}
+            {{ $tilt := index $tilts (mod $i (len $tilts)) }}
+            <figure class="photo-frame photo-frame-{{ $frame }} {{ $tilt }}" aria-hidden="true">
+              {{ partial "image.html" (dict "Src" $p.src "Alt" "" "Class" "photo-frame-img") }}
+              {{ with $p.caption }}
+                <figcaption class="photo-caption">{{ . }}</figcaption>
+              {{ end }}
+            </figure>
+          {{ end }}
         {{ end }}
       </div>
     </div>
@@ -83,42 +88,109 @@
         const lbImg = lightbox.querySelector('.photo-lightbox-img');
         const lbCap = lightbox.querySelector('.photo-lightbox-caption');
         const lbClose = lightbox.querySelector('.photo-lightbox-close');
-        const marquee = document.querySelector('.photo-marquee-track');
+        const marquee = document.querySelector('.photo-marquee');
+        const track = marquee && marquee.querySelector('.photo-marquee-track');
 
-        function open(src, alt, caption) {
+        // ---- Lightbox ----
+        let lbOpen = false;
+        function openLb(src, alt, caption) {
           lbImg.src = src;
           lbImg.alt = alt || '';
           lbCap.textContent = caption || '';
           lbCap.style.display = caption ? '' : 'none';
           lightbox.classList.add('is-open');
           lightbox.setAttribute('aria-hidden', 'false');
-          if (marquee) marquee.style.animationPlayState = 'paused';
+          lbOpen = true;
           document.body.style.overflow = 'hidden';
         }
-
-        function close() {
+        function closeLb() {
           lightbox.classList.remove('is-open');
           lightbox.setAttribute('aria-hidden', 'true');
           lbImg.src = '';
-          if (marquee) marquee.style.animationPlayState = '';
+          lbOpen = false;
           document.body.style.overflow = '';
         }
+        lbClose.addEventListener('click', closeLb);
+        lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLb(); });
+        document.addEventListener('keydown', function (e) {
+          if (e.key === 'Escape' && lbOpen) closeLb();
+        });
 
+        // ---- Auto-Lauf + Drag/Swipe (nur bei der Lauf-Galerie, nicht statisch) ----
+        const running = track && !marquee.classList.contains('photo-marquee--static');
+        let moved = 0;
+
+        if (running) {
+          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          const BASE = 36;            // Grund-Tempo px/s
+          let offset = 0;             // aktueller Versatz (px)
+          let vel = reduce ? 0 : BASE;
+          let half = 0;
+          let dragging = false, hover = false;
+
+          function measure() { half = track.scrollWidth / 2; }
+          measure();
+          window.addEventListener('resize', measure);
+          marquee.querySelectorAll('img').forEach(function (img) {
+            if (!img.complete) img.addEventListener('load', measure, { once: true });
+          });
+
+          function wrap() { if (half > 0) offset = ((offset % half) + half) % half; }
+          function apply() { track.style.transform = 'translateX(' + (-offset) + 'px)'; }
+
+          let prev = null;
+          function tick(t) {
+            if (prev === null) prev = t;
+            const dt = Math.min(0.05, (t - prev) / 1000);
+            prev = t;
+            if (!dragging && !hover) { offset += vel * dt; wrap(); apply(); }
+            const target = reduce ? 0 : BASE;
+            vel += (target - vel) * Math.min(1, dt * 1.6);   // Schwung ebbt zum Grund-Tempo ab
+            requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+
+          marquee.addEventListener('mouseenter', function () { hover = true; });
+          marquee.addEventListener('mouseleave', function () { hover = false; });
+
+          let lastX = 0, lastT = 0, swipeVel = 0;
+          marquee.addEventListener('pointerdown', function (e) {
+            dragging = true; moved = 0; swipeVel = 0;
+            lastX = e.clientX; lastT = e.timeStamp || performance.now();
+            try { marquee.setPointerCapture(e.pointerId); } catch (err) {}
+            marquee.classList.add('is-dragging');
+          });
+          marquee.addEventListener('pointermove', function (e) {
+            if (!dragging) return;
+            const dx = e.clientX - lastX;
+            moved += Math.abs(dx);
+            offset -= dx; wrap(); apply();
+            const now = e.timeStamp || performance.now();
+            const dtt = (now - lastT) / 1000;
+            if (dtt > 0) swipeVel = -dx / dtt;   // px/s in Lauf-Richtung
+            lastX = e.clientX; lastT = now;
+          });
+          function release() {
+            if (!dragging) return;
+            dragging = false;
+            marquee.classList.remove('is-dragging');
+            if (Math.abs(swipeVel) > BASE) {
+              vel = Math.max(-1800, Math.min(1800, swipeVel));   // Wisch beschleunigt, klingt dann ab
+            }
+          }
+          marquee.addEventListener('pointerup', release);
+          marquee.addEventListener('pointercancel', release);
+        }
+
+        // ---- Klick öffnet Lightbox — außer es war ein Zieh-/Wisch-Gesture ----
         document.querySelectorAll('.photo-frame').forEach(function (fig) {
-          fig.addEventListener('click', function () {
+          fig.addEventListener('click', function (e) {
+            if (running && moved > 8) { e.preventDefault(); return; }
             const img = fig.querySelector('img');
             const cap = fig.querySelector('.photo-caption');
             if (!img) return;
-            open(img.src, img.alt, cap ? cap.textContent.trim() : '');
+            openLb(img.src, img.alt, cap ? cap.textContent.trim() : '');
           });
-        });
-
-        lbClose.addEventListener('click', close);
-        lightbox.addEventListener('click', function (e) {
-          if (e.target === lightbox) close();
-        });
-        document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape' && lightbox.classList.contains('is-open')) close();
         });
       })();
     </script>

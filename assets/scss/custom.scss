@@ -467,8 +467,27 @@ header.position-sticky {
     background: linear-gradient(270deg, $cream 0%, transparent 100%);
   }
 
-  &:hover .photo-marquee-track {
-    animation-play-state: paused;
+  // Das Scrollen treibt jetzt JS (Drag/Wisch + Schwung); CSS liefert nur die
+  // Greif-Geste. touch-action: pan-y lässt vertikales Seiten-Scrollen zu,
+  // horizontale Gesten übernimmt JS.
+  cursor: grab;
+  touch-action: pan-y;
+
+  &.is-dragging { cursor: grabbing; }
+
+  // Wenige Bilder: kein Lauftext, sondern statisch zentriert.
+  &.photo-marquee--static {
+    overflow: visible;
+    cursor: default;
+    touch-action: auto;
+
+    .photo-marquee-track {
+      width: 100%;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 2rem;
+      transform: none !important;
+    }
   }
 }
 
@@ -477,12 +496,13 @@ header.position-sticky {
   align-items: center;
   gap: 2.5rem;
   width: max-content;
-  animation: photo-marquee 90s linear infinite;
-}
+  will-change: transform;
+  user-select: none;
 
-@keyframes photo-marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+  img {
+    -webkit-user-drag: none;
+    user-drag: none;
+  }
 }
 
 .photo-frame {
@@ -569,34 +589,30 @@ header.position-sticky {
   }
 }
 
-// Mobile: disable auto-scroll, enable native swipe-scrolling with snap
+// Mobile: kleinere Rahmen; das Scrollen übernimmt der JS-Drag/Wisch (mit Schwung).
 @media (max-width: 768px) {
   .photo-marquee {
-    overflow-x: auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
     padding: 2rem 0;
 
     &::before, &::after { display: none; }
   }
 
   .photo-marquee-track {
-    animation: none;
-    scroll-snap-type: x mandatory;
     gap: 1.25rem;
-    padding: 0 1rem;
   }
 
   .photo-frame {
-    scroll-snap-align: center;
     width: 78vw;
-
-    &[aria-hidden="true"] { display: none; }
 
     .photo-frame-img,
     img {
       height: 220px;
     }
+  }
+
+  // Statisch (wenige Bilder): ein Bild pro Zeile, zentriert.
+  .photo-marquee--static .photo-frame {
+    width: 86vw;
   }
 }
 
