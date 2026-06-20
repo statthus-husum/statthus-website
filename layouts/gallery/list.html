@@ -42,6 +42,8 @@
   {{ if $photos }}
     <div class="photo-lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-hidden="true">
       <button class="photo-lightbox-close" type="button" aria-label="Schließen">&times;</button>
+      <button class="photo-lightbox-nav photo-lightbox-prev" type="button" aria-label="Vorheriges Bild">&#8249;</button>
+      <button class="photo-lightbox-nav photo-lightbox-next" type="button" aria-label="Nächstes Bild">&#8250;</button>
       <div class="photo-lightbox-content">
         <img class="photo-lightbox-img" src="" alt="" />
         <div class="photo-lightbox-caption"></div>
@@ -88,45 +90,100 @@
         const lbImg = lightbox.querySelector('.photo-lightbox-img');
         const lbCap = lightbox.querySelector('.photo-lightbox-caption');
         const lbClose = lightbox.querySelector('.photo-lightbox-close');
+        const lbPrev = lightbox.querySelector('.photo-lightbox-prev');
+        const lbNext = lightbox.querySelector('.photo-lightbox-next');
+        const lbContent = lightbox.querySelector('.photo-lightbox-content');
         const marquee = document.querySelector('.photo-marquee');
         const track = marquee && marquee.querySelector('.photo-marquee-track');
 
-        // ---- Lightbox ----
-        let lbOpen = false;
-        function openLb(src, alt, caption) {
-          lbImg.src = src;
-          lbImg.alt = alt || '';
-          lbCap.textContent = caption || '';
-          lbCap.style.display = caption ? '' : 'none';
+        // Eindeutige Bilder (ohne die Lauf-Kopien) als Navigationsliste.
+        const items = Array.prototype.map.call(
+          document.querySelectorAll('.photo-frame:not([aria-hidden="true"])'),
+          function (fig) {
+            const img = fig.querySelector('img');
+            const cap = fig.querySelector('.photo-caption');
+            return {
+              src: img ? (img.currentSrc || img.src) : '',
+              alt: img ? img.alt : '',
+              caption: cap ? cap.textContent.trim() : ''
+            };
+          }
+        );
+        // Pfeile ausblenden, wenn es nur ein Bild gibt.
+        if (items.length <= 1) {
+          if (lbPrev) lbPrev.style.display = 'none';
+          if (lbNext) lbNext.style.display = 'none';
+        }
+
+        let cur = -1, lbOpen = false;
+        function render() {
+          const it = items[cur]; if (!it) return;
+          lbImg.src = it.src;
+          lbImg.alt = it.alt || '';
+          lbCap.textContent = it.caption || '';
+          lbCap.style.display = it.caption ? '' : 'none';
+        }
+        function openAt(i) {
+          if (i < 0 || i >= items.length) return;
+          cur = i; render();
           lightbox.classList.add('is-open');
           lightbox.setAttribute('aria-hidden', 'false');
           lbOpen = true;
           document.body.style.overflow = 'hidden';
         }
+        function openFromFigure(fig) {
+          const img = fig.querySelector('img'); if (!img) return;
+          const src = img.currentSrc || img.src;
+          let i = items.findIndex(function (it) { return it.src === src; });
+          if (i < 0) i = 0;
+          openAt(i);
+        }
         function closeLb() {
           lightbox.classList.remove('is-open');
           lightbox.setAttribute('aria-hidden', 'true');
-          lbImg.src = '';
-          lbOpen = false;
+          lbImg.src = ''; lbOpen = false; cur = -1;
           document.body.style.overflow = '';
         }
+        function step(d) {
+          if (!lbOpen || items.length < 2) return;
+          cur = (cur + d + items.length) % items.length;
+          render();
+        }
+
         lbClose.addEventListener('click', closeLb);
+        if (lbPrev) lbPrev.addEventListener('click', function (e) { e.stopPropagation(); step(-1); });
+        if (lbNext) lbNext.addEventListener('click', function (e) { e.stopPropagation(); step(1); });
         lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLb(); });
         document.addEventListener('keydown', function (e) {
-          if (e.key === 'Escape' && lbOpen) closeLb();
+          if (!lbOpen) return;
+          if (e.key === 'Escape') closeLb();
+          else if (e.key === 'ArrowLeft') step(-1);
+          else if (e.key === 'ArrowRight') step(1);
         });
 
-        // ---- Auto-Lauf + Drag/Swipe (nur bei der Lauf-Galerie, nicht statisch) ----
+        // Wisch im Lightbox: nach links = nächstes, nach rechts = vorheriges.
+        if (lbContent) {
+          let sx = 0, sy = 0, swiping = false;
+          lbContent.addEventListener('pointerdown', function (e) {
+            swiping = true; sx = e.clientX; sy = e.clientY;
+          });
+          lbContent.addEventListener('pointerup', function (e) {
+            if (!swiping) return;
+            swiping = false;
+            const dx = e.clientX - sx, dy = e.clientY - sy;
+            if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
+          });
+        }
+
+        // ---- Auto-Lauf + Drag/Swipe der Galerie (nicht im statischen Modus) ----
         const running = track && !marquee.classList.contains('photo-marquee--static');
-        let moved = 0;
 
         if (running) {
           const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
           const BASE = 36;            // Grund-Tempo px/s
-          let offset = 0;             // aktueller Versatz (px)
-          let vel = reduce ? 0 : BASE;
-          let half = 0;
+          let offset = 0, vel = reduce ? 0 : BASE, half = 0;
           let dragging = false, hover = false;
+          let lastX = 0, lastT = 0, swipeVel = 0, moved = 0;
 
           function measure() { half = track.scrollWidth / 2; }
           measure();
@@ -141,9 +198,8 @@
           let prev = null;
           function tick(t) {
             if (prev === null) prev = t;
-            const dt = Math.min(0.05, (t - prev) / 1000);
-            prev = t;
-            if (!dragging && !hover) { offset += vel * dt; wrap(); apply(); }
+            const dt = Math.min(0.05, (t - prev) / 1000); prev = t;
+            if (!dragging && !hover && !lbOpen) { offset += vel * dt; wrap(); apply(); }
             const target = reduce ? 0 : BASE;
             vel += (target - vel) * Math.min(1, dt * 1.6);   // Schwung ebbt zum Grund-Tempo ab
             requestAnimationFrame(tick);
@@ -153,7 +209,6 @@
           marquee.addEventListener('mouseenter', function () { hover = true; });
           marquee.addEventListener('mouseleave', function () { hover = false; });
 
-          let lastX = 0, lastT = 0, swipeVel = 0;
           marquee.addEventListener('pointerdown', function (e) {
             dragging = true; moved = 0; swipeVel = 0;
             lastX = e.clientX; lastT = e.timeStamp || performance.now();
@@ -170,28 +225,29 @@
             if (dtt > 0) swipeVel = -dx / dtt;   // px/s in Lauf-Richtung
             lastX = e.clientX; lastT = now;
           });
-          function release() {
+          function release(e) {
             if (!dragging) return;
             dragging = false;
             marquee.classList.remove('is-dragging');
-            if (Math.abs(swipeVel) > BASE) {
-              vel = Math.max(-1800, Math.min(1800, swipeVel));   // Wisch beschleunigt, klingt dann ab
+            if (Math.abs(swipeVel) > BASE) vel = Math.max(-1800, Math.min(1800, swipeVel));
+            // Tipp (kein Ziehen) → Lightbox öffnen. setPointerCapture unterdrückt
+            // das click-Event, daher hier per elementFromPoint auswerten.
+            if (moved <= 8) {
+              const el = document.elementFromPoint(e.clientX, e.clientY);
+              const fig = el && el.closest ? el.closest('.photo-frame') : null;
+              if (fig) openFromFigure(fig);
             }
           }
           marquee.addEventListener('pointerup', release);
-          marquee.addEventListener('pointercancel', release);
-        }
-
-        // ---- Klick öffnet Lightbox — außer es war ein Zieh-/Wisch-Gesture ----
-        document.querySelectorAll('.photo-frame').forEach(function (fig) {
-          fig.addEventListener('click', function (e) {
-            if (running && moved > 8) { e.preventDefault(); return; }
-            const img = fig.querySelector('img');
-            const cap = fig.querySelector('.photo-caption');
-            if (!img) return;
-            openLb(img.src, img.alt, cap ? cap.textContent.trim() : '');
+          marquee.addEventListener('pointercancel', function () {
+            dragging = false; marquee.classList.remove('is-dragging');
           });
-        });
+        } else {
+          // Statisch (wenige Bilder): einfacher Klick öffnet die Lightbox.
+          document.querySelectorAll('.photo-frame').forEach(function (fig) {
+            fig.addEventListener('click', function () { openFromFigure(fig); });
+          });
+        }
       })();
     </script>
   {{ end }}
