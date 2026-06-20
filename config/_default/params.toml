@@ -32,6 +32,9 @@ sidebar = "right" # sidebar value (left, right or false)
 
 # contact form action
 contact_form_action = "https://formspree.io/f/mqeorrly" # Formspree-Endpoint fürs Kontaktformular
+# Google reCAPTCHA v3 Site-Key (öffentlich). Leer = ohne reCAPTCHA.
+# Den zugehörigen Secret-Key in den Formspree-Formular-Einstellungen hinterlegen.
+recaptcha_v3_site_key = ""
 
 # google tag manager, see https://developers.google.com/tag-manager/
 google_tag_manager = "" # example: G-XXXXXXXXXX
