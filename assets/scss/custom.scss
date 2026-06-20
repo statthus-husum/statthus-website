@@ -32,6 +32,22 @@ html, body {
 
 body {
   background-color: $cream !important;
+  // Lesbarkeit: Theme-Basis war 0.875rem (14px) — vor allem mobil zu klein.
+  // Auf 1rem (16px) anheben. Komponenten mit eigener rem-Größe (Navbar,
+  // Buttons, Meta) bleiben unberührt, da relativ zum Root-Element.
+  font-size: 1rem; // 16px
+}
+
+// Gut lesbarer Fließtext (Theme-Default war 14px). Gilt auch mobil.
+p,
+.paragraph,
+.content,
+.content p,
+.content li,
+.content ul,
+.content ol {
+  font-size: 1.0625rem; // 17px
+  line-height: 1.75;
 }
 
 // --- Red Navbar with rounded corners ---
