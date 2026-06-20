@@ -104,3 +104,69 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  # FTP deploy job — runs in PARALLEL with the Pages build/deploy (no `needs`).
+  # Builds Hugo with the FTP site's own base URL and uploads ./public via FTPS.
+  # Configure in repo Settings:
+  #   Variables: FTP_DEPLOY=true (enables this job), FTP_BASE_URL=https://your-ftp-domain
+  #              optional FTP_SERVER_DIR (remote target dir, must end with /, default ./)
+  #   Secrets:   FTP_USERNAME, FTP_PASSWORD  (server hostname is set below)
+  deploy-ftp:
+    if: ${{ vars.FTP_DEPLOY == 'true' }}
+    runs-on: ubuntu-latest
+    env:
+      HUGO_VERSION: "0.152.2"
+      GO_VERSION: "1.20"
+      NODE_VERSION: "20"
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ env.GO_VERSION }}
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install Node.js dependencies
+        run: npm ci
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v3
+        with:
+          hugo-version: ${{ env.HUGO_VERSION }}
+          extended: true
+
+      - name: Install Hugo modules
+        # No -u: stick to the versions pinned in go.mod / go.sum
+        run: hugo mod get
+
+      - name: Build with Hugo (FTP base URL)
+        env:
+          HUGO_CACHEDIR: ${{ runner.temp }}/hugo_cache
+          HUGO_ENVIRONMENT: production
+          TZ: Europe/Berlin
+        run: |
+          hugo \
+            --gc \
+            --minify \
+            --baseURL "${{ vars.FTP_BASE_URL || '/' }}"
+
+      - name: Deploy to FTP (FTPS)
+        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        with:
+          server: w01a9743.kasserver.com
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          local-dir: ./public/
+          server-dir: ${{ vars.FTP_SERVER_DIR || './' }}
