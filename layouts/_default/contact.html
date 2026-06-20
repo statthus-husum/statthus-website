@@ -56,11 +56,6 @@
     </div>
   </section>
 
-  {{ $recaptchaKey := site.Params.recaptcha_v3_site_key }}
-  {{ with $recaptchaKey }}
-    <script src="https://www.google.com/recaptcha/api.js?render={{ . }}"></script>
-  {{ end }}
-
   <script>
     (function () {
       var form = document.getElementById('kontakt-form');
@@ -68,14 +63,16 @@
       var statusEl = document.getElementById('kontakt-status');
       var btn = form.querySelector('button[type="submit"]');
       var label = btn ? (btn.getAttribute('data-label') || btn.textContent) : 'Senden';
-      var siteKey = {{ $recaptchaKey | jsonify }}; // leer = ohne reCAPTCHA
 
-      function post(token) {
-        var data = new FormData(form);
-        if (token) data.append('g-recaptcha-response', token);
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        statusEl.className = 'kontakt-status';
+        statusEl.textContent = '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Senden …'; }
+
         fetch(form.action, {
           method: 'POST',
-          body: data,
+          body: new FormData(form), // Spamschutz über das Honeypot-Feld _gotcha + Formspree
           headers: { 'Accept': 'application/json' }
         }).then(function (res) {
           if (res.ok) {
@@ -96,33 +93,6 @@
         }).finally(function () {
           if (btn) { btn.disabled = false; btn.textContent = label; }
         });
-      }
-
-      form.addEventListener('submit', function (e) {
-        e.preventDefault();
-        statusEl.className = 'kontakt-status';
-        statusEl.textContent = '';
-        if (btn) { btn.disabled = true; btn.textContent = 'Senden …'; }
-
-        // reCAPTCHA-Token holen, aber den Versand NIE blockieren: Wenn grecaptcha
-        // nicht antwortet (z. B. Domain nicht registriert), würde execute() sonst
-        // ewig hängen und der Button bliebe auf „Senden …". Daher Timeout-Netz und
-        // ein Guard, damit post() genau einmal läuft.
-        var sent = false;
-        var go = function (token) { if (!sent) { sent = true; post(token); } };
-
-        if (siteKey && window.grecaptcha && window.grecaptcha.execute) {
-          var timer = setTimeout(function () { go(null); }, 6000);
-          try {
-            grecaptcha.ready(function () {
-              grecaptcha.execute(siteKey, { action: 'submit' })
-                .then(function (token) { clearTimeout(timer); go(token); })
-                .catch(function () { clearTimeout(timer); go(null); });
-            });
-          } catch (err) { clearTimeout(timer); go(null); }
-        } else {
-          go(null);
-        }
       });
     })();
   </script>
