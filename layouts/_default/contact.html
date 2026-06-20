@@ -81,7 +81,10 @@
             statusEl.textContent = 'Danke! Deine Nachricht wurde gesendet — wir melden uns bald.';
           } else {
             return res.json().then(function (data) {
+              if (window.console) console.warn('Formspree-Fehler:', res.status, data);
+              // Formspree liefert entweder {errors:[{message}]} oder {error:"..."}
               var msg = (data && data.errors && data.errors.map(function (er) { return er.message; }).join(' ')) ||
+                (data && data.error) ||
                 'Senden fehlgeschlagen. Bitte versuche es später noch einmal.';
               statusEl.className = 'kontakt-status is-error';
               statusEl.textContent = msg;
