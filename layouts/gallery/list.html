@@ -15,17 +15,27 @@
   </section>
 
   {{/* Bilder kommen automatisch aus dem Media-Ordner assets/images/uploads/Galerie/.
-       Neue Uploads dort (Media Manager) erscheinen ohne Code-Änderung hier.
-       Optionale Bildunterschriften: Frontmatter `captions`, Schlüssel = Dateiname.
-       Fällt auf eine evtl. gepflegte `photos`-Liste zurück, falls der Ordner leer ist. */}}
+       os.ReadDir liest das echte Verzeichnis und ist damit case-sicher auf dem
+       Linux-CI-Runner (GitHub Pages) — resources.Match prüft gegen kleingeschriebene
+       Pfade und fand das großgeschriebene "Galerie" dort nicht. Neue Uploads über den
+       Media Manager erscheinen ohne Code-Änderung. Optionale Bildunterschriften:
+       Frontmatter `captions`, Schlüssel = Dateiname. Fällt auf eine evtl. gepflegte
+       `photos`-Liste zurück, falls der Ordner leer ist. */}}
   {{ $caps := .Params.captions }}
+  {{ $exts := slice ".jpg" ".jpeg" ".png" ".webp" ".gif" }}
+  {{ $dir := "assets/images/uploads/Galerie" }}
   {{ $photos := slice }}
-  {{ range sort (resources.Match "images/uploads/Galerie/*.{jpg,jpeg,JPG,JPEG,png,PNG,webp,WEBP,gif,GIF}") "RelPermalink" }}
-    {{ $name := path.Base .RelPermalink }}
-    {{ $cap := "" }}
-    {{ with $caps }}{{ $cap = index . $name | default "" }}{{ end }}
-    {{ $photos = $photos | append (dict "src" (printf "images/uploads/Galerie/%s" $name) "caption" $cap) }}
+  {{ if os.FileExists $dir }}
+    {{ range (os.ReadDir $dir) }}
+      {{ if and (not .IsDir) (in $exts (lower (path.Ext .Name))) }}
+        {{ $name := .Name }}
+        {{ $cap := "" }}
+        {{ with $caps }}{{ $cap = index . $name | default "" }}{{ end }}
+        {{ $photos = $photos | append (dict "src" (printf "images/uploads/Galerie/%s" $name) "caption" $cap) }}
+      {{ end }}
+    {{ end }}
   {{ end }}
+  {{ $photos = sort $photos "src" }}
   {{ if and (eq (len $photos) 0) .Params.photos }}
     {{ $photos = .Params.photos }}
   {{ end }}
