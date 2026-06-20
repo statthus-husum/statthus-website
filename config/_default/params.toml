@@ -31,7 +31,7 @@ post_layout = "full" # layout value (full, grid or list)
 sidebar = "right" # sidebar value (left, right or false)
 
 # contact form action
-contact_form_action = "#" # contact form works with [https://airform.io/] or [https://formspree.io]
+contact_form_action = "https://formspree.io/f/mqeorrly" # Formspree-Endpoint fürs Kontaktformular
 
 # google tag manager, see https://developers.google.com/tag-manager/
 google_tag_manager = "" # example: G-XXXXXXXXXX
@@ -69,8 +69,9 @@ email = "info@email.com"
 
 # Subscription — footer renders a CTA button linking to /newsletter/,
 # where the Brevo iframe lives. Set enable = false to hide the footer block.
+# Deaktiviert: Newsletter hat eine eigene Box/Seite, daher kein Footer-Block.
 [subscription]
-enable = true
+enable = false
 
 # snipcart for shop
 [snipcart]

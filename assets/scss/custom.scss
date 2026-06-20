@@ -699,6 +699,26 @@ header.position-sticky {
   }
 }
 
+// --- Kontaktformular: Status-/Rückmeldung ---
+.kontakt-status {
+  margin-top: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  line-height: 1.5;
+
+  &:empty { display: none; }
+
+  &.is-success {
+    background: #e6f4ea;
+    color: #1e7e34;
+  }
+  &.is-error {
+    background: rgba($primary, 0.08);
+    color: $primary;
+  }
+}
+
 // Event-data widget (event single sidebar)
 .event-data-widget {
   .event-data {

@@ -1,0 +1,99 @@
+{{ define "main" }}
+  <section class="section-sm">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="title-bordered mb-5 d-flex align-items-center">
+            <h1 class="h4 fw-normal">{{ .Title }}</h1>
+            <ul class="list-inline social-icons ms-auto me-3 d-none d-sm-block">
+              {{ range site.Params.social }}
+                <li class="list-inline-item">
+                  <a href="{{ .link | safeURL }}"><i class="{{ .icon }}"></i></a>
+                </li>
+              {{ end }}
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div class="content mb-5">
+            {{ .Content }}
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          {{/* Versand via Formspree (site.Params.contact_form_action). Standardmäßig
+               per fetch/AJAX, damit die Erfolgsmeldung inline erscheint und die Seite
+               nicht verlassen wird. Ohne JavaScript greift der normale POST. */}}
+          <form
+            id="kontakt-form"
+            method="POST"
+            action="{{ site.Params.contact_form_action }}"
+            class="row gy-4">
+            <div class="col-12 form-group">
+              <label class="mb-2" for="name">Name</label>
+              <input type="text" name="name" id="name" class="form-control" required />
+            </div>
+            <div class="col-12 form-group">
+              <label class="mb-2" for="email">E-Mail</label>
+              <input type="email" name="email" id="email" class="form-control" required />
+            </div>
+            <div class="col-12 form-group">
+              <label class="mb-2" for="message">Nachricht</label>
+              <textarea name="message" id="message" rows="6" class="form-control" required></textarea>
+            </div>
+            {{/* Honeypot gegen Spam — von Formspree unterstützt, für Menschen unsichtbar. */}}
+            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="d-none" aria-hidden="true" />
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary" data-label="Senden">Senden</button>
+            </div>
+            <div class="col-12">
+              <div id="kontakt-status" class="kontakt-status" role="status" aria-live="polite"></div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    (function () {
+      var form = document.getElementById('kontakt-form');
+      if (!form || !window.fetch) return; // ohne fetch: normaler POST-Fallback
+      var statusEl = document.getElementById('kontakt-status');
+      var btn = form.querySelector('button[type="submit"]');
+      var label = btn ? (btn.getAttribute('data-label') || btn.textContent) : 'Senden';
+
+      form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        statusEl.className = 'kontakt-status';
+        statusEl.textContent = '';
+        if (btn) { btn.disabled = true; btn.textContent = 'Senden …'; }
+
+        fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(function (res) {
+          if (res.ok) {
+            form.reset();
+            statusEl.className = 'kontakt-status is-success';
+            statusEl.textContent = 'Danke! Deine Nachricht wurde gesendet — wir melden uns bald.';
+          } else {
+            return res.json().then(function (data) {
+              var msg = (data && data.errors && data.errors.map(function (er) { return er.message; }).join(' ')) ||
+                'Senden fehlgeschlagen. Bitte versuche es später noch einmal.';
+              statusEl.className = 'kontakt-status is-error';
+              statusEl.textContent = msg;
+            });
+          }
+        }).catch(function () {
+          statusEl.className = 'kontakt-status is-error';
+          statusEl.textContent = 'Netzwerkfehler. Bitte versuche es später noch einmal.';
+        }).finally(function () {
+          if (btn) { btn.disabled = false; btn.textContent = label; }
+        });
+      });
+    })();
+  </script>
+{{ end }}

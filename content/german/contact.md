@@ -3,7 +3,8 @@ title: "Talk To Me Anytime :)"
 # description
 description: "This is meta description"
 layout: "contact"
-draft: false
+# Englische Theme-Beispielseite — durch die deutsche /kontakt/-Seite ersetzt.
+draft: true
 ---
 
 # Ask Us Anything <br> Or just Say Hi,
