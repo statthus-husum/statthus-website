@@ -110,7 +110,8 @@ jobs:
   # Configure in repo Settings:
   #   Variables: FTP_DEPLOY=true (enables this job), FTP_BASE_URL=https://your-ftp-domain
   #              optional FTP_SERVER_DIR (remote target dir, must end with /, default ./)
-  #   Secrets:   FTP_USERNAME, FTP_PASSWORD  (server hostname is set below)
+  #   Secrets:   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
+  #              (kept out of this public repo's git history on purpose)
   deploy-ftp:
     if: ${{ vars.FTP_DEPLOY == 'true' }}
     runs-on: ubuntu-latest
@@ -161,9 +162,9 @@ jobs:
             --baseURL "${{ vars.FTP_BASE_URL || '/' }}"
 
       - name: Deploy to FTP (FTPS)
-        uses: SamKirkland/FTP-Deploy-Action@4.3.5
+        uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          server: w01a9743.kasserver.com
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ftps
