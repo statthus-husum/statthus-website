@@ -1,8 +1,8 @@
 ---
-title: "Unterstützen"
-description: "Das staTThus unterstützen"
-layout: "sections"
-draft: false
+layout: sections
+title: Unterstützen
+description: Das staTThus unterstützen
+draft: true
 ---
 
-Du möchtest das staTThus-Projekt unterstützen? Es gibt verschiedene Wege — finanziell, mit deiner Zeit, durch Vernetzung oder Material. Hier ein Überblick.
+Das staTThus-Projekt freut sich über Unterstützung! Finanzielle Unterstützung ist natürlich immer willkommen. Spenden an den Förderverein helfen, das staTThus als Denkmal zu pflegen und zu erhalten.
