@@ -1,5 +1,5 @@
 ---
-title: Unser Neubau
+title: staTThus wächst
 description: |
   Unser Neubau
 image: images/uploads/Neubau/neubau_modell.png
@@ -15,10 +15,36 @@ Das Baugrundstück liegt in direkter Nachbarschaft zum staTThus und ist bereits 
 
 Die Architekten waren auch schon fleißig:
 
-Wir kommen mit großen Schritten voran und werden schon bald den ersten Spatenstich feiern können! 
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_architekten.jpg)
 
-Spätestens zum Wohnprojektetag am 25.4.2026 können wir euch genauere Infos präsentieren.
+Die Planung ist so gut wie abgeschlossen, wir konnten unseren ersten Spatenstich schon feiern.
 
 Und das Tolle für euch: Wir haben noch ein paar Wohnungen zu vergeben!
 
 Schaut euch einfach mal die aktuell noch freien Wohnungen an😉
+
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/grundriss_EG.jpg)
+
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/grundriss_OG1.jpg)
+
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/grundriss_OG4.jpg)
+
+\* Wir suchen Familien, Paare und/oder Alleinerziehende \*
+
+\* Auch für WG's suchen wir gemeinsame Lösungswege!\*
+
+\* Die Wohnungen sind von 75qm bis 80qm groß und haben zwischen 3 und 4 Zimmer \*
+
+\* Die freien Wohnungen sind gefördert und benötigen einen Wohnberechtigungsschein \*
+
+\* Du willst mit uns wachsen? Dann melde dich unter: neubau\@statthus-husum.de
+
+ 
+
+ Wir freuen uns auf euch!
+
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_menschen.jpg)
+
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_menschen2.jpg)
+
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_skizze.png)
