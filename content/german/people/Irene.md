@@ -1,5 +1,6 @@
 ---
 title: Irene
+image: images/uploads/Irene_Foto.jpg
 einstieg: >-
   Ich bin Irene Fröhlich und durch Interesse und Mitarbeit zu dem Projekt
   gestoßen.
