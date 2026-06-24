@@ -1,6 +1,6 @@
 ---
 title: Stefi
-image: images/uploads/Stefi_Foto.jpg
+image: images/uploads/Stefi_-_Bild.png
 einstieg: >-
   Ich bin Stefi und ich bin über meine Freundin Annika, die von Beginn an im
   Wohnprojekt wohnt, zum staTThus gekommen 
