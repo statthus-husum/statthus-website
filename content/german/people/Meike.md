@@ -33,9 +33,9 @@ menschliches: >
   Ich bin nicht immer so ausgeglichen und entspannt, wie ich vielleicht manchmal
   aussehe… 
 funfact: >-
-  Meine Zeitplanung so "ausbaufähig", dass ich um 15:45 immer noch denke ich
+  Meine Zeitplanung ist so "ausbaufähig", dass ich um 15:45 immer noch denke ich
   könnte pünktlich zu meiner Verabredung um 15:30 kommen und evtl. sogar noch
-  "schnell" einen Kuchen backen...
+  schnell einen Kuchen backen...
 passion: 'Backen, Malen, Nähen, Musik und Yoga'
 ---
 
