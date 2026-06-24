@@ -1,6 +1,6 @@
 ---
 title: Anne
-image: images/uploads/people/anne.png
+image: images/uploads/Anne_2.jpg
 einstieg: >-
   Ich in eine naturverbundene, freiheitsliebende Person, die vor zwei Jahren
   ihren Traum verwirklicht hat und vom Pfälzerwald ans Meer gezogen ist.
