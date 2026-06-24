@@ -1,6 +1,6 @@
 ---
 title: Renate
-image: images/uploads/staTThus_Vorstellungen_Instagram_Post.jpg
+image: images/uploads/Renate_-_Bild.jpg
 einstieg: |
   Ich bin Renate und bin aus Bayern nach Husum gezogen, um im Projekt zu wohnen.
 
