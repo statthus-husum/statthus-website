@@ -2,7 +2,7 @@
 title: Mitmachen
 weight: 20
 image_position: left
-draft: true
+draft: false
 build:
   render: never
   list: local
