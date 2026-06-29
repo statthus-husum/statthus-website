@@ -15,12 +15,20 @@
 {{- $hasW := false -}}
 {{- $align := "center" -}}
 
-{{- /* Größe aus URL-Fragment: #w=400 oder #width=400 */ -}}
+{{- /* Größe aus URL-Fragment:
+        #w=400      -> 400px
+        #w=60pct    -> 60%   (empfohlen, da % in URLs sonst kodiert werden muss)
+        #w=60%25    -> 60%   (echtes URL-Encoding von %)
+        #w=60%      -> 60%   (wird i. d. R. auch akzeptiert)
+*/ -}}
 {{- if strings.Contains $url "#" -}}
   {{- $parts := split $url "#" -}}
   {{- $url = index $parts 0 -}}
-  {{- $num := replaceRE `^(?:w|width)=` "" (index $parts 1) -}}
-  {{- if findRE `^[0-9]+$` $num -}}{{- $w = printf "%spx" $num -}}{{- $hasW = true -}}{{- end -}}
+  {{- $val := replaceRE `^(?:w|width)=` "" (index $parts 1) -}}
+  {{- $val = replaceRE `(?:%25|%|pct)$` "%" $val -}}
+  {{- if findRE `^[0-9]+$` $val -}}{{- $w = printf "%spx" $val -}}{{- $hasW = true -}}
+  {{- else if findRE `^[0-9]+%$` $val -}}{{- $w = $val -}}{{- $hasW = true -}}
+  {{- end -}}
 {{- end -}}
 
 {{- /* Größe/Ausrichtung aus dem Markdown-Titel */ -}}
