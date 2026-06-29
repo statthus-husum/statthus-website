@@ -50,6 +50,27 @@ p,
   line-height: 1.75;
 }
 
+// Bilder im Fließtext (Markdown ![]()): immer responsiv, nie über die Spalte
+// hinaus. Größe/Ausrichtung steuert der render-image-Hook per Klasse/Style.
+.content-img,
+.content img {
+  max-width: 100%;
+  height: auto;
+}
+img.align-center { display: block; margin-left: auto; margin-right: auto; }
+img.align-left   { float: left;  margin: 0.25rem 1.25rem 0.75rem 0; }
+img.align-right  { float: right; margin: 0.25rem 0 0.75rem 1.25rem; }
+
+// Auf kleinen Screens Floats aufheben: volle (begrenzte) Breite, zentriert.
+@media (max-width: 576px) {
+  img.align-left,
+  img.align-right {
+    float: none;
+    display: block;
+    margin: 0.5rem auto;
+  }
+}
+
 // --- Red Navbar with rounded corners ---
 .statthus-header {
   position: sticky;

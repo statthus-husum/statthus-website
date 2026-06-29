@@ -1,0 +1,41 @@
+{{- /*
+  Bild-Render-Hook für Markdown-Inhalte (![Alt](url "..."))
+  - Standard: responsiv (max. Spaltenbreite), lazy-geladen.
+  - Größe optional über den Markdown-Titel:
+        ![Alt](bild.jpg "400")        -> 400px breit, zentriert
+        ![Alt](bild.jpg "60%")        -> 60% breit, zentriert
+        ![Alt](bild.jpg "300 left")   -> 300px, links (Text umfließt)
+        ![Alt](bild.jpg "right 250")  -> 250px, rechts
+  - Alternativ in der URL (überlebt CMS-Bearbeitung):
+        ![Alt](bild.jpg#w=400)
+    Schlüsselwörter: left | right | center
+*/ -}}
+{{- $url := .Destination -}}
+{{- $w := "" -}}
+{{- $hasW := false -}}
+{{- $align := "center" -}}
+
+{{- /* Größe aus URL-Fragment: #w=400 oder #width=400 */ -}}
+{{- if strings.Contains $url "#" -}}
+  {{- $parts := split $url "#" -}}
+  {{- $url = index $parts 0 -}}
+  {{- $num := replaceRE `^(?:w|width)=` "" (index $parts 1) -}}
+  {{- if findRE `^[0-9]+$` $num -}}{{- $w = printf "%spx" $num -}}{{- $hasW = true -}}{{- end -}}
+{{- end -}}
+
+{{- /* Größe/Ausrichtung aus dem Markdown-Titel */ -}}
+{{- with .Title -}}
+  {{- range (split (lower .) " ") -}}
+    {{- $t := trim . " " -}}
+    {{- if findRE `^[0-9]+$` $t -}}{{- $w = printf "%spx" $t -}}{{- $hasW = true -}}
+    {{- else if findRE `^[0-9]+(px|rem|em|vw|%)$` $t -}}{{- $w = $t -}}{{- $hasW = true -}}
+    {{- else if eq $t "left" -}}{{- $align = "left" -}}
+    {{- else if eq $t "right" -}}{{- $align = "right" -}}
+    {{- else if eq $t "center" -}}{{- $align = "center" -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $cls := slice "content-img" -}}
+{{- if $hasW -}}{{- $cls = $cls | append (printf "align-%s" $align) -}}{{- end -}}
+<img src="{{ $url | safeURL }}" alt="{{ .Text }}" loading="lazy" class="{{ delimit $cls " " }}"{{ with $w }} style="width:{{ . }};"{{ end }}>
