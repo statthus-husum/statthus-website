@@ -20,4 +20,4 @@ So sieht es aus in unserer Nachbarschaft:
 Die schon erwähnten Kleidertauschparties haben sich mittlerweile in ganz Husum herumgesprochen. Die Idee ist natürlich nicht neu und auch nicht von uns - aber in Husum trifft sie einen Nerv: ohne Kommerz und Konsum sich an neuen Klamotten zu erfreuen, ganz einfach durch Tauschen - das ist einfach eine tolle Sache. Und dass der eigene Kleiderschrank mal wieder durchgeräumt wird, ist ja auch ganz schön. Zweimal im Jahr organisiert das Kreativteam im staTThus diese Aktion mit viel Aufwand und noch mehr Spaß.
 Übrigens treffen sich beim Tauschen alle Altersstufen, das ist lebendig und bereichend.![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/image1.jpg)
 
-![Plakat](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Quartier/Plakat.jpg#w=400)
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Quartier/Plakat.jpg#w=40pct)
