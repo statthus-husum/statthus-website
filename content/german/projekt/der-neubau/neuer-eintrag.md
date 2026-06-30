@@ -43,6 +43,6 @@ Wir freuen uns auf euch!
 
 ![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_menschen.jpg#w=40pct)
 
-![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_menschen2.jpg#w=40pct)
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_menschen2.jpg#w=60pct)
 
-![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_skizze.png#w=40pct)
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_skizze.png#w=100pct)
