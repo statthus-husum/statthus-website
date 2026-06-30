@@ -15,7 +15,8 @@ Das Baugrundstück liegt in direkter Nachbarschaft zum staTThus und ist bereits 
 
 Die Architekten waren auch schon fleißig:
 
-![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_architekten.jpg) <img src="https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_architekten.jpg" alt="Neubau Architekten" style="width:25%; height:auto;">
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_architekten.jpg#w=40pct)
+
 Die Planung ist so gut wie abgeschlossen, wir konnten unseren ersten Spatenstich schon feiern.
 
 Und das Tolle für euch: Wir haben noch ein paar Wohnungen zu vergeben!
