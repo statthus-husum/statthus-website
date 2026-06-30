@@ -1,5 +1,6 @@
 ---
 title: Sieglinde
+image: images/uploads/Sieglinde_Platzhalterin.png
 einstieg: >-
   Ich bin eine der ältesten Bewohnerinnen. Für mich stand es fest, dass ich
   NICHT in einem Altenheim enden wollte.
