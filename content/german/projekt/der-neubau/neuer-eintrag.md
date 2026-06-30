@@ -15,8 +15,7 @@ Das Baugrundstück liegt in direkter Nachbarschaft zum staTThus und ist bereits 
 
 Die Architekten waren auch schon fleißig:
 
-![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_architekten.jpg)
-
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_architekten.jpg) <img src="https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_architekten.jpg" alt="Neubau Architekten" style="width:25%; height:auto;">
 Die Planung ist so gut wie abgeschlossen, wir konnten unseren ersten Spatenstich schon feiern.
 
 Und das Tolle für euch: Wir haben noch ein paar Wohnungen zu vergeben!
@@ -37,11 +36,9 @@ Schaut euch einfach mal die aktuell noch freien Wohnungen an😉
 
 \* Die freien Wohnungen sind gefördert und benötigen einen Wohnberechtigungsschein \*
 
-\* Du willst mit uns wachsen? Dann melde dich unter: neubau\@statthus-husum.de
+\* Du willst mit uns wachsen? Dann melde dich unter: [neubau@statthus-husum.de](mailto:neubau@statthus-husum.de)
 
- 
-
- Wir freuen uns auf euch!
+Wir freuen uns auf euch!
 
 ![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_menschen.jpg)
 
