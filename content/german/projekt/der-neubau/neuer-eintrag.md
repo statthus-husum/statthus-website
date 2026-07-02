@@ -29,7 +29,7 @@ Schaut euch einfach mal die aktuell noch freien Wohnungen an😉
 
 ![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/grundriss_OG4.jpg)
 
-![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_menschen.jpg#w=40pct)
+![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_menschen.jpg "40%")
 
 ![](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/neubau_menschen2.jpg#w=60pct)
 
