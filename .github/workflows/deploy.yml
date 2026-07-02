@@ -113,7 +113,8 @@ jobs:
   #   Secrets:   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
   #              (kept out of this public repo's git history on purpose)
   deploy-ftp:
-    if: ${{ vars.FTP_DEPLOY == 'true' }}
+    # Temporarily disabled — restore to `if: ${{ vars.FTP_DEPLOY == 'true' }}` to re-enable
+    if: ${{ false }}
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: "0.152.2"
