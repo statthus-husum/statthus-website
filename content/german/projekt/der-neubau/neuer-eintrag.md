@@ -8,7 +8,7 @@ image_position: right
 draft: false
 cards:
   - title: Die Planung
-    link: content/german/projekt/die-planung/_index.md
+    link: null
 ---
 
 Das Baugrundstück liegt in direkter Nachbarschaft zum staTThus und ist bereits erschlossen.
