@@ -14,112 +14,109 @@
     </div>
   </section>
 
-  {{/* Bilder kommen automatisch aus dem Media-Ordner assets/images/uploads/Galerie/.
-       os.ReadDir liest das echte Verzeichnis und ist damit case-sicher auf dem
-       Linux-CI-Runner (GitHub Pages) — resources.Match prüft gegen kleingeschriebene
-       Pfade und fand das großgeschriebene "Galerie" dort nicht. Neue Uploads über den
-       Media Manager erscheinen ohne Code-Änderung. Optionale Bildunterschriften:
-       Frontmatter `captions`, Schlüssel = Dateiname. Fällt auf eine evtl. gepflegte
-       `photos`-Liste zurück, falls der Ordner leer ist. */}}
-  {{ $caps := .Params.captions }}
-  {{ $exts := slice ".jpg" ".jpeg" ".png" ".webp" ".gif" }}
-  {{ $dir := "assets/images/uploads/Galerie" }}
-  {{ $photos := slice }}
-  {{ if os.FileExists $dir }}
-    {{ range (os.ReadDir $dir) }}
-      {{ if and (not .IsDir) (in $exts (lower (path.Ext .Name))) }}
-        {{ $name := .Name }}
-        {{ $cap := "" }}
-        {{ with $caps }}{{ $cap = index . $name | default "" }}{{ end }}
-        {{ $photos = $photos | append (dict "src" (printf "images/uploads/Galerie/%s" $name) "caption" $cap) }}
-      {{ end }}
-    {{ end }}
-  {{ end }}
-  {{ $photos = sort $photos "src" }}
-  {{ if and (eq (len $photos) 0) .Params.photos }}
-    {{ $photos = .Params.photos }}
-  {{ end }}
-  {{ if $photos }}
-    <div class="photo-lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-hidden="true">
-      <button class="photo-lightbox-close" type="button" aria-label="Schließen">&times;</button>
-      <button class="photo-lightbox-nav photo-lightbox-prev" type="button" aria-label="Vorheriges Bild">&#8249;</button>
-      <button class="photo-lightbox-nav photo-lightbox-next" type="button" aria-label="Nächstes Bild">&#8250;</button>
-      <div class="photo-lightbox-content">
-        <img class="photo-lightbox-img" src="" alt="" />
-        <div class="photo-lightbox-caption"></div>
-      </div>
+  {{/* Die Bilder liegen NICHT mehr im Repo, sondern im S3-Media-Bucket,
+       ausgeliefert über site.Params.media_base_url (Caddy auf der CMS-VM,
+       siehe statthus-cms). Das CMS pflegt dort uploads/Galerie/manifest.json
+       bei jedem Upload/Delete fort — diese Seite lädt das Manifest client-
+       seitig und rendert daraus. Ein Galerie-Upload ist damit sofort live,
+       ganz ohne Website-Deploy. Optionale Bildunterschriften: Frontmatter
+       `captions`, Schlüssel = Dateiname. Im Marquee laufen die kleinen
+       _thumbs-Varianten; die Lightbox lädt das große Bild (data-full). */}}
+  {{ $mediaBase := site.Params.media_base_url | default "https://bilder.statthus-husum.de" }}
+
+  <div class="photo-lightbox" id="photoLightbox" role="dialog" aria-modal="true" aria-hidden="true">
+    <button class="photo-lightbox-close" type="button" aria-label="Schließen">&times;</button>
+    <button class="photo-lightbox-nav photo-lightbox-prev" type="button" aria-label="Vorheriges Bild">&#8249;</button>
+    <button class="photo-lightbox-nav photo-lightbox-next" type="button" aria-label="Nächstes Bild">&#8250;</button>
+    <div class="photo-lightbox-content">
+      <img class="photo-lightbox-img" src="" alt="" />
+      <div class="photo-lightbox-caption"></div>
     </div>
+  </div>
 
-    {{ $frames := slice "polaroid" "classic" "simple" }}
-    {{ $tilts := slice "tilt-a" "tilt-b" "tilt-c" "tilt-d" }}
-    {{/* Ab 3 Bildern läuft die Galerie (mit Wisch-Schwung scrollbar); darunter
-         statisch zentriert, damit ein einzelnes Bild nicht doppelt erscheint. */}}
-    {{ $scroll := ge (len $photos) 3 }}
-    <div class="photo-marquee{{ if not $scroll }} photo-marquee--static{{ end }}">
-      <div class="photo-marquee-track">
-        {{ range $i, $p := $photos }}
-          {{ $frame := index $frames (mod $i (len $frames)) }}
-          {{ $tilt := index $tilts (mod $i (len $tilts)) }}
-          <figure class="photo-frame photo-frame-{{ $frame }} {{ $tilt }}">
-            {{ partial "image.html" (dict "Src" $p.src "Alt" $p.caption "Class" "photo-frame-img") }}
-            {{ with $p.caption }}
-              <figcaption class="photo-caption">{{ . }}</figcaption>
-            {{ end }}
-          </figure>
-        {{ end }}
-        {{ if $scroll }}
-          {{/* Kopie für den nahtlosen Endlos-Lauf */}}
-          {{ range $i, $p := $photos }}
-            {{ $frame := index $frames (mod $i (len $frames)) }}
-            {{ $tilt := index $tilts (mod $i (len $tilts)) }}
-            <figure class="photo-frame photo-frame-{{ $frame }} {{ $tilt }}" aria-hidden="true">
-              {{ partial "image.html" (dict "Src" $p.src "Alt" "" "Class" "photo-frame-img") }}
-              {{ with $p.caption }}
-                <figcaption class="photo-caption">{{ . }}</figcaption>
-              {{ end }}
-            </figure>
-          {{ end }}
-        {{ end }}
-      </div>
-    </div>
+  <div class="photo-marquee" hidden>
+    <div class="photo-marquee-track"></div>
+  </div>
 
-    <script>
-      (function () {
-        const lightbox = document.getElementById('photoLightbox');
-        if (!lightbox) return;
-        const lbImg = lightbox.querySelector('.photo-lightbox-img');
-        const lbCap = lightbox.querySelector('.photo-lightbox-caption');
-        const lbClose = lightbox.querySelector('.photo-lightbox-close');
-        const lbPrev = lightbox.querySelector('.photo-lightbox-prev');
-        const lbNext = lightbox.querySelector('.photo-lightbox-next');
-        const lbContent = lightbox.querySelector('.photo-lightbox-content');
-        const marquee = document.querySelector('.photo-marquee');
-        const track = marquee && marquee.querySelector('.photo-marquee-track');
+  <script>
+    (function () {
+      {{/* safeJS: im <script>-Kontext würde Hugo den jsonify-Output sonst
+           nochmal als JS-String escapen (CAPTIONS wäre ein String statt
+           Objekt). Werte stammen aus params.toml/Frontmatter — vertrauens-
+           würdige Quellen. */}}
+      var MEDIA_BASE = {{ $mediaBase | jsonify | safeJS }};
+      var MANIFEST_URL = MEDIA_BASE + '/uploads/Galerie/manifest.json';
+      var CAPTIONS = {{ .Params.captions | default dict | jsonify | safeJS }};
 
-        // Eindeutige Bilder (ohne die Lauf-Kopien) als Navigationsliste.
-        const items = Array.prototype.map.call(
-          document.querySelectorAll('.photo-frame:not([aria-hidden="true"])'),
-          function (fig) {
-            const img = fig.querySelector('img');
-            const cap = fig.querySelector('.photo-caption');
-            return {
-              src: img ? (img.currentSrc || img.src) : '',
-              alt: img ? img.alt : '',
-              caption: cap ? cap.textContent.trim() : ''
-            };
-          }
-        );
+      var marquee = document.querySelector('.photo-marquee');
+      var track = marquee && marquee.querySelector('.photo-marquee-track');
+      var lightbox = document.getElementById('photoLightbox');
+      if (!marquee || !track || !lightbox) return;
+
+      var FRAMES = ['polaroid', 'classic', 'simple'];
+      var TILTS = ['tilt-a', 'tilt-b', 'tilt-c', 'tilt-d'];
+
+      function makeFigure(item, idx, hiddenCopy) {
+        var fig = document.createElement('figure');
+        fig.className =
+          'photo-frame photo-frame-' + FRAMES[idx % FRAMES.length] +
+          ' ' + TILTS[idx % TILTS.length];
+        if (hiddenCopy) fig.setAttribute('aria-hidden', 'true');
+        else fig.dataset.idx = String(idx);
+        var img = document.createElement('img');
+        img.className = 'photo-frame-img';
+        img.src = MEDIA_BASE + '/' + (item.thumb || item.src);
+        img.alt = item.caption || '';
+        img.loading = 'lazy';
+        img.decoding = 'async';
+        if (item.width && item.height) {
+          img.width = item.width;
+          img.height = item.height;
+        }
+        fig.appendChild(img);
+        if (item.caption) {
+          var cap = document.createElement('figcaption');
+          cap.className = 'photo-caption';
+          cap.textContent = item.caption;
+          fig.appendChild(cap);
+        }
+        return fig;
+      }
+
+      function init(items) {
+        if (!items.length) return;
+
+        // Ab 3 Bildern läuft die Galerie (mit Wisch-Schwung scrollbar);
+        // darunter statisch zentriert, damit ein einzelnes Bild nicht
+        // doppelt erscheint.
+        var scroll = items.length >= 3;
+        if (!scroll) marquee.classList.add('photo-marquee--static');
+        items.forEach(function (it, i) { track.appendChild(makeFigure(it, i, false)); });
+        if (scroll) {
+          // Kopie für den nahtlosen Endlos-Lauf
+          items.forEach(function (it, i) { track.appendChild(makeFigure(it, i, true)); });
+        }
+        marquee.hidden = false;
+
+        var lbImg = lightbox.querySelector('.photo-lightbox-img');
+        var lbCap = lightbox.querySelector('.photo-lightbox-caption');
+        var lbClose = lightbox.querySelector('.photo-lightbox-close');
+        var lbPrev = lightbox.querySelector('.photo-lightbox-prev');
+        var lbNext = lightbox.querySelector('.photo-lightbox-next');
+        var lbContent = lightbox.querySelector('.photo-lightbox-content');
+
         // Pfeile ausblenden, wenn es nur ein Bild gibt.
         if (items.length <= 1) {
           if (lbPrev) lbPrev.style.display = 'none';
           if (lbNext) lbNext.style.display = 'none';
         }
 
-        let cur = -1, lbOpen = false;
+        var cur = -1, lbOpen = false;
         function render() {
-          const it = items[cur]; if (!it) return;
-          lbImg.src = it.src;
-          lbImg.alt = it.alt || '';
+          var it = items[cur]; if (!it) return;
+          // Lightbox lädt das große Bild — nicht das Marquee-Thumb.
+          lbImg.src = MEDIA_BASE + '/' + it.src;
+          lbImg.alt = it.caption || '';
           lbCap.textContent = it.caption || '';
           lbCap.style.display = it.caption ? '' : 'none';
         }
@@ -132,11 +129,14 @@
           document.body.style.overflow = 'hidden';
         }
         function openFromFigure(fig) {
-          const img = fig.querySelector('img'); if (!img) return;
-          const src = img.currentSrc || img.src;
-          let i = items.findIndex(function (it) { return it.src === src; });
-          if (i < 0) i = 0;
-          openAt(i);
+          // Lauf-Kopien haben kein data-idx — dann über das Original mit
+          // gleicher Position (Kopie i entspricht Original i - items.length).
+          var idx = parseInt(fig.dataset.idx || '-1', 10);
+          if (idx < 0) {
+            var all = track.querySelectorAll('.photo-frame');
+            idx = Array.prototype.indexOf.call(all, fig) % items.length;
+          }
+          openAt(idx);
         }
         function closeLb() {
           lightbox.classList.remove('is-open');
@@ -163,27 +163,25 @@
 
         // Wisch im Lightbox: nach links = nächstes, nach rechts = vorheriges.
         if (lbContent) {
-          let sx = 0, sy = 0, swiping = false;
+          var sx = 0, sy = 0, swiping = false;
           lbContent.addEventListener('pointerdown', function (e) {
             swiping = true; sx = e.clientX; sy = e.clientY;
           });
           lbContent.addEventListener('pointerup', function (e) {
             if (!swiping) return;
             swiping = false;
-            const dx = e.clientX - sx, dy = e.clientY - sy;
+            var dx = e.clientX - sx, dy = e.clientY - sy;
             if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) step(dx < 0 ? 1 : -1);
           });
         }
 
         // ---- Auto-Lauf + Drag/Swipe der Galerie (nicht im statischen Modus) ----
-        const running = track && !marquee.classList.contains('photo-marquee--static');
-
-        if (running) {
-          const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-          const BASE = 36;            // Grund-Tempo px/s
-          let offset = 0, vel = reduce ? 0 : BASE, half = 0;
-          let dragging = false, hover = false;
-          let lastX = 0, lastT = 0, swipeVel = 0, moved = 0;
+        if (scroll) {
+          var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+          var BASE = 36;            // Grund-Tempo px/s
+          var offset = 0, vel = reduce ? 0 : BASE, half = 0;
+          var dragging = false, hover = false;
+          var lastX = 0, lastT = 0, swipeVel = 0, moved = 0;
 
           function measure() { half = track.scrollWidth / 2; }
           measure();
@@ -195,12 +193,12 @@
           function wrap() { if (half > 0) offset = ((offset % half) + half) % half; }
           function apply() { track.style.transform = 'translateX(' + (-offset) + 'px)'; }
 
-          let prev = null;
+          var prev = null;
           function tick(t) {
             if (prev === null) prev = t;
-            const dt = Math.min(0.05, (t - prev) / 1000); prev = t;
+            var dt = Math.min(0.05, (t - prev) / 1000); prev = t;
             if (!dragging && !hover && !lbOpen) { offset += vel * dt; wrap(); apply(); }
-            const target = reduce ? 0 : BASE;
+            var target = reduce ? 0 : BASE;
             vel += (target - vel) * Math.min(1, dt * 1.6);   // Schwung ebbt zum Grund-Tempo ab
             requestAnimationFrame(tick);
           }
@@ -217,11 +215,11 @@
           });
           marquee.addEventListener('pointermove', function (e) {
             if (!dragging) return;
-            const dx = e.clientX - lastX;
+            var dx = e.clientX - lastX;
             moved += Math.abs(dx);
             offset -= dx; wrap(); apply();
-            const now = e.timeStamp || performance.now();
-            const dtt = (now - lastT) / 1000;
+            var now = e.timeStamp || performance.now();
+            var dtt = (now - lastT) / 1000;
             if (dtt > 0) swipeVel = -dx / dtt;   // px/s in Lauf-Richtung
             lastX = e.clientX; lastT = now;
           });
@@ -233,8 +231,8 @@
             // Tipp (kein Ziehen) → Lightbox öffnen. setPointerCapture unterdrückt
             // das click-Event, daher hier per elementFromPoint auswerten.
             if (moved <= 8) {
-              const el = document.elementFromPoint(e.clientX, e.clientY);
-              const fig = el && el.closest ? el.closest('.photo-frame') : null;
+              var el = document.elementFromPoint(e.clientX, e.clientY);
+              var fig = el && el.closest ? el.closest('.photo-frame') : null;
               if (fig) openFromFigure(fig);
             }
           }
@@ -244,11 +242,33 @@
           });
         } else {
           // Statisch (wenige Bilder): einfacher Klick öffnet die Lightbox.
-          document.querySelectorAll('.photo-frame').forEach(function (fig) {
+          track.querySelectorAll('.photo-frame').forEach(function (fig) {
             fig.addEventListener('click', function () { openFromFigure(fig); });
           });
         }
-      })();
-    </script>
-  {{ end }}
+      }
+
+      fetch(MANIFEST_URL, { cache: 'no-cache' })
+        .then(function (res) {
+          if (!res.ok) throw new Error('manifest ' + res.status);
+          return res.json();
+        })
+        .then(function (data) {
+          var items = (data.images || []).map(function (img) {
+            return {
+              src: img.src,
+              thumb: img.thumb,
+              width: img.width,
+              height: img.height,
+              caption: (CAPTIONS && CAPTIONS[img.file]) || ''
+            };
+          });
+          init(items);
+        })
+        .catch(function () {
+          // Manifest nicht erreichbar → Galerie bleibt leer statt die
+          // Seite zu brechen (Titel + Einleitung bleiben sichtbar).
+        });
+    })();
+  </script>
 {{ end }}
