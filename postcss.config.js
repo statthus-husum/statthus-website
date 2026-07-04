@@ -27,6 +27,13 @@ const purgecss = require("@fullhuman/postcss-purgecss")({
     }
   },
   safelist: [
+    // Galerie: Figuren/Marquee entstehen client-seitig aus manifest.json
+    // (layouts/gallery/list.html) — die Klassen tauchen deshalb nicht in
+    // hugo_stats.json auf und würden sonst weggepurged. /^is-/ deckt die
+    // dynamischen Zustände ab (is-open, is-dragging).
+    /^photo-/,
+    /^tilt-/,
+    /^is-/,
     /dark/,
     /^swiper-/,
     /collapsing/,
