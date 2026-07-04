@@ -3,7 +3,7 @@
 # werden first-party über Caddy auf der CMS-VM ausgeliefert (statthus-cms
 # Caddyfile). Die Galerie lädt ihre Bildliste client-seitig von
 # <media_base_url>/uploads/Galerie/manifest.json.
-media_base_url = "https://bilder.statthus-husum.de"
+media_base_url = "https://schreibe.statthus-husum.de"
 
 # favicon — SVG with "TT" mark in brand red on cream
 favicon = "images/favicon.svg"

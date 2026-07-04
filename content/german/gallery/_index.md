@@ -3,7 +3,7 @@ title: "Galerie"
 description: "Bildergalerie"
 draft: false
 # Die Bilder kommen automatisch aus dem Media-Ordner "Galerie" im
-# S3-Media-Bucket (bilder.statthus-husum.de/uploads/Galerie/). Einfach
+# S3-Media-Bucket (schreibe.statthus-husum.de/uploads/Galerie/). Einfach
 # über den Media Manager im CMS hochladen — neue Bilder erscheinen SOFORT
 # auf dieser Seite (client-seitig aus manifest.json geladen, kein
 # Website-Deploy und keine Freigabe nötig).
