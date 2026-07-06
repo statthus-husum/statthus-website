@@ -12,4 +12,4 @@ captions:
   signal-2025-04-29-082415_011.jpeg: ""
 ---
 
-Eindrücke aus dem staTThus — Bauphase, Workshops, Feste und Begegnungen mit Nachbar:innen. Die Bilder ziehen langsam vorbei; mit dem Cursor darüber hält die Bewegung an.
+Eindrücke aus dem staTThus — Bauphase, Workshops, Feste und Begegnungen mit Nachbar:innen. Die Bilder ziehen langsam vorbei; mit dem Cursor darüber hält die Bewegung an. Ihr könnt aber auch swipen.
