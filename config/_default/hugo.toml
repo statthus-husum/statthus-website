@@ -24,7 +24,7 @@ capitalizeListTitles = false # capitalize list titles
 
 [[cascade]]
   layout = "sections"
-  [cascade._target]
+  [cascade.target]
     path = "/projekt/**"
     kind = "section"
 
@@ -32,7 +32,7 @@ capitalizeListTitles = false # capitalize list titles
   [cascade.build]
     render = "never"
     list = "local"
-  [cascade._target]
+  [cascade.target]
     path = "/projekt/**"
     kind = "page"
 

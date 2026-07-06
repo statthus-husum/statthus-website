@@ -1,7 +1,7 @@
 ################################### German language #####################################
 [de]
-languageName = "De"
-languageCode = "de-de"
+label = "De"
+locale = "de-de"
 contentDir = "content/german"
 weight = 1
 # footer content
