@@ -1247,3 +1247,8 @@ footer.section-sm {
     margin: 0 auto;
   }
 }
+
+// Globale Bild-Lightbox: anklickbare Bilder bekommen den Zoom-Cursor
+.lightbox-zoomable {
+  cursor: zoom-in;
+}

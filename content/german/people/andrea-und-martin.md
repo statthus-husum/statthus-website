@@ -1,5 +1,4 @@
 ---
-my-short-bio: Hallo wird sind's!
 title: Andrea und Martin
 image: images/uploads/people/andrea-und-martin.png
 einstieg: >
@@ -29,18 +28,4 @@ funfact: >
 passion: >
   Andrea: Zartbitter-Schokomousse macht mich fast immer für einen Moment
   glücklich!  Martin: Gutes Kochen und Essen
-email: johndoe@logbook.com
-social:
-  - icon: fab fa-facebook
-    link: 'https://facebook.com'
-  - icon: fab fa-twitter
-    link: 'https://twitter.com'
-  - icon: fab fa-github
-    link: 'https://github.com'
 ---
-
-Hello World
-
-ysfsf
-
-sdfsdfsd
