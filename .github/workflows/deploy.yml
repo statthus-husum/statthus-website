@@ -39,7 +39,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: "0.152.2"
+      HUGO_VERSION: "0.162.1"
       GO_VERSION: "1.20"
       NODE_VERSION: "20"
     steps:
@@ -116,7 +116,7 @@ jobs:
     if: ${{ vars.FTP_DEPLOY == 'true' }}
     runs-on: ubuntu-latest
     env:
-      HUGO_VERSION: "0.152.2"
+      HUGO_VERSION: "0.162.1"
       GO_VERSION: "1.20"
       NODE_VERSION: "20"
     steps:
