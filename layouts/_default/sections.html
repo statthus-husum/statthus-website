@@ -25,6 +25,20 @@
       {{ range .RegularPages.ByWeight }}
         {{ $pos := .Params.image_position | default "right" }}
         {{ $cards := .Params.cards }}
+        {{ $sectionLink := "" }}
+        {{ with .Params.link }}
+          {{ if hasPrefix . "content/" }}
+            {{ $logical := . | replaceRE `^content/[^/]+/` "/" | replaceRE `/_index\.md$` "/" | replaceRE `\.md$` "" }}
+            {{ with site.GetPage $logical }}
+              {{ $sectionLink = .RelPermalink }}
+            {{ else }}
+              {{ warnf "projekt-section: konnte Seite %q (logisch: %q) nicht aufloesen — Link wird ausgeblendet" . $logical }}
+            {{ end }}
+          {{ else }}
+            {{ $sectionLink = . | relLangURL }}
+          {{ end }}
+        {{ end }}
+        {{ $linkText := .Params.link_text | default (i18n "continue_reading") }}
         <article class="projekt-section row align-items-center mb-4">
           {{ if .Params.image }}
             <div class="col-md-5 mb-3 mb-md-0 {{ if eq $pos `left` }}order-md-1{{ else }}order-md-2{{ end }}">
@@ -35,11 +49,17 @@
             <div class="col-md-7 {{ if eq $pos `left` }}order-md-2{{ else }}order-md-1{{ end }}">
               <h2 class="projekt-section-header h3">{{ .Title }}</h2>
               <div class="projekt-section-body">{{ .Content }}</div>
+              {{ with $sectionLink }}
+                <a href="{{ . }}" class="btn btn-outline-primary btn-sm mt-2">{{ $linkText }}</a>
+              {{ end }}
             </div>
           {{ else }}
             <div class="col-12">
               <h2 class="projekt-section-header h3">{{ .Title }}</h2>
               <div class="projekt-section-body">{{ .Content }}</div>
+              {{ with $sectionLink }}
+                <a href="{{ . }}" class="btn btn-outline-primary btn-sm mt-2">{{ $linkText }}</a>
+              {{ end }}
             </div>
           {{ end }}
 

@@ -5,4 +5,4 @@ description: Das staTThus-Projekt
 draft: false
 ---
 
-Auf dieser Seite findest du [Hintergrund](https://hintergrund.de) und Aufbau unseres Wohnprojekts — Vision, Architektur, Gemeinschaftsleben. Die Inhalte werden über das CMS gepflegt; weitere Sektionen kommen laufend dazu.
+Auf dieser Seite findest du Hintergrund und Aufbau unseres Wohnprojekts — von der Geschichte des Gebäudes über unsere Arbeitsweise bis zur Finanzierung.

@@ -5,4 +5,4 @@ layout: "sections"
 draft: false
 ---
 
-Eine lebendige Hausgemeinschaft braucht klare Strukturen — und genug Raum für die persönlichen Bedürfnisse aller. Hier zeigen wir, wie wir Entscheidungen treffen und Aufgaben verteilen.
+Als sich selbst verwaltende Genossenschaft gibt es einige Vorschriften, wie wir uns organisieren müssen. Diese versuchen wir so gemeinschaftlich und konsensorientiert wie möglich umzusetzen. Wir haben einen Vorstand von zwei Personen sowie einen dreiköpfigen Aufsichtsrat. Das gesamte Plenum trifft sich regelmäßig. Von diesen Treffen werden Protokolle erstellt und in unserem für alle GenossInnen zugänglichen Blog veröffentlicht. So ist eine stetige Information der Gemeinschaft sichergestellt. Notwendig werdende Beschlüsse können im Umlaufverfahren abgestimmt oder konsensiert werden. In unserem internen Blog werden ebenfalls Ideen geäußert, man kann sich verabreden und austauschen. Die Arbeitsgruppen sind in ihrem eigenen Rhythmus aktiv, je nach Bedarf bilden sich neue.
