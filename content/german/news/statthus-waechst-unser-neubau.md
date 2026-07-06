@@ -1,6 +1,6 @@
 ---
 title: staTThus wächst - Unser Neubau
-date: 2027-10-01T00:00:00.000Z
+date: 2026-07-06T00:00:00.000Z
 description: staTThus wächst - Unser Neubau
 images:
   - images/uploads/Baustelle-2026-07-02.jpg
