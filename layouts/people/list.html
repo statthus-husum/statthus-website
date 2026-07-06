@@ -7,6 +7,9 @@
           <div class="title-bordered">
             <h1 class="h2">{{ .Title }}</h1>
           </div>
+          {{ with .Content }}
+            <div class="content mt-4">{{ . }}</div>
+          {{ end }}
         </div>
       </div>
     </div>
