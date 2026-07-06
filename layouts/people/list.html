@@ -18,7 +18,7 @@
   <!-- people list content -->
   <section class="section">
     <div class="container">
-      <div class="row">
+      <div class="row" id="peopleCards">
         {{ $pages := .RegularPages }}
         {{ if $pages }}
           {{ range $pages }}
@@ -78,4 +78,20 @@
       </div>
     </div>
   </section>
+
+  {{/* Karten bei jedem Aufruf zufällig mischen (Fisher-Yates). Das Skript
+       steht direkt hinter dem Karten-Container und läuft vor dem ersten
+       Paint — kein sichtbares Umsortieren. */}}
+  <script>
+    (function () {
+      var row = document.getElementById('peopleCards');
+      if (!row) return;
+      var cards = Array.prototype.slice.call(row.children);
+      for (var i = cards.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var t = cards[i]; cards[i] = cards[j]; cards[j] = t;
+      }
+      cards.forEach(function (c) { row.appendChild(c); });
+    })();
+  </script>
 {{ end }}
