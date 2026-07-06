@@ -45,10 +45,10 @@
                 <div class="projekt-card-body">
                   <div class="post-card-meta">
                     <span class="post-card-section post-card-section-{{ $section }}">{{ index $label $section }}</span>
-                    <span class="post-card-date">{{ time.Format ":date_long" .Date }}</span>
+                    {{ if not .Date.IsZero }}<span class="post-card-date">{{ time.Format ":date_long" .Date }}</span>{{ end }}
                   </div>
                   <h3 class="projekt-card-title">
-                    {{ if eq $section "people" }}Neue Nachbar:innen: {{ end }}{{ .Title }}
+                    {{ if eq $section "people" }}Menschen im staTThus: {{ end }}{{ .Title }}
                   </h3>
                   {{ with .Params.description }}
                     <p class="projekt-card-desc">{{ . }}</p>
@@ -68,8 +68,8 @@
           <div class="post-teaser-list">
             {{ range $paginator.Pages }}
               <a href="{{ .RelPermalink }}" class="post-teaser-item">
-                <span class="post-teaser-date">{{ time.Format ":date_long" .Date }}</span>
-                <span class="post-teaser-title">{{ if eq .Section "people" }}Neue Nachbar:innen: {{ end }}{{ .Title }}</span>
+                {{ if not .Date.IsZero }}<span class="post-teaser-date">{{ time.Format ":date_long" .Date }}</span>{{ end }}
+                <span class="post-teaser-title">{{ if eq .Section "people" }}Menschen im staTThus: {{ end }}{{ .Title }}</span>
                 <span class="post-teaser-desc">{{ .Summary | plainify | truncate 80 }}</span>
               </a>
             {{ end }}

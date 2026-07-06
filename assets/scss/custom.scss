@@ -163,9 +163,12 @@ header.position-sticky {
 
 // Homepage post cards: force uniform image height via fixed aspect ratio.
 // Scoped to .home-post-card so people-list portraits keep their natural
-// aspect ratio.
+// aspect ratio. object-fit: contain statt cover, damit das ganze Bild
+// sichtbar bleibt (nichts abgeschnitten); Letterbox-Ränder verschmelzen
+// mit dem Karten-Hintergrund ($cream).
 .home-post-card .card-img-top {
   aspect-ratio: 16 / 9;
+  background-color: $cream;
 
   a, picture, img {
     display: block;
@@ -174,7 +177,7 @@ header.position-sticky {
   }
 
   img {
-    object-fit: cover;
+    object-fit: contain;
   }
 }
 

@@ -20,7 +20,7 @@
               <div class="projekt-card-body">
                 <div class="post-card-meta">
                   <span class="post-card-section post-card-section-news">News</span>
-                  <span class="post-card-date">{{ time.Format ":date_long" .Date }}</span>
+                  {{ if not .Date.IsZero }}<span class="post-card-date">{{ time.Format ":date_long" .Date }}</span>{{ end }}
                 </div>
                 <h3 class="projekt-card-title">{{ .Title }}</h3>
                 {{ with .Params.description }}

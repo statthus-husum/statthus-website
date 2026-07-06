@@ -7,6 +7,6 @@ weight: 2
 draft: false
 ---
 
-Schaut euch einfach mal die aktuell noch freien Wohnungen an 😉
+Schaut euch einfach mal die aktuell noch freien Wohnungen an 😉 (EG rechts und 1. Stockwerk beide)
 
 ![Grundriss Obergeschoss 1](https://raw.githubusercontent.com/statthus-husum/statthus-website/staging/assets/images/uploads/Neubau/grundriss_OG1.jpg)

@@ -6,7 +6,7 @@
   <div class="post-teaser-list post-teaser-list-sm">
     {{ range first 3 $events }}
     <a href="{{ .RelPermalink }}" class="post-teaser-item">
-      <span class="post-teaser-date">{{ with .Params.event_date }}{{ dateFormat "02.01." . }}{{ else }}{{ .Date.Format "02.01." }}{{ end }}</span>
+      {{ with .Params.event_date }}<span class="post-teaser-date">{{ dateFormat "02.01." . }}</span>{{ else }}{{ if not .Date.IsZero }}<span class="post-teaser-date">{{ .Date.Format "02.01." }}</span>{{ end }}{{ end }}
       <span class="post-teaser-title">{{ .Title }}</span>
     </a>
     {{ end }}
