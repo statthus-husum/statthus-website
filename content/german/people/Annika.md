@@ -1,6 +1,5 @@
 ---
 title: Annika
-draft: true
 image: >-
   https://schreibe.statthus-husum.de/uploads/staTThus_Vorstellungen_Instagram_Post_20260705_092831_0000.png
 einstieg: >
