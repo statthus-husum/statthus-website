@@ -1,0 +1,57 @@
+{{/* Menü-Fallback für Browser, in denen Bootstraps data-API nicht greift
+     (z. B. Orion mobil): Burger-Button und Dropdowns funktionieren dann
+     trotzdem. Der Handler läuft in der Capture-Phase (merkt sich den
+     Zustand VOR Bootstraps Reaktion) und schaltet nur selbst um, wenn
+     Bootstrap nach 250 ms nichts verändert hat — keine Doppel-Toggles,
+     wenn Bootstrap normal arbeitet. */}}
+<script>
+  (function () {
+    function expanded(el, on) {
+      el.setAttribute('aria-expanded', on ? 'true' : 'false');
+    }
+
+    document.addEventListener(
+      'click',
+      function (e) {
+        var closest = e.target.closest ? e.target.closest.bind(e.target) : null;
+        if (!closest) return;
+
+        // Burger-Button (Navbar auf/zu)
+        var toggler = closest('[data-bs-toggle="collapse"]');
+        if (toggler) {
+          var sel = toggler.getAttribute('data-bs-target') || toggler.getAttribute('href');
+          var target = sel && document.querySelector(sel);
+          if (!target) return;
+          var was = target.classList.contains('show') || target.classList.contains('collapsing');
+          setTimeout(function () {
+            var is = target.classList.contains('show') || target.classList.contains('collapsing');
+            if (is !== was) return; // Bootstrap hat reagiert
+            var open = target.classList.toggle('show');
+            toggler.classList.toggle('collapsed', !open);
+            expanded(toggler, open);
+          }, 250);
+          return;
+        }
+
+        // Dropdowns (Über uns, Aktuelles)
+        var dd = closest('[data-bs-toggle="dropdown"]');
+        if (dd) {
+          if (dd.tagName === 'A') e.preventDefault(); // kein Sprung nach oben
+          var menu = dd.nextElementSibling;
+          if (!menu || !menu.classList.contains('dropdown-menu')) return;
+          var wasOpen = menu.classList.contains('show');
+          setTimeout(function () {
+            if (menu.classList.contains('show') !== wasOpen) return; // Bootstrap hat reagiert
+            document.querySelectorAll('.dropdown-menu.show').forEach(function (m) {
+              if (m !== menu) m.classList.remove('show');
+            });
+            var open = menu.classList.toggle('show');
+            dd.classList.toggle('show', open);
+            expanded(dd, open);
+          }, 250);
+        }
+      },
+      true
+    );
+  })();
+</script>
