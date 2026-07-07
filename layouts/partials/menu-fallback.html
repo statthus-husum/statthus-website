@@ -22,10 +22,16 @@
           var sel = toggler.getAttribute('data-bs-target') || toggler.getAttribute('href');
           var target = sel && document.querySelector(sel);
           if (!target) return;
-          var was = target.classList.contains('show') || target.classList.contains('collapsing');
+          var wasShow = target.classList.contains('show');
           setTimeout(function () {
-            var is = target.classList.contains('show') || target.classList.contains('collapsing');
-            if (is !== was) return; // Bootstrap hat reagiert
+            // Bootstrap hat reagiert, wenn .show gewechselt hat ODER gerade
+            // die Auf-/Zuklapp-Animation (.collapsing) läuft. Beim Schließen
+            // ist .show sofort weg, beim Öffnen kommt es erst nach der
+            // Animation — .collapsing deckt beide Übergänge ab.
+            var reacted =
+              target.classList.contains('collapsing') ||
+              target.classList.contains('show') !== wasShow;
+            if (reacted) return;
             var open = target.classList.toggle('show');
             toggler.classList.toggle('collapsed', !open);
             expanded(toggler, open);
