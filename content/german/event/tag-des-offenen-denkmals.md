@@ -28,4 +28,4 @@ In diesem Jahr wird es einen besonderen Programmpunkt im neu gestalteten „Glas
 
 Das sind geladene Gäste wie z.B. Stadtverordnete, MitarbeiterInnen der Verwaltung, weitere BewohnerInnen in der näheren Nachbarschaft, die in denkmalgeschützten Häusern leben und viele InteressentInnen, die immer wieder ihr Interesse daran bekundet haben, die Entwicklung des Projektes kennenzulernen und zu begleiten.
 
-Folgende Fragen entstehen beim Nachdenken über das Thema Netzwerke: Was bedeuten Dir/Ihnen denkmalgeschützte Gebäude? Welchen Nutzen haben sie für die Gemeinschaft?Wie prägen Wohnprojekte und oder Denkmale ihre Umgebung? Welche Erfahrungen gibt es zum Wohnen im Denkmal? Was muss passieren, um Häuser zu erhalten? Welche Rolle spielt der Neubau? Welche Rolle spielt die kommunale Ebene?
+Folgende Fragen entstehen beim Nachdenken über das Thema Netzwerke: Was bedeuten Dir/Ihnen denkmalgeschützte Gebäude? Welchen Nutzen haben sie für die Gemeinschaft?Wie prägen Wohnprojekte und oder Denkmale ihre Umgebung? Welche Erfahrungen gibt es zum Wohnen im Denkmal? Was muss passieren, um Häuser zu erhalten? Welche Rolle spielt der Neubau? Welche Rolle spielt die kommunale Ebene? 
