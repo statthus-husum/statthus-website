@@ -14,7 +14,7 @@ tags:
   - offener Stammtisch
 ---
 
-An jedem dritten Samstag im Monat sind Interessierte herzlich eingeladen uns um 15 Uhr zu besuchen und mit uns in den Austausch zu kommen.
+An **jedem dritten Samstag im Monat** sind Interessierte herzlich eingeladen uns **um 15 Uhr** zu besuchen und mit uns in den Austausch zu kommen.
 
 Bitte meldet euch unter [info@statthus-husum.de](mailto:info@statthus-husum.de) an.
 
