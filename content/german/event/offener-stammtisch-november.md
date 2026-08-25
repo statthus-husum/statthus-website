@@ -8,8 +8,7 @@ event_date: 2026-11-21T00:00:00.000Z
 event_end: 2026-11-21T00:00:00.000Z
 event_location: Gemeinschaftsraum
 themen: []
-flags:
-  - top-post
+flags: []
 tags:
   - offener Stammtisch
 ---
