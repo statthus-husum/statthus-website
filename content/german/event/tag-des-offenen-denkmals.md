@@ -1,6 +1,6 @@
 ---
 title: Tag des offenen Denkmals im staTThus
-date: 2026-02-10T00:00:00.000Z
+date: 2026-08-30T00:00:00.000Z
 description: Am Tag des offenen Denkmals öffnen wir unsere Türen für alle Interessierten.
 images:
   - 'https://schreibe.statthus-husum.de/uploads/11.JPG'
