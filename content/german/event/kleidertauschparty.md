@@ -7,8 +7,7 @@ images:
 event_date: 2026-10-18T00:00:00.000Z
 event_end: 2026-10-18T00:00:00.000Z
 event_location: Pestalozziring 11
-themen:
-  - wir-im-quartier
+themen: []
 flags:
   - top-post
 tags:

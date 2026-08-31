@@ -7,8 +7,7 @@ images:
 event_date: 2026-09-13T09:00:00.000Z
 event_end: 2026-09-13T15:00:00.000Z
 event_location: 'staTThus, Haupteingang'
-themen:
-  - wir-im-quartier
+themen: []
 flags:
   - top-post
 tags:
