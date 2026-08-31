@@ -3,7 +3,10 @@ title: Kleidertauschparty ab 14 Uhr
 date: 2026-08-25T00:00:00.000Z
 description: Es wird wieder getauscht!
 images:
-  - 'https://schreibe.statthus-husum.de/uploads/IMG_3485.jpeg'
+  - 'https://schreibe.statthus-husum.de/uploads/IMG_20260831_131129_365.jpg'
+  - ''
+  - ''
+  - ''
 event_date: 2026-10-18T00:00:00.000Z
 event_end: 2026-10-18T00:00:00.000Z
 event_location: Pestalozziring 11
