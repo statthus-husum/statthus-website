@@ -1,6 +1,6 @@
 ---
 title: Das Denkmal
-weight: 10
+weight: 40
 image: images/uploads/08e6f3ec-6e93-45e9-a294-2616e7a6bbfc1.jpg
 image_position: right
 link: content/german/projekt/das-denkmal/_index.md
