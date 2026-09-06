@@ -6,9 +6,11 @@
 # 3. (Optional) Configure custom domain in Settings > Pages
 #
 # The workflow triggers on:
-# - Push to main branch → both targets (GitHub Pages + FTP)
-# - Manual dispatch via GitHub UI → choose target: both | pages | ftp
-#   (e.g. re-upload the FTP site without touching Pages)
+# - Push to main branch → ONLY the preview site on GitHub Pages
+# - Manual dispatch (GitHub UI or the Freigabe app's "Website per FTP
+#   hochladen" button) → target: ftp (default) | pages | both
+#   The live site is never uploaded automatically: check the preview first,
+#   then trigger the FTP upload by hand.
 
 name: Deploy Hugo site to GitHub Pages
 
@@ -19,13 +21,13 @@ on:
   workflow_dispatch:
     inputs:
       target:
-        description: "Was deployen?"
+        description: "Was deployen? (ftp = Live-Site hochladen)"
         type: choice
-        default: both
+        default: ftp
         options:
-          - both
-          - pages
           - ftp
+          - pages
+          - both
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -44,9 +46,9 @@ defaults:
   run:
     shell: bash
 
-# On push, `inputs.target` is empty → every "!= …" check below is true and
-# both targets run. On manual dispatch the chosen target gates the jobs;
-# `deploy` follows `build` automatically via `needs`.
+# Push → only the Pages preview (build + deploy). Manual dispatch → the chosen
+# target; `deploy` follows `build` automatically via `needs`. The FTP job
+# never runs on push.
 jobs:
   # Build job
   build:
@@ -119,7 +121,8 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-  # FTP deploy job — runs in PARALLEL with the Pages build/deploy (no `needs`).
+  # FTP deploy job — manual only (workflow_dispatch, target ftp|both). Runs in
+  # PARALLEL with the Pages build/deploy when both are selected (no `needs`).
   # Builds Hugo with the FTP site's own base URL and uploads ./public via FTPS.
   # Configure in repo Settings:
   #   Variables: FTP_DEPLOY=true (enables this job), FTP_BASE_URL=https://your-ftp-domain
@@ -127,7 +130,7 @@ jobs:
   #   Secrets:   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
   #              (kept out of this public repo's git history on purpose)
   deploy-ftp:
-    if: ${{ vars.FTP_DEPLOY == 'true' && (github.event_name != 'workflow_dispatch' || inputs.target != 'pages') }}
+    if: ${{ vars.FTP_DEPLOY == 'true' && github.event_name == 'workflow_dispatch' && inputs.target != 'pages' }}
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: "0.162.1"
