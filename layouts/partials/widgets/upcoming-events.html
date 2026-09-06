@@ -5,7 +5,7 @@
 <div class="widget">
   <h5 class="widget-title"><span>Nächste Veranstaltungen</span></h5>
   <div class="post-teaser-list post-teaser-list-sm">
-    {{ range first 3 $events }}
+    {{ range first 5 $events }}
     <a href="{{ .RelPermalink }}" class="post-teaser-item">
       {{ with .Params.event_date }}<span class="post-teaser-date">{{ dateFormat "02.01." (partial "functions/event-time" .) }}</span>{{ else }}{{ if not .Date.IsZero }}<span class="post-teaser-date">{{ .Date.Format "02.01." }}</span>{{ end }}{{ end }}
       <span class="post-teaser-title">{{ .Title }}</span>
