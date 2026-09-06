@@ -4,8 +4,7 @@ date: 2026-08-25T00:00:00.000Z
 description: Kommt vorbei und lernt uns bei Kaffee und Kuchen kennen!
 images:
   - 'https://schreibe.statthus-husum.de/uploads/Offener_Stammtisch.svg'
-event_date: 2026-11-21T00:00:00.000Z
-event_end: 2026-11-21T00:00:00.000Z
+event_date: 2026-11-21T14:00:00.000Z
 event_location: Gemeinschaftsraum
 themen: []
 flags: []
