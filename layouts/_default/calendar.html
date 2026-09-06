@@ -111,7 +111,7 @@
                 {{ range $paginator.Pages }}
                   <a href="{{ .RelPermalink }}" class="post-teaser-item">
                     <span class="post-teaser-date">
-                      {{ with .Params.event_date }}{{ dateFormat "02.01.2006" . }}{{ else }}{{ .Date.Format "02.01.2006" }}{{ end }}
+                      {{ with .Params.event_date }}{{ dateFormat "02.01.2006" (partial "functions/event-time" .) }}{{ else }}{{ .Date.Format "02.01.2006" }}{{ end }}
                     </span>
                     <span class="post-teaser-title">{{ .Title }}</span>
                     {{ with .Params.event_location }}<span class="post-teaser-desc">{{ . }}</span>{{ end }}
@@ -136,7 +136,7 @@
 const calEvents = [
 {{- range $i, $e := $events -}}
   {{- if $i }},{{ end -}}
-  {"title":"{{ .Title }}","url":"{{ .RelPermalink }}","date":"{{ with .Params.event_date }}{{ dateFormat "2006-01-02" . }}{{ else }}{{ .Date.Format "2006-01-02" }}{{ end }}","location":"{{ default "" .Params.event_location }}"}
+  {"title":"{{ .Title }}","url":"{{ .RelPermalink }}","date":"{{ with .Params.event_date }}{{ dateFormat "2006-01-02" (partial "functions/event-time" .) }}{{ else }}{{ .Date.Format "2006-01-02" }}{{ end }}","location":"{{ default "" .Params.event_location }}"}
 {{- end -}}
 ];
 

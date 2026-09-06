@@ -1,15 +1,16 @@
 {{ if .Params.event_date }}
+{{ $start := partial "functions/event-time" .Params.event_date }}
 <div class="widget event-data-widget">
   <h5 class="widget-title"><span>Termin</span></h5>
   <dl class="event-data mb-0">
     <dt>Datum</dt>
-    <dd>{{ time.Format ":date_long" .Params.event_date }}</dd>
+    <dd>{{ time.Format ":date_long" $start }}</dd>
 
     <dt>Uhrzeit</dt>
     <dd>
-      {{ time.Format "15:04" .Params.event_date }}
+      {{ time.Format "15:04" $start }}
       {{ with .Params.event_end }}
-        – {{ time.Format "15:04" . }}
+        – {{ time.Format "15:04" (partial "functions/event-time" .) }}
       {{ end }}
        Uhr
     </dd>

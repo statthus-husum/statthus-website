@@ -1,0 +1,13 @@
+{{- /*
+  Liefert einen Frontmatter-Zeitwert als time.Time in Europe/Berlin.
+
+  Tina speichert Datum + Uhrzeit als UTC-ISO-String ("…T12:00:00.000Z").
+  Hugo formatiert einen Zeitwert in dessen eigener Zone; das timeZone aus
+  der Config greift nur beim Parsen von Angaben OHNE Zonen-Info. Ohne
+  Umrechnung stünde also 12:00 statt 14:00 auf der Seite. Die Eingabe
+  darf string oder time.Time sein — YAML liefert je nach Quoting beides.
+
+  Aufruf: {{ $t := partial "functions/event-time" .Params.event_date }}
+*/ -}}
+{{- $loc := (time.AsTime "2000-01-01T00:00:00" "Europe/Berlin").Location -}}
+{{- return ((time.AsTime .).In $loc) -}}

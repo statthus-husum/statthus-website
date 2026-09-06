@@ -12,7 +12,13 @@
           <h1 class="h2">{{ .Title }}</h1>
         </div>
         <ul class="list-inline post-meta mb-3">
-          <li class="list-inline-item">{{ time.Format ":date_long" .PublishDate }}</li>
+          {{/* Kopfzeile zeigt den Termin (mit Uhrzeit), nicht das Veröffentlichungsdatum */}}
+          {{ with .Params.event_date }}
+            {{ $start := partial "functions/event-time" . }}
+            <li class="list-inline-item">{{ time.Format ":date_long" $start }}, {{ time.Format "15:04" $start }} Uhr</li>
+          {{ else }}
+            <li class="list-inline-item">{{ time.Format ":date_long" .PublishDate }}</li>
+          {{ end }}
         </ul>
       </div>
     </div>
