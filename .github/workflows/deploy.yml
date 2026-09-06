@@ -6,8 +6,9 @@
 # 3. (Optional) Configure custom domain in Settings > Pages
 #
 # The workflow triggers on:
-# - Push to main branch
-# - Manual dispatch via GitHub UI
+# - Push to main branch → both targets (GitHub Pages + FTP)
+# - Manual dispatch via GitHub UI → choose target: both | pages | ftp
+#   (e.g. re-upload the FTP site without touching Pages)
 
 name: Deploy Hugo site to GitHub Pages
 
@@ -16,6 +17,15 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      target:
+        description: "Was deployen?"
+        type: choice
+        default: both
+        options:
+          - both
+          - pages
+          - ftp
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
@@ -34,9 +44,13 @@ defaults:
   run:
     shell: bash
 
+# On push, `inputs.target` is empty → every "!= …" check below is true and
+# both targets run. On manual dispatch the chosen target gates the jobs;
+# `deploy` follows `build` automatically via `needs`.
 jobs:
   # Build job
   build:
+    if: ${{ github.event_name != 'workflow_dispatch' || inputs.target != 'ftp' }}
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: "0.162.1"
@@ -113,7 +127,7 @@ jobs:
   #   Secrets:   FTP_SERVER, FTP_USERNAME, FTP_PASSWORD
   #              (kept out of this public repo's git history on purpose)
   deploy-ftp:
-    if: ${{ vars.FTP_DEPLOY == 'true' }}
+    if: ${{ vars.FTP_DEPLOY == 'true' && (github.event_name != 'workflow_dispatch' || inputs.target != 'pages') }}
     runs-on: ubuntu-latest
     env:
       HUGO_VERSION: "0.162.1"
