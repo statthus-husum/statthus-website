@@ -8,7 +8,10 @@
     {{ partial "post-thumbnail.html" (dict "Page" . "Alt" "..." "Class" "...") }}
 */}}
 {{ $page := .Page }}
-{{ $alt := .Alt | default "post-thumb" }}
+{{/* Kein Platzhalter-Alt: die Lightbox zeigt den Alt-Text als Bildunterschrift,
+     und „post-thumb“ stand dann groß unter dem Bild. Leer ist korrekt für
+     rein dekorative Vorschaubilder. */}}
+{{ $alt := .Alt | default "" }}
 {{ $class := .Class | default "w-100" }}
 
 {{ $src := "" }}
