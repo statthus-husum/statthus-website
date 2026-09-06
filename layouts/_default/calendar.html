@@ -104,7 +104,10 @@
           <!-- List view -->
           <div class="calendar-view-list">
             {{ $events := where .Site.RegularPages "Section" "event" }}
-            {{ $sorted := ($events.ByParam "event_date").Reverse }}
+            {{/* Kommende Termine zuerst (nächster oben), danach vergangene (jüngster oben) */}}
+            {{ $upcoming := partial "functions/feed-sorted" (dict "Pages" $events "Order" "asc" "Filter" "upcoming") }}
+            {{ $past := partial "functions/feed-sorted" (dict "Pages" $events "Order" "desc" "Filter" "past") }}
+            {{ $sorted := $upcoming | append $past }}
             {{ $paginator := .Paginate $sorted 15 }}
             {{ if $paginator.Pages }}
               <div class="post-teaser-list">

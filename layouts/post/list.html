@@ -9,7 +9,8 @@
       </div>
     </div>
 
-    {{ $feed := where site.RegularPages "Section" "in" (slice "event" "news" "people") }}
+    {{/* Termine gehören in den Kalender, nicht in den News-Feed */}}
+    {{ $feed := where site.RegularPages "Section" "in" (slice "news" "people") }}
     {{ if $feed }}
       <div class="row">
         <div class="col-12 mb-3">
@@ -30,10 +31,7 @@
         <div class="post-view-cards row projekt-card-row">
           {{ range $paginator.Pages }}
             {{ $section := .Section }}
-            {{ $label := dict "news" "News" "event" "Termin" "people" "Menschen" }}
-            {{/* Termine zeigen das Veranstaltungsdatum, nicht das Veröffentlichungsdatum */}}
-            {{ $shown := .Date }}
-            {{ if and (eq $section "event") .Params.event_date }}{{ $shown = partial "functions/event-time" .Params.event_date }}{{ end }}
+            {{ $label := dict "news" "News" "people" "Menschen" }}
             <div class="col-12 col-md-6 col-lg-4 mb-4">
               <a class="projekt-card post-card h-100" href="{{ .RelPermalink }}">
                 <div class="projekt-card-image">
@@ -48,7 +46,7 @@
                 <div class="projekt-card-body">
                   <div class="post-card-meta">
                     <span class="post-card-section post-card-section-{{ $section }}">{{ index $label $section }}</span>
-                    {{ if not $shown.IsZero }}<span class="post-card-date">{{ time.Format ":date_long" $shown }}</span>{{ end }}
+                    {{ if not .Date.IsZero }}<span class="post-card-date">{{ time.Format ":date_long" .Date }}</span>{{ end }}
                   </div>
                   <h3 class="projekt-card-title">
                     {{ if eq $section "people" }}Menschen im staTThus: {{ end }}{{ .Title }}
@@ -70,10 +68,8 @@
         <div class="post-view-list">
           <div class="post-teaser-list">
             {{ range $paginator.Pages }}
-              {{ $shown := .Date }}
-              {{ if and (eq .Section "event") .Params.event_date }}{{ $shown = partial "functions/event-time" .Params.event_date }}{{ end }}
               <a href="{{ .RelPermalink }}" class="post-teaser-item">
-                {{ if not $shown.IsZero }}<span class="post-teaser-date">{{ time.Format ":date_long" $shown }}</span>{{ end }}
+                {{ if not .Date.IsZero }}<span class="post-teaser-date">{{ time.Format ":date_long" .Date }}</span>{{ end }}
                 <span class="post-teaser-title">{{ if eq .Section "people" }}Menschen im staTThus: {{ end }}{{ .Title }}</span>
                 <span class="post-teaser-desc">{{ .Summary | plainify | truncate 80 }}</span>
               </a>

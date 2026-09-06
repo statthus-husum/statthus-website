@@ -1,5 +1,6 @@
 <!-- upcoming events -->
-{{ $events := where site.RegularPages "Section" "event" }}
+{{/* Nur kommende Termine (ab heute), der nächste zuerst */}}
+{{ $events := partial "functions/feed-sorted" (dict "Pages" (where site.RegularPages "Section" "event") "Order" "asc" "Filter" "upcoming") }}
 {{ if $events }}
 <div class="widget">
   <h5 class="widget-title"><span>Nächste Veranstaltungen</span></h5>

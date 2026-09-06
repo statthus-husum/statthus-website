@@ -1,14 +1,13 @@
-<!-- latest news: rollierender Feed über alle Posts + neue People-Einträge -->
-{{ $feed := where site.RegularPages "Section" "in" (slice "event" "news" "people") }}
+<!-- latest news: News + neue People-Einträge. Termine stehen im Widget
+     „Nächste Veranstaltungen“ und im Kalender, nicht hier. -->
+{{ $feed := where site.RegularPages "Section" "in" (slice "news" "people") }}
 {{ if $feed }}
 <div class="widget">
   <h5 class="widget-title"><span>Neues vom staTThus</span></h5>
   <div class="post-teaser-list post-teaser-list-sm">
     {{ range first 5 $feed.ByDate.Reverse }}
-    {{ $shown := .Date }}
-    {{ if and (eq .Section "event") .Params.event_date }}{{ $shown = partial "functions/event-time" .Params.event_date }}{{ end }}
     <a href="{{ .RelPermalink }}" class="post-teaser-item">
-      {{ if not $shown.IsZero }}<span class="post-teaser-date">{{ $shown.Format "02.01." }}</span>{{ end }}
+      {{ if not .Date.IsZero }}<span class="post-teaser-date">{{ .Date.Format "02.01." }}</span>{{ end }}
       <span class="post-teaser-title">{{ if eq .Section "people" }}Menschen im staTThus: {{ end }}{{ .Title }}</span>
     </a>
     {{ end }}

@@ -1,0 +1,39 @@
+{{- /*
+  Sortiert Seiten nach ihrem "wirksamen" Datum: für Termine (Section
+  "event") das Veranstaltungsdatum event_date (in Berliner Zeit), für
+  alles andere .Date. .ByDate würde Termine nach Veröffentlichungsdatum
+  einreihen, .ByParam "event_date" scheitert an gemischten Typen
+  (string vs. time.Time, je nach YAML-Quoting).
+
+  Aufruf:
+    {{ $p := partial "functions/feed-sorted" (dict "Pages" $feed) }}
+    {{ $p := partial "functions/feed-sorted" (dict "Pages" $events "Order" "asc" "Filter" "upcoming") }}
+
+  Order:  "desc" (Standard, neueste zuerst) | "asc"
+  Filter: "" (Standard) | "upcoming" (heute und später) | "past" (vor heute)
+  Rückgabe: page.Pages (für .Paginate, first, range …)
+*/ -}}
+{{- $order := .Order | default "desc" -}}
+{{- $filter := .Filter | default "" -}}
+{{- $today := now.Format "2006-01-02" -}}
+{{- $items := slice -}}
+{{- range .Pages -}}
+  {{- $t := .Date -}}
+  {{- if and (eq .Section "event") .Params.event_date -}}
+    {{- $t = partial "functions/event-time" .Params.event_date -}}
+  {{- end -}}
+  {{- $day := $t.Format "2006-01-02" -}}
+  {{- $keep := true -}}
+  {{- if eq $filter "upcoming" -}}{{- $keep = ge $day $today -}}{{- end -}}
+  {{- if eq $filter "past" -}}{{- $keep = lt $day $today -}}{{- end -}}
+  {{- if $keep -}}
+    {{- $items = $items | append (dict "t" $t.Unix "p" .) -}}
+  {{- end -}}
+{{- end -}}
+{{- /* first 0 liefert ein leeres page.Pages, append hält den Typ — so
+       akzeptiert .Paginate das Ergebnis. */ -}}
+{{- $pages := first 0 site.RegularPages -}}
+{{- range sort $items "t" $order -}}
+  {{- $pages = $pages | append .p -}}
+{{- end -}}
+{{- return $pages -}}
