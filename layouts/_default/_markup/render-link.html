@@ -1,0 +1,26 @@
+{{- /*
+  Link-Render-Hook für Markdown-Inhalte ([Text](url)).
+  Ersetzt den Hook aus dem Modul components/render-link, damit
+  wurzel-absolute Links wie [Formular](/dokumente/x.pdf) auch dann
+  funktionieren, wenn die Site unter einem Basis-Pfad läuft — die
+  GitHub-Pages-Vorschau liegt unter /statthus-website/, die Live-Site
+  unter /. relURL hängt den Basis-Pfad an, lässt "/" unverändert.
+  Alles andere (Ziel-Fenster für externe Links, ?class=-Zusatz) wie
+  im Modul.
+*/ -}}
+{{- $dest := .Destination -}}
+{{- if and (hasPrefix $dest "/") (not (hasPrefix $dest "//")) -}}
+  {{- /* relURL lässt Eingaben mit führendem "/" unverändert — daher
+         erst den Slash abschneiden, dann den Basis-Pfad anhängen. */ -}}
+  {{- $dest = strings.TrimPrefix "/" $dest | relURL -}}
+{{- end -}}
+<a href="{{ $dest | safeURL }}"
+{{- with .Title }} title="{{ . }}"{{ end -}}
+{{- if strings.HasPrefix .Destination "http" }} target="_blank" rel="noopener"{{ end -}}
+{{- if in .Destination "?class=" -}}
+  {{- $getClass := string (index (findRE "class=([^&#]*)" .Destination) 0) -}}
+  {{- $class := replace (replace $getClass `class=` ``) `+` ` ` -}}
+  {{- printf ` class="%s"` $class | safeHTMLAttr -}}
+{{- end -}}
+>{{ .Text | safeHTML }}</a>
+{{- /* This comment removes trailing newlines. */ -}}
