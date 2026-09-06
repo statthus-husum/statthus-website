@@ -1255,3 +1255,35 @@ footer.section-sm {
 .lightbox-zoomable {
   cursor: zoom-in;
 }
+
+// --- Accordion shortcode (gethugothemes/accordion module) ---
+// Theme gives the header button its $body-bg while the surrounding
+// .projekt-section card is white, and the collapsed .accordion-content keeps
+// its margins — result: a two-tone block when closed. Make the header
+// transparent and drop the stray margins so it reads as one element.
+.accordion {
+  border: 1px solid $cream-darker !important;
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 1rem 0;
+
+  .accordion-header {
+    background: transparent;
+    color: $text-dark;
+    padding: 0.75rem 1rem !important;
+    font-weight: 600 !important;
+  }
+
+  .accordion-content {
+    margin: 0 !important;
+    color: $text-dark;
+
+    > p {
+      margin-bottom: 0;
+    }
+  }
+
+  &.active .accordion-content {
+    padding-bottom: 0.75rem;
+  }
+}
