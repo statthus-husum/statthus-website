@@ -1,5 +1,5 @@
 ---
-title: Kleidertauschparty ab 14 Uhr
+title: Kleidertauschparty
 date: 2026-08-25T00:00:00.000Z
 description: Es wird wieder getauscht!
 images:
