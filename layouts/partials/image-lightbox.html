@@ -40,7 +40,12 @@
 
     var cur = -1, open = false;
 
+    // Unterschrift: figcaption, sonst der Alt-Text (bei Markdown-Bildern im
+    // Fließtext ist der eine echte Beschreibung). Die Titelbilder eines
+    // Beitrags (.post-slider) tragen als Alt nur den Beitragstitel — der
+    // steht schon als Überschrift über dem Bild, also keine Unterschrift.
     function caption(img) {
+      if (img.closest('.post-slider')) return '';
       var fig = img.closest('figure');
       var fc = fig && fig.querySelector('figcaption');
       return (fc && fc.textContent) || img.getAttribute('alt') || '';
