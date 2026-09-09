@@ -3,7 +3,8 @@ title: Tag des offenen Denkmals im staTThus
 date: 2026-08-30T00:00:00.000Z
 description: Am Tag des offenen Denkmals öffnen wir unsere Türen für alle Interessierten.
 images:
-  - 'https://schreibe.statthus-husum.de/uploads/11.JPG'
+  - 'https://schreibe.statthus-husum.de/uploads/denkmal.jpg'
+  - 'https://schreibe.statthus-husum.de/uploads/Logo-Forderverein_rot.png'
 event_date: 2026-09-13T12:00:00.000Z
 event_end: 2026-09-13T15:00:00.000Z
 event_location: 'staTThus, Haupteingang'
