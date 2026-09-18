@@ -1,0 +1,63 @@
+{{/*
+  Newsletter (/newsletter/): Anmeldeformular (Inhalt von _index.md, rohes
+  Brevo-HTML — bewusst NICHT im CMS editierbar) plus Archiv „Bisherige
+  Ausgaben“ aus content/german/newsletter/*.md, im CMS gepflegt wie News.
+
+  Frontmatter je Ausgabe: title, date, date_label (optional), description
+  (Kurztext: was steht drin), link (Webversion oder PDF, optional),
+  link_text (optional), body (optional: Volltext, klappt unter der Ausgabe
+  auf — für Ausgaben, die nur noch als Text vorliegen).
+  Kompakte Liste statt Bild-Karten; neueste zuerst, 10 pro Seite. Ausgaben
+  haben keine eigene URL (cascade in config/_default/hugo.toml). Das
+  Formular steht nur auf Seite 1.
+*/}}
+{{ define "main" }}
+<section class="section-sm">
+  <div class="container">
+    {{ $paginator := .Paginate .RegularPages.ByDate.Reverse 10 }}
+    <div class="row">
+      <div class="col-12">
+        <div class="title-bordered mb-5 d-flex align-items-center">
+          <h1 class="h2">{{ .Title }}</h1>
+        </div>
+        {{ if eq $paginator.PageNumber 1 }}
+          <div class="content">{{ .Content }}</div>
+        {{ else }}
+          <p><a href="{{ .RelPermalink }}">Zur Newsletter-Anmeldung</a></p>
+        {{ end }}
+      </div>
+    </div>
+
+    {{ if $paginator.Pages }}
+      <div class="row">
+        <div class="col-12">
+          <h2 class="h3 mt-5 mb-4" id="archiv">Bisherige Ausgaben</h2>
+          <div class="newsletter-archiv">
+            {{ range $paginator.Pages }}
+              {{ $ausgabe := . }}
+              {{ $dateText := .Params.date_label }}
+              {{ if and (not $dateText) (not .Date.IsZero) }}
+                {{ $dateText = time.Format ":date_long" (partial "functions/event-time" .Date) }}
+              {{ end }}
+              {{ $link := .Params.link }}
+              {{ if and $link (hasPrefix $link "/") (not (hasPrefix $link "//")) }}{{ $link = strings.TrimPrefix "/" $link | relURL }}{{ end }}
+              <article class="newsletter-ausgabe">
+                {{ with $dateText }}<div class="chronik-date">{{ . }}</div>{{ end }}
+                <h3 class="newsletter-ausgabe-title">{{ .Title }}</h3>
+                {{ with .Params.description }}<p class="newsletter-ausgabe-desc">{{ . }}</p>{{ end }}
+                {{ with $link }}
+                  <a href="{{ . }}" class="btn btn-outline-primary btn-sm"{{ if hasPrefix . "http" }} target="_blank" rel="noopener"{{ end }}>{{ $ausgabe.Params.link_text | default "Ausgabe ansehen" }}</a>
+                {{ end }}
+                {{ with .Content }}
+                  {{ partial "accordion" (dict "Title" "Ausgabe hier lesen" "Content" . ) }}
+                {{ end }}
+              </article>
+            {{ end }}
+          </div>
+          {{ partial "pagination.html" $paginator }}
+        </div>
+      </div>
+    {{ end }}
+  </div>
+</section>
+{{ end }}

@@ -36,15 +36,15 @@ capitalizeListTitles = false # capitalize list titles
     path = "/projekt/**"
     kind = "page"
 
-# Chronik- und Presse-Einträge (CMS-gepflegt wie News): keine eigene URL,
-# nur als Abschnitt auf /chronik/ bzw. /presse/ — und damit auch nicht in
-# Feeds/Suche.
+# Chronik-, Presse- und Newsletter-Archiv-Einträge (CMS-gepflegt wie News):
+# keine eigene URL, nur als Abschnitt auf /chronik/, /presse/ bzw.
+# /newsletter/ — und damit auch nicht in Feeds/Suche.
 [[cascade]]
   [cascade.build]
     render = "never"
     list = "local"
   [cascade.target]
-    path = "{/chronik/**,/presse/**}"
+    path = "{/chronik/**,/presse/**,/newsletter/**}"
     kind = "page"
 
 ########################### Services #############################
