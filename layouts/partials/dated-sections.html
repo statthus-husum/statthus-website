@@ -1,0 +1,84 @@
+{{- /*
+  Datierte Abschnitte mit Pagination — gemeinsamer Baustein für
+  /chronik/ und /presse/ (layouts/{chronik,presse}/list.html).
+  Einträge im Stil der Projekt-Abschnitte (_default/sections.html), im CMS
+  gepflegt wie News-Artikel (content/german/<section>/*.md).
+
+  Frontmatter je Eintrag: title, date, date_label (optional, ersetzt das
+  formatierte Datum, z.B. "2015" oder "Frühjahr 2014"), images (Liste,
+  erstes = Hauptbild, weitere als Miniaturen), image_position (optional,
+  sonst abwechselnd rechts/links), body.
+  Nur Presse: quelle (Medium, z.B. "Husumer Nachrichten") und link (URL
+  zum Beitrag) — erscheinen in der Datumszeile bzw. als Knopf.
+  Die Einträge haben keine eigene URL (cascade build.render = never in
+  config/_default/hugo.toml) und tauchen nicht in Feeds auf.
+
+  Aufruf:
+    {{ partial "dated-sections.html" (dict "Page" . "DefaultOrder" "aufsteigend"
+         "DateFormat" "January 2006" "Empty" "…") }}
+  Reihenfolge: _index.md → reihenfolge: aufsteigend | absteigend
+  (überschreibt DefaultOrder).
+*/ -}}
+{{ $page := .Page }}
+{{ $order := $page.Params.reihenfolge | default .DefaultOrder | default "aufsteigend" }}
+{{ $dateFormat := .DateFormat | default "January 2006" }}
+{{ $empty := .Empty }}
+  <section class="section-sm">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <div class="title-bordered mb-5 d-flex align-items-center">
+            <h1 class="h2">{{ $page.Title }}</h1>
+          </div>
+          {{ with $page.Content }}
+            <div class="content mb-5">{{ . }}</div>
+          {{ end }}
+        </div>
+      </div>
+
+      {{ $entries := $page.RegularPages.ByDate }}
+      {{ if eq $order "absteigend" }}{{ $entries = $entries.Reverse }}{{ end }}
+      {{ $paginator := $page.Paginate $entries 6 }}
+
+      {{ range $i, $e := $paginator.Pages }}
+        {{ $pos := cond (modBool $i 2) "right" "left" }}
+        {{ with .Params.image_position }}{{ $pos = . }}{{ end }}
+        {{ $images := slice }}
+        {{ range .Params.images }}{{ if . }}{{ $images = $images | append . }}{{ end }}{{ end }}
+        {{ $dateText := .Params.date_label }}
+        {{ if and (not $dateText) (not .Date.IsZero) }}
+          {{ $dateText = time.Format $dateFormat (partial "functions/event-time" .Date) }}
+        {{ end }}
+        <article class="projekt-section chronik-entry row align-items-center mb-4">
+          {{ with index $images 0 }}
+            <div class="col-md-5 mb-3 mb-md-0 {{ if eq $pos `left` }}order-md-1{{ else }}order-md-2{{ end }}">
+              <div class="projekt-section-image">
+                {{ partial "image.html" (dict "Src" . "Alt" $e.Title "Class" "img-fluid rounded-lg") }}
+              </div>
+            </div>
+          {{ end }}
+          <div class="{{ if $images }}col-md-7 {{ if eq $pos `left` }}order-md-2{{ else }}order-md-1{{ end }}{{ else }}col-12{{ end }}">
+            {{ if or $dateText .Params.quelle }}
+              <div class="chronik-date">{{ with .Params.quelle }}{{ . }}{{ if $dateText }} · {{ end }}{{ end }}{{ $dateText }}</div>
+            {{ end }}
+            <h2 class="projekt-section-header h3">{{ .Title }}</h2>
+            <div class="projekt-section-body content">{{ .Content }}</div>
+            {{ with .Params.link }}
+              <a href="{{ . }}" class="btn btn-outline-primary btn-sm mt-2"{{ if hasPrefix . "http" }} target="_blank" rel="noopener"{{ end }}>{{ $e.Params.link_text | default "Zum Beitrag" }}</a>
+            {{ end }}
+            {{ if gt (len $images) 1 }}
+              <div class="chronik-thumbs">
+                {{ range after 1 $images }}
+                  {{ partial "image.html" (dict "Src" . "Alt" $e.Title "Class" "chronik-thumb") }}
+                {{ end }}
+              </div>
+            {{ end }}
+          </div>
+        </article>
+      {{ else }}
+        <p>{{ $empty }}</p>
+      {{ end }}
+
+      {{ partial "pagination.html" $paginator }}
+    </div>
+  </section>

@@ -1,0 +1,6 @@
+{{/* Presse und Medien (/presse/, Über uns): neuester Beitrag zuerst, volles Datum,
+     dazu Medium (quelle) und Link zum Beitrag.
+     Darstellung und Frontmatter: partials/dated-sections.html */}}
+{{ define "main" }}
+  {{ partial "dated-sections.html" (dict "Page" . "DefaultOrder" "absteigend" "DateFormat" ":date_long" "Empty" "Hier sammeln wir Berichte über das staTThus aus Presse und Medien.") }}
+{{ end }}
