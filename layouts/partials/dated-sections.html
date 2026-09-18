@@ -8,8 +8,11 @@
   formatierte Datum, z.B. "2015" oder "Frühjahr 2014"), images (Liste,
   erstes = Hauptbild, weitere als Miniaturen), image_position (optional,
   sonst abwechselnd rechts/links), body.
-  Nur Presse: quelle (Medium, z.B. "Husumer Nachrichten") und link (URL
-  zum Beitrag) — erscheinen in der Datumszeile bzw. als Knopf.
+  Nur Presse: typ (zeitung | tv | radio | web | podcast | sonstiges —
+  Symbol + Bezeichnung als Marke über dem Titel), quelle (Medium, z.B.
+  "Husumer Nachrichten") und link (URL zum Beitrag) — erscheinen in der
+  Datumszeile bzw. als Knopf. Die typ-Werte müssen zu den Optionen im CMS
+  passen (cms tina/collections/dated-sections.ts).
   Die Einträge haben keine eigene URL (cascade build.render = never in
   config/_default/hugo.toml) und tauchen nicht in Feeds auf.
 
@@ -23,6 +26,14 @@
 {{ $order := $page.Params.reihenfolge | default .DefaultOrder | default "aufsteigend" }}
 {{ $dateFormat := .DateFormat | default "January 2006" }}
 {{ $empty := .Empty }}
+{{ $typen := dict
+  "zeitung"   (dict "label" "Zeitung"  "icon" "fas fa-newspaper")
+  "tv"        (dict "label" "TV"       "icon" "fas fa-tv")
+  "radio"     (dict "label" "Radio"    "icon" "fas fa-broadcast-tower")
+  "web"       (dict "label" "Online"   "icon" "fas fa-globe")
+  "podcast"   (dict "label" "Podcast"  "icon" "fas fa-podcast")
+  "sonstiges" (dict "label" "Sonstiges" "icon" "fas fa-bullhorn")
+}}
   <section class="section-sm">
     <div class="container">
       <div class="row">
@@ -58,6 +69,9 @@
             </div>
           {{ end }}
           <div class="{{ if $images }}col-md-7 {{ if eq $pos `left` }}order-md-2{{ else }}order-md-1{{ end }}{{ else }}col-12{{ end }}">
+            {{ with index $typen (.Params.typ | default "") }}
+              <span class="presse-typ"><i class="{{ .icon }}" aria-hidden="true"></i> {{ .label }}</span>
+            {{ end }}
             {{ if or $dateText .Params.quelle }}
               <div class="chronik-date">{{ with .Params.quelle }}{{ . }}{{ if $dateText }} · {{ end }}{{ end }}{{ $dateText }}</div>
             {{ end }}
