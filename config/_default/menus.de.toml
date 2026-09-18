@@ -39,6 +39,12 @@ weight = 20
 
 [[main]]
 parent = "Über uns"
+name = "Chronik"
+url = "chronik/"
+weight = 25
+
+[[main]]
+parent = "Über uns"
 name = "Wie wir leben"
 url = "themen/wie-wir-leben/"
 weight = 30

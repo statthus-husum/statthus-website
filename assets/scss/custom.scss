@@ -1256,6 +1256,32 @@ footer.section-sm {
   cursor: zoom-in;
 }
 
+// --- Chronik (layouts/chronik/list.html) ---
+// Einträge nutzen die .projekt-section-Karte; dazu Datumszeile und
+// Miniaturen für weitere Bilder (öffnen in der Lightbox).
+.chronik-date {
+  color: $text-muted;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem;
+}
+
+.chronik-thumbs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+
+  img, picture img {
+    width: 88px;
+    height: 66px;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+}
+
 // --- Accordion shortcode (gethugothemes/accordion module) ---
 // Theme gives the header button its $body-bg while the surrounding
 // .projekt-section card is white, and the collapsed .accordion-content keeps
