@@ -3,7 +3,6 @@ title: staTThus im Schleswig-Holstein Magazin
 date: 2026-05-18T00:00:00.000Z
 typ: tv
 link: >-
-  Schleswig-Holstein Magazin: Husum: Wohnprojekt "Statthus" wird erweitert -
   https://www.ardmediathek.de/video/Y3JpZDovL25kci5kZS9jNDMyNTM2Zi00MzRiLTRlZTgtODM2OS0wYzVjZDAyNzVhODc
 link_text: Zum TV-Beitrag
 images:
@@ -11,4 +10,4 @@ images:
 image_position: left
 ---
 
-Das Schleswig-Holstein Magazin hat uns besucht und einen wunderschönen Beitrag über uns gemacht. 
+Das Schleswig-Holstein Magazin hat uns besucht und einen wunderschönen Beitrag über uns gemacht.
