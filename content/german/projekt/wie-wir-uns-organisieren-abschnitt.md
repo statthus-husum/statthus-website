@@ -1,7 +1,7 @@
 ---
 title: Wie wir uns organisieren
 weight: 20
-image: images/uploads/neubau_menschen.jpg
+image: images/uploads/Gruppenfoto2026.jpg
 image_position: left
 link: content/german/projekt/wie-wir-uns-organisieren/_index.md
 draft: false
