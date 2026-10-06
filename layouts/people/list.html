@@ -45,7 +45,7 @@
                     <a class="text-dark" href="{{ .RelPermalink }}">{{ .Title }}</a>
                   </h3>
                   
-                  {{ with .Params.einstieg }}
+                  {{ with or .Params.einstieg .Params.dasbinich }}
                     <p class="mb-3">{{ . | markdownify | plainify | truncate 100 }}</p>
                   {{ end }}
 

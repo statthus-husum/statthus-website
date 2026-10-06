@@ -1,4 +1,5 @@
 ---
+_template: erwachsen
 title: Antje
 image: 'https://schreibe.statthus-husum.de/uploads/people/Antje_-_Bild.png'
 einstieg: >-

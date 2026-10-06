@@ -1,4 +1,5 @@
 ---
+_template: erwachsen
 title: Stefan
 image: 'https://schreibe.statthus-husum.de/uploads/Stefan.png'
 einstieg: >-

@@ -1,4 +1,5 @@
 ---
+_template: erwachsen
 title: Irene
 image: images/uploads/Irene_-_Bild.png
 einstieg: >-

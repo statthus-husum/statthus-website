@@ -85,6 +85,27 @@
 - id: passion
   translation: Leidenschaft
 
+- id: kind_dasbinich
+  translation: Das bin ich
+
+- id: kind_lieblingsplatz
+  translation: Mein Lieblingsplatz im staTThus
+
+- id: kind_spass
+  translation: Das macht mir hier Spaß
+
+- id: kind_superkraft
+  translation: Wenn das staTThus eine Superkraft hätte, …
+
+- id: kind_geheimnis
+  translation: Das wissen die meisten Leute nicht über mich
+
+- id: kind_wunsch
+  translation: Mein Wunsch für das staTThus
+
+- id: kind_neueskind
+  translation: Was würdest du einem neuen Kind erzählen, das hier einziehen möchte?
+
 - id: back_to
   translation: Zurück zu
 

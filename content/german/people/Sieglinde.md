@@ -1,4 +1,5 @@
 ---
+_template: erwachsen
 title: Sieglinde
 image: images/uploads/Sieglinde_Platzhalterin.png
 einstieg: >-

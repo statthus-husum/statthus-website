@@ -1,4 +1,5 @@
 ---
+_template: erwachsen
 title: Andrea und Martin
 image: images/uploads/people/andrea-und-martin.png
 einstieg: >

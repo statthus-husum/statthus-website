@@ -1,4 +1,5 @@
 ---
+_template: erwachsen
 title: Meike
 image: >-
   https://schreibe.statthus-husum.de/uploads/staTThus_Vorstellungen_Instagram_Post_20260724_155550_0000.png

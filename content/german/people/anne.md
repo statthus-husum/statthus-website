@@ -1,4 +1,5 @@
 ---
+_template: erwachsen
 title: Anne
 image: images/uploads/Anne_-_Bild.png
 einstieg: >-

@@ -1,4 +1,5 @@
 ---
+_template: erwachsen
 title: Renate
 image: images/uploads/Renate_-_Bild.jpg
 einstieg: |

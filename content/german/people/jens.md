@@ -1,4 +1,5 @@
 ---
+_template: erwachsen
 title: Jens
 image: images/uploads/people/jens.png
 einstieg: "Moin. Ich bin Jens und ich habe euch über \"bring-together\" gefunden – gleich bei der ersten Suche ein echtes match!\n\nIch bin seit April 2025 dabei und ich werde alleine einziehen, aber eben auch mit vielen tollen Nachbarn hier wohnen \U0001F60A\n"

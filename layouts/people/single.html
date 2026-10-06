@@ -27,26 +27,43 @@
           {{ end }}
         </div>
         <div class="col-lg-9 col-md-8 content text-md-start">
-          <div class="people-tag">
-            <div class="people-text-header">{{ i18n "wer_wir_sind" }}</div>
-            <div class="people-text-body">{{ .Params.einstieg | markdownify | safeHTML }}</div>
-          </div>
-          <div class="people-tag">
-            <div class="people-text-header">{{ i18n "motivation" }}</div>
-            <div class="people-text-body">{{ .Params.motivation | markdownify | safeHTML }}</div>
-          </div>
-          <div class="people-tag">
-            <div class="people-text-header">{{ i18n "menschliches" }}</div>
-            <div class="people-text-body">{{ .Params.menschliches | markdownify | safeHTML }}</div>
-          </div>
-          <div class="people-tag">
-            <div class="people-text-header">{{ i18n "funfact" }}</div>
-            <div class="people-text-body">{{ .Params.funfact | markdownify | safeHTML }}</div>
-          </div>
-          <div class="people-tag">
-            <div class="people-text-header">{{ i18n "passion" }}</div>
-            <div class="people-text-body">{{ .Params.passion | markdownify | safeHTML }}</div>
-          </div>
+          {{/* Kinder-Profil (_template: kind, siehe CMS person.ts): eigene Fragen.
+               "neueskind" ist nur für ältere Kinder (bei jüngeren leer) — daher nur ausgeben, wenn beantwortet. */}}
+          {{ if eq (index .Params "_template") "kind" }}
+            {{ range slice "dasbinich" "lieblingsplatz" "spass" "superkraft" "geheimnis" "wunsch" }}
+              <div class="people-tag">
+                <div class="people-text-header">{{ i18n (print "kind_" .) }}</div>
+                <div class="people-text-body">{{ index $.Params . | default "" | markdownify | safeHTML }}</div>
+              </div>
+            {{ end }}
+            {{ with .Params.neueskind }}
+              <div class="people-tag">
+                <div class="people-text-header">{{ i18n "kind_neueskind" }}</div>
+                <div class="people-text-body">{{ . | markdownify | safeHTML }}</div>
+              </div>
+            {{ end }}
+          {{ else }}
+            <div class="people-tag">
+              <div class="people-text-header">{{ i18n "wer_wir_sind" }}</div>
+              <div class="people-text-body">{{ .Params.einstieg | markdownify | safeHTML }}</div>
+            </div>
+            <div class="people-tag">
+              <div class="people-text-header">{{ i18n "motivation" }}</div>
+              <div class="people-text-body">{{ .Params.motivation | markdownify | safeHTML }}</div>
+            </div>
+            <div class="people-tag">
+              <div class="people-text-header">{{ i18n "menschliches" }}</div>
+              <div class="people-text-body">{{ .Params.menschliches | markdownify | safeHTML }}</div>
+            </div>
+            <div class="people-tag">
+              <div class="people-text-header">{{ i18n "funfact" }}</div>
+              <div class="people-text-body">{{ .Params.funfact | markdownify | safeHTML }}</div>
+            </div>
+            <div class="people-tag">
+              <div class="people-text-header">{{ i18n "passion" }}</div>
+              <div class="people-text-body">{{ .Params.passion | markdownify | safeHTML }}</div>
+            </div>
+          {{ end }}
           {{ .Content }}
         </div>
 

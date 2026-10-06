@@ -1,4 +1,5 @@
 ---
+_template: erwachsen
 title: Stefi
 image: images/uploads/Stefi_-_Bild.png
 einstieg: >-
