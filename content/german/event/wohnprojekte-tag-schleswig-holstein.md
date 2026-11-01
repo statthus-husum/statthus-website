@@ -5,8 +5,10 @@ description: Wir sind Ausrichtungsort für den Wohnprojekte-Tag in Schleswig-Hol
 images:
   - 'https://schreibe.statthus-husum.de/uploads/Einladung_Wohnprojektetag.jpg'
   - 'https://schreibe.statthus-husum.de/uploads/Einladung_Wohnprojektetag2.png'
-event_date: 2026-04-27T09:00:00.000Z
+event_date: 2026-04-25T09:00:00.000Z
 event_location: Husum
+flags:
+  - top-post
 ---
 
 🌍 Zusammen Klima wandeln – Der Wohnprojektetag SH kommt zu uns nach Husum! 🏡✨
@@ -27,8 +29,8 @@ Das erwartet euch bei uns:
 
 Kommt vorbei, lasst euch inspirieren und werdet Teil der Lösung! 💚
 
-👉 Ihr wollt euer eigenes Projekt mit einem Stand vorstellen? Dann schreibt schnell eine Mail an: info\@netzwerk-wohnen-sh.de 
+👉 Ihr wollt euer eigenes Projekt mit einem Stand vorstellen? Dann schreibt schnell eine Mail an: [info@netzwerk-wohnen-sh.de](mailto:info@netzwerk-wohnen-sh.de)
 
-Alle Infos zum vollen Programm findet ihr unter: www\.netzwerk-wohnen-sh.de 
+Alle Infos zum vollen Programm findet ihr unter: [www.netzwerk-wohnen-sh.de](http://www.netzwerk-wohnen-sh.de)
 
 Wir sehen uns in Husum! 👋🏠
