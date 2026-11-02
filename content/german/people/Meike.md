@@ -1,5 +1,4 @@
 ---
-_template: erwachsen
 title: Meike
 image: >-
   https://schreibe.statthus-husum.de/uploads/staTThus_Vorstellungen_Instagram_Post_20260724_155550_0000.png
@@ -16,7 +15,7 @@ einstieg: >
   im Altbau auf 80 qm und teilen uns ein Bad. Was uns teilweise zu
   organisatorischen Höchstleistungen zwingt…daher geht’s für uns auch ab in den
   Neubau!
-motivation: "Wir wollten damals raus aus der für uns zu anonymen Stadt Hamburg. Für uns und vor allem für unseren Sohn wollten wir das so nicht weiter machen. Auch wenn Hamburg eine schöne Stadt mit vielen kulturellen Angeboten und netten Menschen ist, war uns das alles zu groß und gleichzeitig doch zu einsam/anonym. Ein Haus auf dem Land zu bauen, kam für uns nicht nur aus Kostengründen nicht in Frage. \n\nGemeinschaftliches Wohnen bedeutete für mich gemeinsam Verantwortung zu tragen und somit zu teilen und gleichzeitig auch gemeinsam Zeit und gemeinsame Interessen zu verbringen und nicht nur in der Kernfamilie unterwegs zu sein. Ich könnte ewig weiter schreiben, da für mich gemeinschaftliches Wohnen einfach nur sinnvoll ist…;) \n\nFür mich persönlich heißt \"Gemeinschaft\", dass ich nicht allein sein muss, wenn ich es nicht möchte. Es bedeutet nicht alles allein stemmen zu müssen, es bedeutet gemeinsam schöne und auch herausfordernde Zeiten zu überstehen und auch gemeinsam darauf zurück blicken zu können. Freude und auch Leid zu teilen. Nach meinem Verständnis ist man in einer Gemeinschaft füreinander da. Sei es als Unterstützung, wenn es einem nicht gut geht oder man auf Hilfe angewiesen ist oder andersherum diese Unterstützung für andere zu sein oder auch um gemeinsam schöne Zeiten zu verbringen.\n\nMeine Lieblingsmomente sind die Momente in denen unsere Kinder hier auf dem Gelände herumlaufen und sich sichtbar sicher und frei fühlen. Ich liebe es sie dabei zu beobachten und in der Zeit mit den anderen staTThuslern entspannt in unserem großen gemeinsamen Garten zu schnacken. Mein Lieblingsort ist dementsprechend der Garten \U0001F60A\n"
+motivation: "Wir wollten damals raus aus der für uns zu anonymen Stadt Hamburg. Für uns und vor allem für unseren Sohn wollten wir das so nicht weiter machen. Auch wenn Hamburg eine schöne Stadt mit vielen kulturellen Angeboten und netten Menschen ist, war uns das alles zu groß und gleichzeitig doch zu einsam/anonym. Ein Haus auf dem Land zu bauen, kam für uns nicht nur aus Kostengründen nicht in Frage. \n\nGemeinschaftliches Wohnen bedeutet für mich gemeinsam Verantwortung zu tragen und somit zu teilen und gleichzeitig auch gemeinsam Zeit und gemeinsame Interessen zu verbringen und nicht nur in der Kernfamilie unterwegs zu sein.  \n\nFür mich persönlich heißt \"Gemeinschaft\", dass ich nicht allein sein muss, wenn ich es nicht möchte. Es bedeutet nicht alles allein stemmen zu müssen, es bedeutet gemeinsam schöne und auch herausfordernde Zeiten zu überstehen und auch gemeinsam darauf zurück blicken zu können. Freude und auch Leid zu teilen. Nach meinem Verständnis ist man in einer Gemeinschaft füreinander da. Sei es als Unterstützung, wenn es einem nicht gut geht oder man auf Hilfe angewiesen ist oder andersherum diese Unterstützung für andere zu sein oder auch um gemeinsam schöne Zeiten zu verbringen. Ich könnte ewig weiter schreiben, da für mich gemeinschaftliches Wohnen einfach nur sinnvoll ist…;)\n\nMeine Lieblingsmomente sind die Momente in denen unsere Kinder hier auf dem Gelände herumlaufen und sich sichtbar sicher und frei fühlen. Ich liebe es sie dabei zu beobachten und in der Zeit mit den anderen staTThuslern entspannt in unserem großen gemeinsamen Garten zu schnacken. Mein Lieblingsort ist dementsprechend der Garten \U0001F60A\n"
 menschliches: >
   Was machst du im Alltag oder beruflich am liebsten? 
 
@@ -39,5 +38,6 @@ funfact: >-
   könnte pünktlich zu meiner Verabredung um 15:30 kommen und evtl. sogar noch
   schnell einen Kuchen backen...
 passion: 'Backen, Malen, Nähen, Musik und Yoga'
+_template: erwachsen
 ---
 
