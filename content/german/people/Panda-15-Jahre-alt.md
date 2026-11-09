@@ -1,6 +1,6 @@
 ---
 title: 'Panda, 15 Jahre alt'
-image: 'https://schreibe.statthus-husum.de/uploads/glitzertattoos.JPG'
+image: 'https://schreibe.statthus-husum.de/uploads/panda.png'
 dasbinich: >-
   Wenn ich ein Tier wäre, wäre ich ein Delfin. Dann könnte ich schnell durchs
   Wasser schwimmen.
