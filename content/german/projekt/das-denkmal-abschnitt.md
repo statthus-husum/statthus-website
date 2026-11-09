@@ -8,4 +8,3 @@ draft: false
 ---
 
 Unser Zuhause ist ein denkmalgeschütztes Gebäude — die ehemalige Osterhusumer Schule. Von der Architektur über originale Details bis zur historischen Bedeutung: Das Haus hat viele Geschichten zu erzählen.
-Hurra!
