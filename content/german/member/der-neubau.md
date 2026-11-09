@@ -4,6 +4,7 @@ description: Unser Neubau direkt neben dem staTThus
 image: images/uploads/Neubau/neubau_modell.png
 image_position: right
 weight: 1
+banner: "Achtung – jetzt nur noch 2 geförderte Wohnungen frei"
 draft: false
 ---
 

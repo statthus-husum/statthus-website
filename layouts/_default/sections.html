@@ -44,6 +44,7 @@
             <div class="col-md-5 mb-3 mb-md-0 {{ if eq $pos `left` }}order-md-1{{ else }}order-md-2{{ end }}">
               <div class="projekt-section-image">
                 {{ partial "image.html" (dict "Src" .Params.image "Alt" .Title "Class" "img-fluid rounded-lg") }}
+                {{ with .Params.banner }}<div class="section-banner" role="note">{{ . }}</div>{{ end }}
               </div>
             </div>
             <div class="col-md-7 {{ if eq $pos `left` }}order-md-2{{ else }}order-md-1{{ end }}">
@@ -55,6 +56,7 @@
             </div>
           {{ else }}
             <div class="col-12">
+              {{ with .Params.banner }}<div class="section-banner section-banner--inline" role="note">{{ . }}</div>{{ end }}
               <h2 class="projekt-section-header h3">{{ .Title }}</h2>
               <div class="projekt-section-body">{{ .Content }}</div>
               {{ with $sectionLink }}
