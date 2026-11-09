@@ -7,4 +7,4 @@ link: content/german/projekt/wie-wir-das-finanzieren/_index.md
 draft: false
 ---
 
-Als selbst gegründete Kleingenossenschaft finanzieren wir das Projekt über Genossenschaftsanteile, Förderungen und Kredite. Was ein Anteil kostet und was man dafür bekommt.
+Als selbst gegründete Kleingenossenschaft finanzieren wir das Projekt über Genossenschaftsanteile, Förderungen und Kredite. Was ein Anteil kostet und was man dafür bekommt. Lest weiter in den Abschnitten.
