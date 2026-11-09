@@ -1,0 +1,43 @@
+# Keeps `staging` in step with `main`.
+#
+# Content edited directly on main (in the repo or the GitHub UI) deploys via
+# deploy.yml. Without this sync, staging would still hold the old text, and
+# the Freigabe app would offer that old text as a pending change — approving
+# it would silently revert the direct edit. Merging main into staging after
+# every push prevents that.
+#
+# Races with Freigabe (which force-updates staging right after pushing main)
+# are harmless: the merge is then a no-op or gets overwritten with the same
+# content. A merge conflict means a pending CMS edit touches the same file as
+# the direct edit — resolve that by hand.
+
+name: Sync main → staging
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-staging
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout staging
+        uses: actions/checkout@v4
+        with:
+          ref: staging
+          fetch-depth: 0
+
+      - name: Merge main into staging
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git merge --no-edit origin/main
+          git push origin staging
