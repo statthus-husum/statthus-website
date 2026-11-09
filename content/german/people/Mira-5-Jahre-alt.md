@@ -1,6 +1,6 @@
 ---
 title: 'Mira, 5 Jahre alt'
-image: 'https://schreibe.statthus-husum.de/uploads/Juna_Mira.jpg'
+image: 'https://schreibe.statthus-husum.de/uploads/Mira_Juna.png'
 dasbinich: >-
   Wenn ich ein Tier wäre, wäre ich ein Pferd. Weil ich Pferde so cool finde. Die
   können so schöne Sachen. Springen über Hindernisse, Kutschen ziehen und so
